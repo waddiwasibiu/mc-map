@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的世界 - Baka 村结构坐标</title>
+    <title>Baka 村结构坐标库 - 本地管理</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
@@ -40,6 +40,11 @@
                 transform: translateY(-5px);
                 box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             }
+            .structure-image {
+                background-color: #f0f0f0;
+                background-size: cover;
+                background-position: center;
+            }
         }
     </style>
 </head>
@@ -56,6 +61,7 @@
                 <nav class="hidden md:flex space-x-6">
                     <a href="#home" class="text-gray-700 hover:text-primary transition-colors">首页</a>
                     <a href="#structures" class="text-gray-700 hover:text-primary transition-colors">结构列表</a>
+                    <a href="#add-structure" class="text-gray-700 hover:text-primary transition-colors">添加结构</a>
                     <a href="#about" class="text-gray-700 hover:text-primary transition-colors">关于我们</a>
                 </nav>
                 
@@ -75,6 +81,7 @@
             <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
                 <a href="#home" class="block py-2 text-gray-700 hover:text-primary transition-colors">首页</a>
                 <a href="#structures" class="block py-2 text-gray-700 hover:text-primary transition-colors">结构列表</a>
+                <a href="#add-structure" class="block py-2 text-gray-700 hover:text-primary transition-colors">添加结构</a>
                 <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition-colors">关于我们</a>
             </div>
         </div>
@@ -88,21 +95,80 @@
                 <div class="flex flex-col md:flex-row items-center">
                     <div class="md:w-1/2 mb-6 md:mb-0">
                         <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">欢迎来到 Baka 村结构坐标库</h2>
-                        <p class="text-gray-600 mb-6 text-lg">探索并分享《我的世界》中各种独特结构的坐标，让你的冒险更加便捷！</p>
+                        <p class="text-gray-600 mb-6 text-lg">探索并分享《我的世界》中各种独特结构的坐标，让冒险更加便捷！</p>
                         <div class="flex flex-wrap gap-4">
                             <a href="#structures" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center">
                                 <i class="fa fa-map-marker mr-2"></i> 浏览结构
                             </a>
-                            <a href="#" class="px-6 py-3 bg-white text-primary border border-primary rounded-lg hover:bg-primary/5 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 贡献坐标
+                            <a href="#add-structure" class="px-6 py-3 bg-white text-primary border border-primary rounded-lg hover:bg-primary/5 transition-colors flex items-center">
+                                <i class="fa fa-plus mr-2"></i> 添加新结构
                             </a>
                         </div>
                     </div>
                     <div class="md:w-1/2 flex justify-center">
-                        <img src="1.png" alt="我的世界游戏截图" class="rounded-xl shadow-lg max-w-full h-auto">
+                        <div class="structure-image w-full h-64 rounded-xl" style="background-image: url('1.png')"></div>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- 添加结构部分 -->
+        <section id="add-structure" class="mb-12 bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-2xl font-bold text-dark mb-6">添加新结构</h2>
+            <form id="addStructureForm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">结构名称</label>
+                        <input type="text" id="structureName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="例如：海底神殿" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">结构类型</label>
+                        <select id="structureType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" required>
+                            <option value="">选择类型</option>
+                            <option value="遗迹">遗迹</option>
+                            <option value="自然奇观">自然奇观</option>
+                            <option value="村庄">村庄</option>
+                            <option value="要塞">要塞</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">结构描述</label>
+                        <textarea id="structureDescription" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="描述这个结构的特征和重要性..." required></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">图片编号</label>
+                        <div class="flex items-center">
+                            <span class="px-4 py-3 bg-gray-100 rounded-l-lg border border-r-0 border-gray-300">img</span>
+                            <input type="number" id="structureImage" min="2" max="20" class="w-full px-4 py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="2-20" required>
+                            <span class="ml-2 text-gray-500">.png</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">输入2-20之间的数字，对应本地图片文件 (如输入"2"对应"2.png")</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">结构图标</label>
+                        <select id="structureIcon" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" required>
+                            <option value="">选择图标</option>
+                            <option value="fa-fort-awesome">堡垒</option>
+                            <option value="fa-tree">丛林</option>
+                            <option value="fa-sun-o">沙漠</option>
+                            <option value="fa-tornado">旋风</option>
+                            <option value="fa-cloud">云朵</option>
+                            <option value="fa-home">村庄</option>
+                            <option value="fa-diamond">宝藏</option>
+                            <option value="fa-ship">沉船</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-4">
+                    <button type="reset" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+                        重置表单
+                    </button>
+                    <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center">
+                        <i class="fa fa-plus mr-2"></i> 添加结构
+                    </button>
+                </div>
+            </form>
         </section>
 
         <!-- 服务器选择和筛选 -->
@@ -134,969 +200,62 @@
         <section id="structures" class="space-y-6">
             <!-- 一区内容 -->
             <div id="server1Content">
-                <!-- 孤独堡垒 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="fortress" data-server="server1">
-                    <div class="relative">
-                        <img src="2.png" alt="孤独堡垒外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server1"></i> <span class="server1-fortress-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">孤独堡垒</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">遗迹</span>
-                            </div>
-                            <div class="text-server1 text-2xl">
-                                <i class="fa fa-fort-awesome"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>位于高空的巨大堡垒，由玄武岩和黑石建成。堡垒内部布满陷阱和怪物，同时也藏有珍贵的宝藏和经验。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server1-fortressCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server1-fortressAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="例如：宝箱位置、入口等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                <button class="px-4 py-2 bg-server1 text-white rounded-md hover:bg-server1/90 transition-colors add-coordinate-btn" data-structure="fortress" data-server="server1">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server1-fortressToggleBtn" class="px-4 py-2 border border-server1 text-server1 rounded-md hover:bg-server1/10 transition-colors flex items-center">
-                                <span id="server1-fortressToggleText">展开全部</span>
-                                <i id="server1-fortressToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server1-fortressAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月15日 14:30
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- 丛林神殿 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="jungle" data-server="server1">
-                    <div class="relative">
-                        <img src="3.png" alt="丛林神殿外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server1"></i> <span class="server1-jungle-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">丛林神殿</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">遗迹</span>
-                            </div>
-                            <div class="text-server1 text-2xl">
-                                <i class="fa fa-tree"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>隐藏在茂密丛林中的古老神殿，周围缠绕着藤蔓和树木。神殿内部布满陷阱，特别是在宝箱周围，需要小心触发。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server1-jungleCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server1-jungleAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="例如：宝箱位置、入口等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                <button class="px-4 py-2 bg-server1 text-white rounded-md hover:bg-server1/90 transition-colors add-coordinate-btn" data-structure="jungle" data-server="server1">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server1-jungleToggleBtn" class="px-4 py-2 border border-server1 text-server1 rounded-md hover:bg-server1/10 transition-colors flex items-center">
-                                <span id="server1-jungleToggleText">展开全部</span>
-                                <i id="server1-jungleToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server1-jungleAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月18日 10:15
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- 沙漠神殿 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="desert" data-server="server1">
-                    <div class="relative">
-                        <img src="4.png" alt="沙漠神殿外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server1"></i> <span class="server1-desert-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">沙漠神殿</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">遗迹</span>
-                            </div>
-                            <div class="text-server1 text-2xl">
-                                <i class="fa fa-sun-o"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>隐藏在沙漠中的古老神殿，周围被沙子覆盖。神殿内部布满陷阱，特别是在宝箱周围，需要小心触发。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server1-desertCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server1-desertAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="例如：宝箱位置、入口等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                <button class="px-4 py-2 bg-server1 text-white rounded-md hover:bg-server1/90 transition-colors add-coordinate-btn" data-structure="desert" data-server="server1">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server1-desertToggleBtn" class="px-4 py-2 border border-server1 text-server1 rounded-md hover:bg-server1/10 transition-colors flex items-center">
-                                <span id="server1-desertToggleText">展开全部</span>
-                                <i id="server1-desertToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server1-desertAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月22日 15:45
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- 旋风云 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="whirlwind" data-server="server1">
-                    <div class="relative">
-                        <img src="5.png" alt="旋风云外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server1"></i> <span class="server1-whirlwind-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">旋风云</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">自然奇观</span>
-                            </div>
-                            <div class="text-server1 text-2xl">
-                                <i class="fa fa-tornado"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>天空中旋转的巨大云团，通常伴随着强烈的气流和雷电。云团中心可能隐藏着罕见的天气现象和珍贵物品。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server1-whirlwindCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server1-whirlwindAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="例如：云团位置、活动规律等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                <button class="px-4 py-2 bg-server1 text-white rounded-md hover:bg-server1/90 transition-colors add-coordinate-btn" data-structure="whirlwind" data-server="server1">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server1-whirlwindToggleBtn" class="px-4 py-2 border border-server1 text-server1 rounded-md hover:bg-server1/10 transition-colors flex items-center">
-                                <span id="server1-whirlwindToggleText">展开全部</span>
-                                <i id="server1-whirlwindToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server1-whirlwindAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月10日 08:20
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- 善魂云 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="goodspirit" data-server="server1">
-                    <div class="relative">
-                        <img src="6.png" alt="善魂云外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server1"></i> <span class="server1-goodspirit-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">善魂云</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">自然奇观</span>
-                            </div>
-                            <div class="text-server1 text-2xl">
-                                <i class="fa fa-cloud"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>散发着柔和光芒的神秘云团，据说蕴含着善良的灵魂。接近云团可能会获得祝福或珍贵的物品奖励。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server1-goodspiritCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server1-goodspiritAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="例如：云团位置、祝福效果等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                <button class="px-4 py-2 bg-server1 text-white rounded-md hover:bg-server1/90 transition-colors add-coordinate-btn" data-structure="goodspirit" data-server="server1">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server1-goodspiritToggleBtn" class="px-4 py-2 border border-server1 text-server1 rounded-md hover:bg-server1/10 transition-colors flex items-center">
-                                <span id="server1-goodspiritToggleText">展开全部</span>
-                                <i id="server1-goodspiritToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server1-goodspiritAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月12日 13:35
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- 嘎吱村 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="creak" data-server="server1">
-                    <div class="relative">
-                        <img src="7.png" alt="嘎吱村外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server1"></i> <span class="server1-creak-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">嘎吱村</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">村庄</span>
-                            </div>
-                            <div class="text-server1 text-2xl">
-                                <i class="fa fa-home"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>由木头和石头建成的小村庄，村民们以伐木和农耕为生。村庄内有商店、铁匠铺和农场，可以与村民交易获取稀有物品。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server1-creakCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server1-creakAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server1/50 focus:border-server1" placeholder="例如：村庄入口、重要建筑等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                <button class="px-4 py-2 bg-server1 text-white rounded-md hover:bg-server1/90 transition-colors add-coordinate-btn" data-structure="creak" data-server="server1">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server1-creakToggleBtn" class="px-4 py-2 border border-server1 text-server1 rounded-md hover:bg-server1/10 transition-colors flex items-center">
-                                <span id="server1-creakToggleText">展开全部</span>
-                                <i id="server1-creakToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server1-creakAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月25日 09:20
-                        </span>
-                    </div>
-                </div>
+                <!-- 结构卡片将通过JavaScript动态生成 -->
             </div>
             
             <!-- 二区内容 -->
             <div id="server2Content" class="hidden">
-                <!-- 孤独堡垒 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="fortress" data-server="server2">
-                    <div class="relative">
-                        <img src="2.png" alt="孤独堡垒外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server2"></i> <span class="server2-fortress-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">孤独堡垒</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">遗迹</span>
-                            </div>
-                            <div class="text-server2 text-2xl">
-                                <i class="fa fa-fort-awesome"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>位于高空的巨大堡垒，由玄武岩和黑石建成。堡垒内部布满陷阱和怪物，同时也藏有珍贵的宝藏和经验。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server2-fortressCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server2-fortressAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="例如：宝箱位置、入口等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                <button class="px-4 py-2 bg-server2 text-white rounded-md hover:bg-server2/90 transition-colors add-coordinate-btn" data-structure="fortress" data-server="server2">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server2-fortressToggleBtn" class="px-4 py-2 border border-server2 text-server2 rounded-md hover:bg-server2/10 transition-colors flex items-center">
-                                <span id="server2-fortressToggleText">展开全部</span>
-                                <i id="server2-fortressToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server2-fortressAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月15日 14:30
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- 丛林神殿 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="jungle" data-server="server2">
-                    <div class="relative">
-                        <img src="3.png" alt="丛林神殿外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server2"></i> <span class="server2-jungle-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">丛林神殿</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">遗迹</span>
-                            </div>
-                            <div class="text-server2 text-2xl">
-                                <i class="fa fa-tree"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>隐藏在茂密丛林中的古老神殿，周围缠绕着藤蔓和树木。神殿内部布满陷阱，特别是在宝箱周围，需要小心触发。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server2-jungleCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server2-jungleAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="例如：宝箱位置、入口等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                <button class="px-4 py-2 bg-server2 text-white rounded-md hover:bg-server2/90 transition-colors add-coordinate-btn" data-structure="jungle" data-server="server2">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server2-jungleToggleBtn" class="px-4 py-2 border border-server2 text-server2 rounded-md hover:bg-server2/10 transition-colors flex items-center">
-                                <span id="server2-jungleToggleText">展开全部</span>
-                                <i id="server2-jungleToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server2-jungleAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月18日 10:15
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- 沙漠神殿 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="desert" data-server="server2">
-                    <div class="relative">
-                        <img src="4.png" alt="沙漠神殿外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server2"></i> <span class="server2-desert-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">沙漠神殿</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">遗迹</span>
-                            </div>
-                            <div class="text-server2 text-2xl">
-                                <i class="fa fa-sun-o"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>隐藏在沙漠中的古老神殿，周围被沙子覆盖。神殿内部布满陷阱，特别是在宝箱周围，需要小心触发。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server2-desertCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server2-desertAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="例如：宝箱位置、入口等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                <button class="px-4 py-2 bg-server2 text-white rounded-md hover:bg-server2/90 transition-colors add-coordinate-btn" data-structure="desert" data-server="server2">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server2-desertToggleBtn" class="px-4 py-2 border border-server2 text-server2 rounded-md hover:bg-server2/10 transition-colors flex items-center">
-                                <span id="server2-desertToggleText">展开全部</span>
-                                <i id="server2-desertToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server2-desertAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月22日 15:45
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- 旋风云 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="whirlwind" data-server="server2">
-                    <div class="relative">
-                        <img src="5.png" alt="旋风云外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server2"></i> <span class="server2-whirlwind-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">旋风云</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">自然奇观</span>
-                            </div>
-                            <div class="text-server2 text-2xl">
-                                <i class="fa fa-tornado"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>天空中旋转的巨大云团，通常伴随着强烈的气流和雷电。云团中心可能隐藏着罕见的天气现象和珍贵物品。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server2-whirlwindCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server2-whirlwindAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="例如：云团位置、活动规律等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                ```html
-                        <button class="px-4 py-2 bg-server2 text-white rounded-md hover:bg-server2/90 transition-colors add-coordinate-btn" data-structure="whirlwind" data-server="server2">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server2-whirlwindToggleBtn" class="px-4 py-2 border border-server2 text-server2 rounded-md hover:bg-server2/10 transition-colors flex items-center">
-                                <span id="server2-whirlwindToggleText">展开全部</span>
-                                <i id="server2-whirlwindToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server2-whirlwindAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月10日 08:20
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- 善魂云 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="goodspirit" data-server="server2">
-                    <div class="relative">
-                        <img src="6.png" alt="善魂云外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server2"></i> <span class="server2-goodspirit-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">善魂云</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">自然奇观</span>
-                            </div>
-                            <div class="text-server2 text-2xl">
-                                <i class="fa fa-cloud"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>散发着柔和光芒的神秘云团，据说蕴含着善良的灵魂。接近云团可能会获得祝福或珍贵的物品奖励。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server2-goodspiritCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server2-goodspiritAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="例如：云团位置、祝福效果等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                <button class="px-4 py-2 bg-server2 text-white rounded-md hover:bg-server2/90 transition-colors add-coordinate-btn" data-structure="goodspirit" data-server="server2">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server2-goodspiritToggleBtn" class="px-4 py-2 border border-server2 text-server2 rounded-md hover:bg-server2/10 transition-colors flex items-center">
-                                <span id="server2-goodspiritToggleText">展开全部</span>
-                                <i id="server2-goodspiritToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server2-goodspiritAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月12日 13:35
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- 嘎吱村 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="creak" data-server="server2">
-                    <div class="relative">
-                        <img src="7.png" alt="嘎吱村外观" class="w-full h-48 object-cover">
-                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                            <i class="fa fa-map-marker mr-1 text-server2"></i> <span class="server2-creak-count">0</span>个坐标
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-dark">嘎吱村</h3>
-                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">村庄</span>
-                            </div>
-                            <div class="text-server2 text-2xl">
-                                <i class="fa fa-home"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6 text-gray-600">
-                            <p>由木头和石头建成的小村庄，村民们以伐木和农耕为生。村庄内有商店、铁匠铺和农场，可以与村民交易获取稀有物品。</p>
-                        </div>
-                        
-                        <!-- 坐标列表 -->
-                        <div id="server2-creakCoordinates" class="space-y-3 mb-6">
-                            <!-- 默认显示的坐标 -->
-                        </div>
-                        
-                        <!-- 添加坐标表单 - 默认隐藏 -->
-                        <div id="server2-creakAddForm" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                            <h4 class="font-medium mb-3">添加新坐标</h4>
-                            <div class="grid grid-cols-3 gap-4 mb-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="X">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Y">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="Z">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-server2/50 focus:border-server2" placeholder="例如：村庄入口、重要建筑等">
-                            </div>
-                            <div class="flex justify-end gap-2">
-                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-btn">取消</button>
-                                <button class="px-4 py-2 bg-server2 text-white rounded-md hover:bg-server2/90 transition-colors add-coordinate-btn" data-structure="creak" data-server="server2">添加坐标</button>
-                            </div>
-                        </div>
-                        
-                        <!-- 操作按钮 -->
-                        <div class="flex justify-between items-center">
-                            <button id="server2-creakToggleBtn" class="px-4 py-2 border border-server2 text-server2 rounded-md hover:bg-server2/10 transition-colors flex items-center">
-                                <span id="server2-creakToggleText">展开全部</span>
-                                <i id="server2-creakToggleIcon" class="fa fa-chevron-down ml-2"></i>
-                            </button>
-                            <button id="server2-creakAddBtn" class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加坐标
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 flex justify-between items-center">
-                        <span class="text-xs text-gray-500">
-                            <i class="fa fa-clock-o mr-1"></i>
-                            2025年6月25日 09:20
-                        </span>
-                    </div>
-                </div>
+                <!-- 结构卡片将通过JavaScript动态生成 -->
             </div>
         </section>
     </main>
 
     <!-- 关于我们 -->
-    <section id="about" class="bg-dark text-white py-12">
+    <section id="about" class="bg-white py-12">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row gap-8">
-                <div class="md:w-1/2">
-                    <h2 class="text-2xl font-bold mb-4">关于 Baka 村结构坐标库</h2>
-                    <p class="text-gray-300 mb-4">
-                        Baka 村结构坐标库是一个为《我的世界》玩家打造的社区驱动平台，致力于收集、整理和分享游戏中各种独特结构的坐标信息。
-                    </p>
-                    <p class="text-gray-300 mb-6">
-                        我们的目标是帮助玩家更轻松地找到稀有结构，节省探索时间，让游戏体验更加丰富多彩。无论你是寻找宝藏、建造基地还是探索世界，这里都能为你提供有价值的坐标信息。
-                    </p>
-                    <div class="flex gap-4">
-                        <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center">
-                            <i class="fa fa-github mr-2"></i> GitHub
-                        </a>
-                        <a href="#" class="px-4 py-2 bg-white text-dark rounded-lg hover:bg-gray-200 transition-colors flex items-center">
-                            <i class="fa fa-discord mr-2"></i> Discord
-                        </a>
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-dark mb-4">关于 Baka 村</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">我们是一群热爱《我的世界》的玩家，致力于收集和分享游戏中各种独特结构的坐标，让大家的游戏体验更加丰富多彩。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-map-signs"></i>
                     </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">结构坐标库</h3>
+                    <p class="text-gray-600">我们收集了各种稀有和独特的结构坐标，包括遗迹、自然奇观和特殊地点，让你无需探索即可轻松找到它们。</p>
                 </div>
-                <div class="md:w-1/2">
-                    <h3 class="text-xl font-bold mb-4">如何贡献</h3>
-                    <p class="text-gray-300 mb-4">
-                        我们欢迎每位玩家为坐标库做出贡献！如果你发现了有趣的结构或坐标，只需点击"添加坐标"按钮，填写相关信息，就可以与社区分享你的发现。
-                    </p>
-                    <ul class="space-y-2 text-gray-300">
-                        <li class="flex items-start">
-                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
-                            <span>添加新的结构坐标</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
-                            <span>更新现有坐标信息</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
-                            <span>验证坐标的准确性</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
-                            <span>分享游戏技巧和经验</span>
-                        </li>
-                    </ul>
+                
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">社区共享</h3>
+                    <p class="text-gray-600">Baka 村是一个开放的社区，所有玩家都可以贡献自己发现的坐标，与其他玩家分享游戏中的精彩发现。</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-gamepad"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-3">游戏指南</h3>
+                    <p class="text-gray-600">除了坐标库，我们还提供各种游戏攻略和指南，帮助你更好地探索《我的世界》的奇妙世界。</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <h3 class="text-2xl font-bold text-dark mb-6">加入我们</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center">
+                        <i class="fa fa-weixin mr-2"></i> 微信公众号
+                    </a>
+                    <a href="#" class="px-6 py-3 bg-white text-primary border border-primary rounded-lg hover:bg-primary/5 transition-colors flex items-center">
+                        <i class="fa fa-qq mr-2"></i> QQ 群
+                    </a>
+                    <a href="#" class="px-6 py-3 bg-dark text-white rounded-lg hover:bg-dark/90 transition-colors flex items-center">
+                        <i class="fa fa-github mr-2"></i> GitHub
+                    </a>
                 </div>
             </div>
         </div>
@@ -1120,160 +279,286 @@
 
     <!-- JavaScript -->
     <script>
-        // 默认坐标数据
-        const defaultCoordinates = {
-            server1: {
-                fortress: [
-                    { id: 1, x: 120, y: 70, z: -500, description: "主堡垒入口" },
-                    { id: 2, x: 115, y: 65, z: -510, description: "宝箱房间" },
-                    { id: 3, x: 130, y: 68, z: -520, description: "烈焰人刷怪笼" }
-                ],
-                jungle: [
-                    { id: 1, x: -850, y: 64, z: 320, description: "隐藏的丛林神殿" },
-                    { id: 2, x: -845, y: 62, z: 325, description: "陷阱房间" }
-                ],
-                desert: [
-                    { id: 1, x: 1500, y: 63, z: -700, description: "沙漠神殿入口" },
-                    { id: 2, x: 1503, y: 60, z: -703, description: "压力板陷阱" }
-                ],
-                whirlwind: [
-                    { id: 1, x: -200, y: 100, z: -1000, description: "大型旋风云" },
-                    { id: 2, x: -210, y: 95, z: -1010, description: "雷电频发区域" }
-                ],
-                goodspirit: [
-                    { id: 1, x: 800, y: 110, z: 500, description: "和平的善魂云" },
-                    { id: 2, x: 805, y: 108, z: 510, description: "可获得经验球" }
-                ],
-                creak: [
-                    { id: 1, x: -500, y: 64, z: 800, description: "大型嘎吱村" },
-                    { id: 2, x: -495, y: 64, z: 810, description: "铁匠铺" },
-                    { id: 3, x: -510, y: 64, z: 805, description: "农场" }
-                ]
+        // 默认结构数据
+        const defaultStructures = [
+            {
+                id: 1,
+                name: "孤独堡垒",
+                type: "遗迹",
+                description: "试炼刷怪笼与那跃动的灵魂火，也许就是这堡垒里最后的活动之物了。如果感兴趣，你可以在那主塔楼的顶端见到巨大的旋风人。",
+                image: 2,
+                icon: "fa-fort-awesome",
+                coordinates: {
+                    server1: [
+                        { id: 1, x: 120, y: 70, z: -500, description: "哼" },
+                        { id: 2, x: 115, y: 65, z: -510, description: "哼" }
+                    ],
+                    server2: [
+                        { id: 1, x: 300, y: 75, z: -200, description: "哼" }
+                    ]
+                }
             },
-            server2: {
-                fortress: [
-                    { id: 1, x: 300, y: 75, z: -200, description: "山顶堡垒" },
-                    { id: 2, x: 295, y: 70, z: -210, description: "宝藏室" }
-                ],
-                jungle: [
-                    { id: 1, x: -600, y: 65, z: 400, description: "河边丛林神殿" },
-                    { id: 2, x: -605, y: 63, z: 395, description: "隐藏通道" }
-                ],
-                desert: [
-                    { id: 1, x: 1200, y: 63, z: -400, description: "绿洲附近的神殿" }
-                ],
-                whirlwind: [
-                    { id: 1, x: -100, y: 90, z: -800, description: "小型旋风云" }
-                ],
-                goodspirit: [
-                    { id: 1, x: 700, y: 105, z: 600, description: "山谷上方的善魂云" },
-                    { id: 2, x: 710, y: 102, z: 610, description: "可获得附魔书" }
-                ],
-                creak: [
-                    { id: 1, x: -400, y: 64, z: 700, description: "小型嘎吱村" },
-                    { id: 2, x: -395, y: 64, z: 705, description: "图书馆" }
-                ]
-            }
-        };
-        
-        // 重新编号坐标
-        function renumberCoordinates(coordinates) {
-            return coordinates.map((coord, index) => ({
-                ...coord,
-                id: index + 1
-            }));
+            {
+                id: 2,
+                name: "丛林神殿",
+                type: "遗迹",
+                description: "隐藏在茂密丛林中的古老神殿，周围缠绕着藤蔓和树木。神殿内部布满陷阱，特别是在宝箱周围，需要小心触发。",
+                image: 3,
+                icon: "fa-tree",
+                coordinates: {
+                    server1: [
+                        { id: 1, x: -850, y: 64, z: 320, description: "哦" }
+                    ],
+                    server2: [
+                        { id: 1, x: -600, y: 65, z: 400, description: "哦" }
+                    ]
+                }
+            },
+            {
+                id: 3,
+                name: "沙漠神殿",
+                type: "遗迹",
+                description: "隐藏在沙漠中的古老神殿，被沙子覆盖。内部困有许多亡灵，还设有一些陷阱。",
+                image: 4,
+                icon: "fa-sun-o",
+                coordinates: {
+                    server1: [
+                        { id: 1, x: 1500, y: 63, z: -700, description: "嗷" }
+                    ],
+                    server2: [
+                        { id: 1, x: 1200, y: 63, z: -400, description: "嗷" }
+                    ]
+                }
+            },
+            {
+                id: 4,
+                name: "旋风云",
+                type: "自然奇观",
+                description: "天空中旋转的巨大云团，风呼啸，刷怪笼中的旋风人被靠近的玩家唤醒......特殊战利品：无冷却风弹、脆风棒、“风爆弹射”附魔书、“动能缓冲”附魔书",
+                image: 5,
+                icon: "fa-tornado",
+                coordinates: {
+                    server1: [
+                        { id: 1, x: -200, y: 100, z: -1000, description: "喵" }
+                    ],
+                    server2: [
+                        { id: 1, x: -100, y: 90, z: -800, description: "喵" }
+                    ]
+                }
+            },
+            {
+                id: 5,
+                name: "善魂云",
+                type: "自然奇观",
+                description: "刷新在雪原、积雪高山、冰刺之地和冰封山峰群系空中的快乐云朵，云上雪屋的地下室里貌似关押着一只永远不会长大的小可爱，去解放它让它自由地追逐天空吧！特殊战利品：颜色各异的挽具、失水恶魂、“悠魂”附魔书、“纯真守护”附魔书”附魔书、“动能缓冲”附魔书",
+                image: 6,
+                icon: "fa-tornado",
+                coordinates: {
+                    server1: [
+                        { id: 1, x: -200, y: 100, z: -1000, description: "喵" }
+                    ],
+                    server2: [
+                        { id: 1, x: -100, y: 90, z: -800, description: "喵" }
+                    ]
+                }
+            },
+            {
+                id: 6,
+                name: "嘎吱村",
+                type: "自然奇观",
+                description: "新在苍白森林的灾厄营地，炼金房、图书馆、教堂、靶场......特殊战利品：音乐唱片-《Infinite Spooky Amethyst》、嘎吱佳酿、附有快速填装IV的弩",
+                image: 7,
+                icon: "fa-tornado",
+                coordinates: {
+                    server1: [
+                        { id: 1, x: -200, y: 100, z: -1000, description: "喵" }
+                    ],
+                    server2: [
+                        { id: 1, x: -100, y: 90, z: -800, description: "喵" }
+                    ]
+                }
+            },
+
+        ];
+
+        // 从本地存储加载结构数据
+        function loadStructures() {
+            const savedStructures = localStorage.getItem('mcStructures');
+            return savedStructures ? JSON.parse(savedStructures) : defaultStructures;
         }
 
-        // 加载坐标
-        function loadCoordinates(server) {
-            const structures = ['fortress', 'jungle', 'desert', 'whirlwind', 'goodspirit', 'creak'];
+        // 保存结构数据到本地存储
+        function saveStructures(structures) {
+            localStorage.setItem('mcStructures', JSON.stringify(structures));
+        }
+
+        // 添加新结构
+        function addStructure(structure) {
+            const structures = loadStructures();
             
-            structures.forEach(structure => {
-                // 从本地存储获取坐标
-                let coordinates = JSON.parse(localStorage.getItem(`${server}-${structure}Coordinates`));
-                
-                // 如果本地存储没有数据，使用默认数据
-                if (!coordinates || coordinates.length === 0) {
-                    coordinates = defaultCoordinates[server][structure] || [];
-                    
-                    // 保存默认数据到本地存储
-                    localStorage.setItem(`${server}-${structure}Coordinates`, JSON.stringify(coordinates));
+            // 为新结构生成唯一ID
+            const newId = structures.length > 0 ? Math.max(...structures.map(s => s.id)) + 1 : 1;
+            
+            // 创建新结构对象
+            const newStructure = {
+                id: newId,
+                name: structure.name,
+                type: structure.type,
+                description: structure.description,
+                image: parseInt(structure.image),
+                icon: structure.icon,
+                coordinates: {
+                    server1: [],
+                    server2: []
                 }
-                
-                // 更新坐标计数
-                document.querySelector(`.${server}-${structure}-count`).textContent = coordinates.length;
-                
-                // 获取容器
-                const container = document.getElementById(`${server}-${structure}Coordinates`);
-                
-                // 清空容器
-                container.innerHTML = '';
-                
-                // 显示坐标
-                coordinates.forEach((coord, index) => {
-                    const coordElement = document.createElement('div');
-                    coordElement.className = `bg-gray-50 p-4 rounded-lg border border-gray-200 ${index >= 3 ? `${server}-${structure}-hidden-coord hidden` : ''}`;
+            };
+            
+            // 添加到结构列表
+            structures.push(newStructure);
+            
+            // 保存到本地存储
+            saveStructures(structures);
+            
+            return newStructure;
+        }
+
+        // 渲染结构卡片
+        function renderStructureCard(structure, server) {
+            const serverClass = server === 'server1' ? 'server1' : 'server2';
+            const coordinates = structure.coordinates[server] || [];
+            
+            return `
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="${structure.id}" data-server="${server}">
+                    <div class="relative">
+                        <div class="structure-image w-full h-48" style="background-image: url('${structure.image}.png')"></div>
+                        <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
+                            <i class="fa fa-map-marker mr-1 text-${serverClass}"></i> ${coordinates.length}个坐标
+                        </div>
+                    </div>
                     
-                    coordElement.innerHTML = `
-                        <div class="flex justify-between items-start mb-2">
-                            <div class="font-medium">
-                                #${coord.id} ${coord.description}
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-dark">${structure.name}</h3>
+                                <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">${structure.type}</span>
                             </div>
-                            <div class="text-xs text-gray-500">
-                                <i class="fa fa-user mr-1"></i> 匿名
+                            <div class="text-${serverClass} text-2xl">
+                                <i class="fa ${structure.icon}"></i>
                             </div>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <div class="grid grid-cols-3 gap-2 text-sm">
-                                <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
-                                    <i class="fa fa-arrow-right text-gray-500 mr-2"></i>
-                                    <span class="font-mono">X: ${coord.x}</span>
+                        
+                        <div class="mb-6 text-gray-600">
+                            <p>${structure.description}</p>
+                        </div>
+                        
+                        <!-- 坐标列表 -->
+                        <div id="${server}-${structure.id}-coordinates" class="space-y-3 mb-6">
+                            ${coordinates.length > 0 ? coordinates.map(coord => `
+                                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div class="font-medium">
+                                            #${coord.id} ${coord.description}
+                                        </div>
+                                        <div class="text-xs text-gray-500">
+                                            <i class="fa fa-user mr-1"></i> 匿名
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <div class="grid grid-cols-3 gap-2 text-sm">
+                                            <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
+                                                <i class="fa fa-arrow-right text-gray-500 mr-2"></i>
+                                                <span class="font-mono">X: ${coord.x}</span>
+                                            </div>
+                                            <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
+                                                <i class="fa fa-arrow-up text-gray-500 mr-2"></i>
+                                                <span class="font-mono">Y: ${coord.y}</span>
+                                            </div>
+                                            <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
+                                                <i class="fa fa-arrow-left text-gray-500 mr-2"></i>
+                                                <span class="font-mono">Z: ${coord.z}</span>
+                                            </div>
+                                        </div>
+                                        <button class="text-red-500 hover:text-red-700 transition-colors delete-coordinate-btn" data-server="${server}" data-structure="${structure.id}" data-id="${coord.id}">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
-                                    <i class="fa fa-arrow-up text-gray-500 mr-2"></i>
-                                    <span class="font-mono">Y: ${coord.y}</span>
+                            `).join('') : '<p class="text-center text-gray-500 py-4">暂无坐标数据</p>'}
+                        </div>
+                        
+                        <!-- 添加坐标表单 - 默认隐藏 -->
+                        <div id="${server}-${structure.id}-add-form" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
+                            <h4 class="font-medium mb-3">添加新坐标</h4>
+                            <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
+                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="X">
                                 </div>
-                                <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
-                                    <i class="fa fa-arrow-left text-gray-500 mr-2"></i>
-                                    <span class="font-mono">Z: ${coord.z}</span>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
+                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="Y">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
+                                    <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="Z">
                                 </div>
                             </div>
-                            <button class="text-red-500 hover:text-red-700 transition-colors delete-coordinate-btn" data-server="${server}" data-structure="${structure}" data-id="${coord.id}">
-                                <i class="fa fa-trash"></i>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">坐标描述</label>
+                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="例如：宝箱位置、入口等">
+                            </div>
+                            <div class="flex justify-end gap-2">
+                                <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors cancel-add-coordinate-btn">取消</button>
+                                <button class="px-4 py-2 bg-${serverClass} text-white rounded-md hover:bg-${serverClass}/90 transition-colors add-coordinate-btn" data-structure="${structure.id}" data-server="${server}">添加坐标</button>
+                            </div>
+                        </div>
+                        
+                        <!-- 操作按钮 -->
+                        <div class="flex justify-between items-center">
+                            <button class="px-4 py-2 border border-${serverClass} text-${serverClass} rounded-md hover:bg-${serverClass}/10 transition-colors flex items-center toggle-coordinates-btn" data-structure="${structure.id}" data-server="${server}">
+                                <span>展开全部</span>
+                                <i class="fa fa-chevron-down ml-2"></i>
+                            </button>
+                            <button class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center show-add-form-btn" data-structure="${structure.id}" data-server="${server}">
+                                <i class="fa fa-plus mr-2"></i> 添加坐标
                             </button>
                         </div>
-                    `;
+                    </div>
                     
-                    container.appendChild(coordElement);
-                });
-                
-                // 更新展开/折叠按钮状态
-                const toggleBtn = document.getElementById(`${server}-${structure}ToggleBtn`);
-                const toggleText = document.getElementById(`${server}-${structure}ToggleText`);
-                const toggleIcon = document.getElementById(`${server}-${structure}ToggleIcon`);
-                
-                // 如果坐标数量超过3个，显示展开按钮
-                if (coordinates.length > 3) {
-                    toggleBtn.classList.remove('hidden');
-                    
-                    // 检查是否有隐藏的坐标
-                    const hiddenCoords = document.querySelectorAll(`.${server}-${structure}-hidden-coord`);
-                    if (hiddenCoords.length > 0) {
-                        toggleText.textContent = '展开全部';
-                        toggleIcon.className = 'fa fa-chevron-down ml-2';
-                    } else {
-                        toggleText.textContent = '收起';
-                        toggleIcon.className = 'fa fa-chevron-up ml-2';
-                    }
-                } else {
-                    toggleBtn.classList.add('hidden');
-                }
-            });
+                    <div class="bg-gray-50 p-4 flex justify-between items-center">
+                        <span class="text-xs text-gray-500">
+                            <i class="fa fa-clock-o mr-1"></i>
+                            ${new Date().toLocaleDateString('zh-CN')}
+                        </span>
+                        <button class="text-red-500 hover:text-red-700 text-sm delete-structure-btn" data-id="${structure.id}">
+                            <i class="fa fa-trash mr-1"></i> 删除结构
+                        </button>
+                    </div>
+                </div>
+            `;
         }
-        
+
+        // 渲染所有结构
+        function renderAllStructures() {
+            const structures = loadStructures();
+            const server1Content = document.getElementById('server1Content');
+            const server2Content = document.getElementById('server2Content');
+            
+            server1Content.innerHTML = '';
+            server2Content.innerHTML = '';
+            
+            structures.forEach(structure => {
+                server1Content.innerHTML += renderStructureCard(structure, 'server1');
+                server2Content.innerHTML += renderStructureCard(structure, 'server2');
+            });
+            
+            // 重新绑定事件
+            bindEvents();
+        }
+
         // 添加坐标
-        function addCoordinate(server, structure) {
-            const form = document.getElementById(`${server}-${structure}AddForm`);
+        function addCoordinate(server, structureId) {
+            const form = document.getElementById(`${server}-${structureId}-add-form`);
             const inputs = form.querySelectorAll('input');
             const xInput = inputs[0];
             const yInput = inputs[1];
@@ -1282,38 +567,38 @@
             
             // 验证输入
             if (!xInput.value || !yInput.value || !zInput.value) {
-                alert('请填写完整的坐标信息');
+                showNotification('请填写完整的坐标信息', 'error');
                 return;
             }
             
-            // 获取当前坐标
-            let coordinates = JSON.parse(localStorage.getItem(`${server}-${structure}Coordinates`));
+            const structures = loadStructures();
+            const structure = structures.find(s => s.id === structureId);
             
-            // 如果本地存储没有数据，使用默认数据
-            if (!coordinates || coordinates.length === 0) {
-                coordinates = defaultCoordinates[server][structure] || [];
+            if (!structure) {
+                showNotification('结构不存在', 'error');
+                return;
             }
             
             // 创建新坐标
+            const coordinates = structure.coordinates[server] || [];
+            const newId = coordinates.length > 0 ? Math.max(...coordinates.map(c => c.id)) + 1 : 1;
+            
             const newCoord = {
-                id: coordinates.length + 1, // 简单地使用下一个编号
+                id: newId,
                 x: parseInt(xInput.value),
                 y: parseInt(yInput.value),
                 z: parseInt(zInput.value),
                 description: descInput.value || '新坐标'
             };
             
-            // 添加到数组
-            coordinates.push(newCoord);
+            // 添加到坐标列表
+            structure.coordinates[server].push(newCoord);
             
-            // 重新编号坐标
-            coordinates = renumberCoordinates(coordinates);
+            // 保存结构数据
+            saveStructures(structures);
             
-            // 保存到本地存储
-            localStorage.setItem(`${server}-${structure}Coordinates`, JSON.stringify(coordinates));
-            
-            // 重新加载坐标
-            loadCoordinates(server);
+            // 重新渲染结构
+            renderAllStructures();
             
             // 重置表单
             form.reset();
@@ -1324,47 +609,64 @@
             // 显示成功消息
             showNotification('坐标添加成功！', 'success');
         }
-        
+
         // 删除坐标
-        function deleteCoordinate(server, structure, id) {
+        function deleteCoordinate(server, structureId, coordId) {
             if (!confirm('确定要删除这个坐标吗？')) return;
             
-            // 获取当前坐标
-            let coordinates = JSON.parse(localStorage.getItem(`${server}-${structure}Coordinates`));
+            const structures = loadStructures();
+            const structure = structures.find(s => s.id === structureId);
             
-            // 如果本地存储没有数据，使用默认数据
-            if (!coordinates || coordinates.length === 0) {
-                coordinates = defaultCoordinates[server][structure] || [];
+            if (!structure) {
+                showNotification('结构不存在', 'error');
+                return;
             }
             
-            // 删除指定ID的坐标
-            coordinates = coordinates.filter(coord => coord.id !== id);
+            // 删除坐标
+            structure.coordinates[server] = structure.coordinates[server].filter(coord => coord.id !== coordId);
             
-            // 重新编号坐标
-            if (coordinates.length > 0) {
-                coordinates = renumberCoordinates(coordinates);
-            }
+            // 保存结构数据
+            saveStructures(structures);
             
-            // 保存到本地存储
-            localStorage.setItem(`${server}-${structure}Coordinates`, JSON.stringify(coordinates));
-            
-            // 重新加载坐标
-            loadCoordinates(server);
+            // 重新渲染结构
+            renderAllStructures();
             
             // 显示成功消息
             showNotification('坐标已删除！', 'success');
         }
-        
+
+        // 删除结构
+        function deleteStructure(structureId) {
+            if (!confirm('确定要删除这个结构吗？所有相关坐标也将被删除！')) return;
+            
+            const structures = loadStructures();
+            const newStructures = structures.filter(s => s.id !== structureId);
+            
+            // 保存结构数据
+            saveStructures(newStructures);
+            
+            // 重新渲染结构
+            renderAllStructures();
+            
+            // 显示成功消息
+            showNotification('结构已删除！', 'success');
+        }
+
         // 显示通知
         function showNotification(message, type = 'info') {
+            // 移除现有通知
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+            
             // 创建通知元素
             const notification = document.createElement('div');
-            notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-500 translate-x-full ${
-                type === 'success' ? 'bg-green-500 text-white' : 'bg-blue-500 text-white'
+            notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-500 notification ${
+                type === 'success' ? 'bg-green-500 text-white' : 
+                type === 'error' ? 'bg-red-500 text-white' : 'bg-blue-500 text-white'
             }`;
             notification.innerHTML = `
                 <div class="flex items-center">
-                    <i class="fa ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'} mr-2"></i>
+                    <i class="fa ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-times-circle' : 'fa-info-circle'} mr-2"></i>
                     <span>${message}</span>
                 </div>
             `;
@@ -1372,142 +674,150 @@
             // 添加到页面
             document.body.appendChild(notification);
             
-            // 触发动画
-            setTimeout(() => {
-                notification.classList.remove('translate-x-full');
-                notification.classList.add('translate-x-0');
-            }, 10);
-            
             // 自动关闭
             setTimeout(() => {
-                notification.classList.remove('translate-x-0');
-                notification.classList.add('translate-x-full');
-                
-                // 移除元素
+                notification.style.opacity = '0';
                 setTimeout(() => {
                     document.body.removeChild(notification);
                 }, 500);
             }, 3000);
         }
-        
-        // 切换服务器
-        function toggleServer(server) {
-            document.getElementById('server1Content').classList.toggle('hidden', server !== 'server1');
-            document.getElementById('server2Content').classList.toggle('hidden', server !== 'server2');
-            
-            // 保存当前服务器选择
-            localStorage.setItem('currentServer', server);
-            
-            // 加载所选服务器的坐标
-            loadCoordinates(server);
-        }
-        
-        // 展开/折叠坐标
-        function toggleCoordinates(server, structure) {
-            const hiddenCoords = document.querySelectorAll(`.${server}-${structure}-hidden-coord`);
-            const toggleText = document.getElementById(`${server}-${structure}ToggleText`);
-            const toggleIcon = document.getElementById(`${server}-${structure}ToggleIcon`);
-            
-            if (hiddenCoords.length > 0) {
-                // 展开
-                hiddenCoords.forEach(coord => coord.classList.remove('hidden'));
-                toggleText.textContent = '收起';
-                toggleIcon.className = 'fa fa-chevron-up ml-2';
-            } else {
-                // 折叠
-                const allCoords = document.querySelectorAll(`#${server}-${structure}Coordinates > div`);
-                Array.from(allCoords).slice(3).forEach(coord => {
-                    coord.classList.add(`${server}-${structure}-hidden-coord`, 'hidden');
+
+        // 绑定事件
+        function bindEvents() {
+            // 添加结构表单提交
+            document.getElementById('addStructureForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('structureName').value;
+                const type = document.getElementById('structureType').value;
+                const description = document.getElementById('structureDescription').value;
+                const image = document.getElementById('structureImage').value;
+                const icon = document.getElementById('structureIcon').value;
+                
+                if (!name || !type || !description || !image || !icon) {
+                    showNotification('请填写所有必填字段', 'error');
+                    return;
+                }
+                
+                if (image < 2 || image > 20) {
+                    showNotification('图片编号必须在2-20之间', 'error');
+                    return;
+                }
+                
+                // 添加新结构
+                addStructure({
+                    name,
+                    type,
+                    description,
+                    image,
+                    icon
                 });
-                toggleText.textContent = '展开全部';
-                toggleIcon.className = 'fa fa-chevron-down ml-2';
-            }
-        }
-        
-        // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', () => {
-            // 从本地存储获取当前服务器选择
-            const currentServer = localStorage.getItem('currentServer') || 'server1';
-            document.getElementById('serverSelector').value = currentServer;
-            
-            // 切换服务器
-            toggleServer(currentServer);
-            
-            // 服务器选择事件
-            document.getElementById('serverSelector').addEventListener('change', (e) => {
-                toggleServer(e.target.value);
+                
+                // 重置表单
+                document.getElementById('addStructureForm').reset();
+                
+                // 重新渲染结构
+                renderAllStructures();
+                
+                // 显示成功消息
+                showNotification('结构添加成功！', 'success');
+                
+                // 滚动到结构列表
+                document.getElementById('structures').scrollIntoView({ behavior: 'smooth' });
             });
             
-            // 添加坐标按钮事件
-            document.querySelectorAll('.add-coordinate-btn').forEach(btn => {
+            // 添加坐标按钮
+            document.querySelectorAll('.show-add-form-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const server = e.target.dataset.server;
-                    const structure = e.target.dataset.structure;
-                    addCoordinate(server, structure);
-                });
-            });
-            
-            // 删除坐标按钮事件
-            document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('delete-coordinate-btn') || e.target.parentElement.classList.contains('delete-coordinate-btn')) {
-                    const btn = e.target.classList.contains('delete-coordinate-btn') ? e.target : e.target.parentElement;
-                    const server = btn.dataset.server;
-                    const structure = btn.dataset.structure;
-                    const id = parseInt(btn.dataset.id);
-                    deleteCoordinate(server, structure, id);
-                }
-            });
-            
-            // 展开/折叠按钮事件
-            document.querySelectorAll('[id$="ToggleBtn"]').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const idParts = e.target.id.split('-');
-                    const server = idParts[0];
-                    const structure = idParts[1];
-                    toggleCoordinates(server, structure);
-                });
-            });
-            
-            // 添加坐标表单显示按钮事件
-            document.querySelectorAll('[id$="AddBtn"]').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const idParts = e.target.id.split('-');
-                    const server = idParts[0];
-                    const structure = idParts[1];
+                    const structureId = e.target.dataset.structure;
                     
                     // 隐藏所有表单
-                    document.querySelectorAll('[id$="AddForm"]').forEach(form => {
+                    document.querySelectorAll('[id$="-add-form"]').forEach(form => {
                         form.classList.add('hidden');
                     });
                     
                     // 显示当前表单
-                    document.getElementById(`${server}-${structure}AddForm`).classList.remove('hidden');
+                    const form = document.getElementById(`${server}-${structureId}-add-form`);
+                    form.classList.remove('hidden');
+                    
+                    // 滚动到表单位置
+                    form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 });
             });
             
-            // 取消按钮事件
-            document.querySelectorAll('.cancel-btn').forEach(btn => {
+            // 添加坐标提交
+            document.querySelectorAll('.add-coordinate-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    const form = e.target.closest('[id$="AddForm"]');
+                    const server = e.target.dataset.server;
+                    const structureId = parseInt(e.target.dataset.structure);
+                    addCoordinate(server, structureId);
+                });
+            });
+            
+            // 取消添加坐标
+            document.querySelectorAll('.cancel-add-coordinate-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const form = e.target.closest('[id$="-add-form"]');
                     form.classList.add('hidden');
                 });
             });
             
+            // 删除坐标
+            document.querySelectorAll('.delete-coordinate-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const server = e.target.dataset.server;
+                    const structureId = parseInt(e.target.dataset.structure);
+                    const coordId = parseInt(e.target.dataset.id);
+                    deleteCoordinate(server, structureId, coordId);
+                });
+            });
+            
+            // 删除结构
+            document.querySelectorAll('.delete-structure-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const structureId = parseInt(e.target.dataset.id);
+                    deleteStructure(structureId);
+                });
+            });
+            
+            // 切换坐标显示
+            document.querySelectorAll('.toggle-coordinates-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const server = e.target.dataset.server;
+                    const structureId = e.target.dataset.structure;
+                    const container = document.getElementById(`${server}-${structureId}-coordinates`);
+                    const isExpanded = container.getAttribute('data-expanded') === 'true';
+                    
+                    if (isExpanded) {
+                        container.setAttribute('data-expanded', 'false');
+                        container.classList.add('max-h-60', 'overflow-y-hidden');
+                        e.target.innerHTML = '<span>展开全部</span><i class="fa fa-chevron-down ml-2"></i>';
+                    } else {
+                        container.setAttribute('data-expanded', 'true');
+                        container.classList.remove('max-h-60', 'overflow-y-hidden');
+                        e.target.innerHTML = '<span>收起</span><i class="fa fa-chevron-up ml-2"></i>';
+                    }
+                });
+            });
+            
+            // 服务器切换
+            document.getElementById('serverSelector').addEventListener('change', (e) => {
+                const server = e.target.value;
+                document.getElementById('server1Content').classList.toggle('hidden', server !== 'server1');
+                document.getElementById('server2Content').classList.toggle('hidden', server !== 'server2');
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 渲染所有结构
+            renderAllStructures();
+            
             // 移动端菜单切换
             document.getElementById('mobileMenuBtn').addEventListener('click', () => {
                 document.getElementById('mobileMenu').classList.toggle('hidden');
-            });
-            
-            // 滚动时导航栏样式变化
-            window.addEventListener('scroll', () => {
-                const header = document.querySelector('header');
-                if (window.scrollY > 50) {
-                    header.classList.add('py-2', 'shadow-lg');
-                    header.classList.remove('py-4', 'shadow-md');
-                } else {
-                    header.classList.add('py-4', 'shadow-md');
-                    header.classList.remove('py-2', 'shadow-lg');
-                }
             });
             
             // 平滑滚动
@@ -1531,48 +841,31 @@
                 });
             });
             
+            // 滚动时导航栏样式变化
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('py-2', 'shadow-lg');
+                    header.classList.remove('py-4', 'shadow-md');
+                } else {
+                    header.classList.add('py-4', 'shadow-md');
+                    header.classList.remove('py-2', 'shadow-lg');
+                }
+            });
+            
             // 搜索功能
             document.getElementById('searchInput').addEventListener('input', (e) => {
                 const searchTerm = e.target.value.toLowerCase();
+                const structures = document.querySelectorAll('[data-structure]');
                 
-                // 显示所有结构
-                document.querySelectorAll('[data-structure]').forEach(structure => {
-                    structure.classList.remove('hidden');
-                });
-                
-                if (searchTerm.trim() === '') return;
-                
-                // 遍历所有结构
-                document.querySelectorAll('[data-structure]').forEach(structure => {
-                    const structureName = structure.querySelector('h3').textContent.toLowerCase();
-                    let hasMatch = structureName.includes(searchTerm);
+                structures.forEach(structure => {
+                    const name = structure.querySelector('h3').textContent.toLowerCase();
+                    const type = structure.querySelector('span').textContent.toLowerCase();
+                    const description = structure.querySelector('p').textContent.toLowerCase();
                     
-                    // 检查坐标描述
-                    if (!hasMatch) {
-                        const coords = structure.querySelectorAll('#' + structure.dataset.server + '-' + structure.dataset.structure + 'Coordinates > div');
-                        coords.forEach(coord => {
-                            const desc = coord.querySelector('.font-medium').textContent.toLowerCase();
-                            if (desc.includes(searchTerm)) {
-                                hasMatch = true;
-                            }
-                        });
-                    }
-                    
-                    // 检查坐标值
-                    if (!hasMatch) {
-                        const coords = structure.querySelectorAll('#' + structure.dataset.server + '-' + structure.dataset.structure + 'Coordinates > div');
-                        coords.forEach(coord => {
-                            const coordValues = coord.querySelectorAll('.font-mono');
-                            coordValues.forEach(value => {
-                                if (value.textContent.toLowerCase().includes(searchTerm)) {
-                                    hasMatch = true;
-                                }
-                            });
-                        });
-                    }
-                    
-                    // 隐藏不匹配的结构
-                    if (!hasMatch) {
+                    if (name.includes(searchTerm) || type.includes(searchTerm) || description.includes(searchTerm)) {
+                        structure.classList.remove('hidden');
+                    } else {
                         structure.classList.add('hidden');
                     }
                 });
