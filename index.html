@@ -303,6 +303,45 @@
     <!-- 评论容器 -->
     <div id="gitment-container"></div>
 
+
+    <!-- 应用 Tailwind 类到评论容器 -->
+    <div id="gitment-container" class="bg-white rounded-xl shadow-md p-6 mt-8"></div>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            /* 自定义 Gitment 组件样式 */
+            .gitment-card {
+                @apply bg-white rounded-xl shadow-md p-6;
+            }
+            .gitment-heading {
+                @apply text-xl font-bold text-gray-800 mb-4;
+            }
+            .gitment-button {
+                @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors;
+            }
+        }
+    </style>
+
+    <script>
+        // 初始化 Gitment 后应用自定义类
+        gitment.render('gitment-container', {
+            afterRender() {
+                // 添加自定义类到 Gitment 元素
+                document.querySelector('.gitment-container').classList.add('gitment-card');
+                document.querySelector('.gitment-comments-header').classList.add('gitment-heading');
+                document.querySelectorAll('.gitment-editor-submit').forEach(btn => {
+                    btn.classList.add('gitment-button');
+                });
+            }
+        });
+    </script>
+
+
+
+
+
     <footer class="bg-white shadow-md py-6">
         <div class="container mx-auto px-4 text-center text-gray-600">
             <p>&copy; 2025 Baka 村结构坐标库. 保留所有权利.</p>
