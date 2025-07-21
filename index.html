@@ -64,6 +64,12 @@
             }
         }
     </style>
+
+
+    <!-- 引入 Gitment CSS -->
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+
+
 </head>
 <body class="bg-gray-50 font-inter">
     <!-- 导航栏 -->
@@ -293,6 +299,10 @@
         </div>
     </div>
 
+
+    <!-- 评论容器 -->
+    <div id="gitment-container"></div>
+
     <footer class="bg-white shadow-md py-6">
         <div class="container mx-auto px-4 text-center text-gray-600">
             <p>&copy; 2025 Baka 村结构坐标库. 保留所有权利.</p>
@@ -301,5 +311,19 @@
 
     <!-- 引入外部 JavaScript 文件 -->
     <script src="script.js"></script>
+    <!-- 引入 Gitment JavaScript -->
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+        const gitment = new Gitment({
+            id: 'baka村', // 可选，默认为 location.href
+            owner: 'waddiwasibiu', // 你的 GitHub 用户名
+            repo: 'mc-map', // 存储评论的仓库名称
+            oauth: {
+                client_id: 'Ov23lir8R3Vh9Zzynyvy', // 你的 client_id
+                client_secret: 'b7b652dc0032f772142895a06b45e0fe66d197c2', // 你的 client_secret
+            },
+        });
+        gitment.render('gitment-container');
+    </script>
 </body>
 </html>
