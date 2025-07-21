@@ -63,6 +63,13 @@
                 width: 90vw;
                 max-width: 800px;
             }
+            #gitalk-container {
+                font-family: 'Inter', sans-serif;
+                color: #1E293B; /* 使用 dark 颜色 */
+            }
+            #gitalk-container .gt-comment-content {
+                border-radius: 0.375rem; /* 与其他卡片的圆角一致 */
+            }
         }
     </style>
 </head>
@@ -295,7 +302,11 @@
     </div>
 
     <!-- 评论容器 -->
-    <div id="gitalk-container"></div>
+    <div class="container mx-auto px-4 mb-12">
+        <div id="gitalk-container" class="bg-white rounded-xl shadow-md p-6"></div>
+    </div>
+
+
 
     <footer class="bg-white shadow-md py-6">
         <div class="container mx-auto px-4 text-center text-gray-600">
