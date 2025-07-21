@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
     
     <!-- Tailwind 配置 -->
     <script>
@@ -64,12 +65,6 @@
             }
         }
     </style>
-
-
-    <!-- 引入 Gitment CSS -->
-    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-
-
 </head>
 <body class="bg-gray-50 font-inter">
     <!-- 导航栏 -->
@@ -299,48 +294,8 @@
         </div>
     </div>
 
-
     <!-- 评论容器 -->
-    <div id="gitment-container"></div>
-
-
-    <!-- 应用 Tailwind 类到评论容器 -->
-    <div id="gitment-container" class="bg-white rounded-xl shadow-md p-6 mt-8"></div>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            /* 自定义 Gitment 组件样式 */
-            .gitment-card {
-                @apply bg-white rounded-xl shadow-md p-6;
-            }
-            .gitment-heading {
-                @apply text-xl font-bold text-gray-800 mb-4;
-            }
-            .gitment-button {
-                @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors;
-            }
-        }
-    </style>
-
-    <script>
-        // 初始化 Gitment 后应用自定义类
-        gitment.render('gitment-container', {
-            afterRender() {
-                // 添加自定义类到 Gitment 元素
-                document.querySelector('.gitment-container').classList.add('gitment-card');
-                document.querySelector('.gitment-comments-header').classList.add('gitment-heading');
-                document.querySelectorAll('.gitment-editor-submit').forEach(btn => {
-                    btn.classList.add('gitment-button');
-                });
-            }
-        });
-    </script>
-
-
-
-
+    <div id="gitalk-container"></div>
 
     <footer class="bg-white shadow-md py-6">
         <div class="container mx-auto px-4 text-center text-gray-600">
@@ -350,19 +305,6 @@
 
     <!-- 引入外部 JavaScript 文件 -->
     <script src="script.js"></script>
-    <!-- 引入 Gitment JavaScript -->
-    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-    <script>
-        const gitment = new Gitment({
-            id: 'baka村', // 可选，默认为 location.href
-            owner: 'waddiwasibiu', // 你的 GitHub 用户名
-            repo: 'mc-map', // 存储评论的仓库名称
-            oauth: {
-                client_id: 'Ov23lir8R3Vh9Zzynyvy', // 你的 client_id
-                client_secret: 'b7b652dc0032f772142895a06b45e0fe66d197c2', // 你的 client_secret
-            },
-        });
-        gitment.render('gitment-container');
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 </body>
 </html>
