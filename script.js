@@ -212,6 +212,43 @@ const defaultStructures = [
     }
 },
 
+{
+    id: 7,
+    name: "遗迹废墟",
+    type: "自然奇观",
+    description: "“看起来年是一座年代久远的地下博物馆”",
+    image: 8,
+    icon: "fa-tornado",
+    coordinates: {
+        server1: [
+            { id: 1, x: -11239, y: 128, z: 447, description: "4靶场1女巫" },
+
+        ],
+        server2: [
+            { id: 1, x: -100, y: 90, z: -800, description: "喵" },
+        ]
+    }
+},
+
+
+{
+    id: 8,
+    name: "试炼堡垒",
+    type: "自然奇观",
+    description: "生成于主世界冰冻深海和暖水海洋群系空中的巨大试炼结构",
+    image: 9,
+    icon: "fa-tornado",
+    coordinates: {
+        server1: [
+            { id: 1, x: -11239, y: 128, z: 447, description: "4靶场1女巫" },
+        ],
+        server2: [
+            { id: 1, x: -100, y: 90, z: -800, description: "喵" },
+        ]
+    }
+},
+
+
 ];
 
 
