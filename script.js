@@ -11,11 +11,11 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: -1067, y: 128, z: 1099, description: "近" },
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
 
         ],
         server2: [
-            { id: 1, x: -1378, y: 128, z: 1731, description: "近" },
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
         
         ]
     }
@@ -29,11 +29,11 @@ const defaultStructures = [
     icon: "fa-tree",
     coordinates: {
         server1: [
-            { id: 1, x: -37, y: 128, z: 535, description: "近" },
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
 
         ],
         server2: [
-            { id: 1, x: -600, y: 65, z: 400, description: "哦" }
+            { id: 1, x: 0, y: 192, z: 0, description: "哦" }
         ]
     }
 },
@@ -46,10 +46,10 @@ const defaultStructures = [
     icon: "fa-sun-o",
     coordinates: {
         server1: [
-            { id: 1, x: 1500, y: 63, z: -700, description: "嗷" }
+            { id: 1, x: 0, y: 63, z: 0, description: "嗷" }
         ],
         server2: [
-            { id: 1, x: 1200, y: 63, z: -400, description: "嗷" }
+            { id: 1, x: 0, y: 63, z: 0, description: "嗷" }
         ]
     }
 },
@@ -62,12 +62,12 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
-            { id: 1, x: -3661, y: 308, z: 60, description: "大" },
-            { id: 1, x: -2581, y: 265, z: 73, description: "大" },
+            { id: 1, x: -3661, y: 192, z: 60, description: "大" },
+            { id: 2, x: -2581, y: 192, z: 73, description: "大" },
 
         ],
         server2: [
-            { id: 1, x: -2222, y: 90, z: -800, description: "喵" }
+            { id: 1, x: 0, y: 192, z: 0, description: "喵" }
         ]
     }
 },
@@ -80,11 +80,11 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
-            { id: 1, x: -2831, y: 261, z: -943, description: "大" },
+            { id: 1, x: -2831, y: 192, z: -943, description: "大" },
 
             ],
         server2: [
-            { id: 1, x: 47966, y: 424, z: 31393, description: "大" },
+            { id: 1, x: 0, y: 192, z: 0, description: "大" },
         ]
     }
 },
@@ -97,12 +97,12 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
-            { id: 1, x: -11239, y: 128, z: 447, description: "4靶场1女巫" },
+            { id: 1, x: 0, y: 192, z: 0, description: "4靶场1女巫" },
 
 
         ],
         server2: [
-            { id: 1, x: -100, y: 90, z: -800, description: "喵" }
+            { id: 1, x: 0, y: 192, z: 0, description: "喵" }
         ]
     }
 },
@@ -116,11 +116,11 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
-            { id: 1, x: -11239, y: 128, z: 447, description: "4靶场1女巫" },
+            { id: 1, x: 0, y: 192, z: 0, description: "" },
 
         ],
         server2: [
-            { id: 1, x: -100, y: 90, z: -800, description: "喵" },
+            { id: 1, x: 0, y: 192, z: 0, description: "喵" },
         ]
     }
 },
@@ -135,10 +135,11 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
-            { id: 1, x: -11239, y: 128, z: 447, description: "4靶场1女巫" },
+            { id: 1, x: -90, y: 192, z: 92, description: "" },
+            { id: 2, x: -719, y: 192, z: -1435, description: "" },
         ],
         server2: [
-            { id: 1, x: -100, y: 90, z: -800, description: "喵" },
+            { id: 1, x: 0, y: 192, z: 0, description: "喵" },
         ]
     }
 },
