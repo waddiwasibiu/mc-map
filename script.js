@@ -135,7 +135,7 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
-            { id: 1, x: -90, y: 192, z: 92, description: "" },
+            { id: 1, x: -720, y: 192, z: 736, description: "" },
             { id: 2, x: -719, y: 192, z: -1435, description: "" },
         ],
         server2: [
