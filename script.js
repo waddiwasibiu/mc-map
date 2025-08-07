@@ -102,7 +102,7 @@ const defaultStructures = [
 
         ],
         server2: [
-            { id: 1, x: 0, y: 192, z: 0, description: "喵" }
+            { id: 1, x: 1909, y: 192, z: 4929, description: "0靶场2女巫" }
         ]
     }
 },
