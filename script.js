@@ -38,6 +38,7 @@ const defaultStructures = [
             { id: 1, x: 1380, y: 192, z: 3127, description: "" },
             { id: 2, x: 379, y: 192, z: 4069, description: "" },
             { id: 3, x: 3729, y: 192, z: 3938, description: "" },
+            { id: 4, x: 1171, y: 192, z: -4078, description: "旁边100m就是嘎吱村" },
         ]
     }
 },
@@ -111,6 +112,7 @@ const defaultStructures = [
         ],
         server2: [
             { id: 1, x: 1909, y: 192, z: 4929, description: "0靶场2女巫" }
+            { id: 1, x: 1188, y: 192, z: -4692, description: "2靶场2女巫" }
         ]
     }
 },
