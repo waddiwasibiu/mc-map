@@ -1,321 +1,1053 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baka 村结构坐标库</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+// 存储展开状态
+const expandedStates = {};
+
+const defaultStructures = [
+{
+    id: 1,
+    name: "孤独堡垒",
+    type: "遗迹",
+    description: "试炼刷怪笼与那跃动的灵魂火，也许就是这堡垒里最后的活动之物了。如果感兴趣，你可以在那主塔楼的顶端见到巨大的旋风人。",
+    image: 2,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+
+        ],
+        server2: [
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+        
+        ]
+    }
+},
+{
+    id: 2,
+    name: "丛林神殿",
+    type: "遗迹",
+    description: "隐藏在茂密丛林中的古老神殿，周围缠绕着藤蔓和树木。神殿内部布满陷阱，特别是在宝箱周围，需要小心触发。",
+    image: 3,
+    icon: "fa-tree",
+    coordinates: {
+        server1: [
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+
+        ],
+        server2: [
+            { id: 1, x: 0, y: 192, z: 0, description: "哦" }
+        ]
+    }
+},
+{
+    id: 3,
+    name: "沙漠神殿",
+    type: "遗迹",
+    description: "隐藏在沙漠中的古老神殿，被沙子覆盖。内部困有许多亡灵，还设有一些陷阱。",
+    image: 4,
+    icon: "fa-sun-o",
+    coordinates: {
+        server1: [
+            { id: 1, x: 0, y: 63, z: 0, description: "嗷" }
+        ],
+        server2: [
+            { id: 1, x: 0, y: 63, z: 0, description: "嗷" }
+        ]
+    }
+},
+{
+    id: 4,
+    name: "旋风云",
+    type: "自然奇观",
+    description: "天空中旋转的巨大云团，风呼啸，刷怪笼中的旋风人被靠近的玩家唤醒......特殊战利品：无冷却风弹、脆风棒、“风爆弹射”附魔书、“动能缓冲”附魔书",
+    image: 5,
+    icon: "fa-tornado",
+    coordinates: {
+        server1: [
+            { id: 1, x: -3661, y: 192, z: 60, description: "大" },
+            { id: 2, x: -2581, y: 192, z: 73, description: "大" },
+
+        ],
+        server2: [
+            { id: 1, x: -2, y: 192, z: 8474, description: "喵" },
+            { id: 2, x: 43, y: 192, z: 8452, description: "" },
+        ]
+    }
+},
+{
+    id: 5,
+    name: "善魂云",
+    type: "自然奇观",
+    description: "刷新在雪原、积雪高山、冰刺之地和冰封山峰群系空中的快乐云朵，云上雪屋的地下室里貌似关押着一只永远不会长大的小可爱，去解放它让它自由地追逐天空吧！特殊战利品：颜色各异的挽具、失水恶魂、“悠魂”附魔书、“纯真守护”附魔书”附魔书、“动能缓冲”附魔书",
+    image: 6,
+    icon: "fa-tornado",
+    coordinates: {
+        server1: [
+            { id: 1, x: -2831, y: 192, z: -943, description: "大" },
+
+            ],
+        server2: [
+            { id: 1, x: 235, y: 192, z: 8362, description: "大" },
+        ]
+    }
+},
+{
+    id: 6,
+    name: "嘎吱村",
+    type: "自然奇观",
+    description: "新在苍白森林的灾厄营地，炼金房、图书馆、教堂、靶场......特殊战利品：音乐唱片-《Infinite Spooky Amethyst》、嘎吱佳酿、附有快速填装IV的弩",
+    image: 7,
+    icon: "fa-tornado",
+    coordinates: {
+        server1: [
+            { id: 1, x: 0, y: 192, z: 0, description: "4靶场1女巫" },
+
+
+        ],
+        server2: [
+            { id: 1, x: 1909, y: 192, z: 4929, description: "0靶场2女巫" }
+        ]
+    }
+},
+
+{
+    id: 7,
+    name: "遗迹废墟",
+    type: "自然奇观",
+    description: "“看起来年是一座年代久远的地下博物馆”",
+    image: 8,
+    icon: "fa-tornado",
+    coordinates: {
+        server1: [
+            { id: 1, x: 0, y: 192, z: 0, description: "" },
+
+        ],
+        server2: [
+            { id: 1, x: 0, y: 192, z: 0, description: "喵" },
+        ]
+    }
+},
+
+
+{
+    id: 8,
+    name: "试炼堡垒",
+    type: "自然奇观",
+    description: "生成于主世界冰冻深海和暖水海洋群系空中的巨大试炼结构",
+    image: 9,
+    icon: "fa-tornado",
+    coordinates: {
+        server1: [
+            { id: 1, x: -720, y: 192, z: 736, description: "" },
+            { id: 2, x: -719, y: 192, z: -1435, description: "" },
+            { id: 3, x: 2898, y: 192, z: 728, description: "" },
+            { id: 4, x: -2156, y: 192, z: -688, description: "" },
+        ],
+        server2: [
+            { id: 1, x: 23, y: 192, z: 51, description: "" },
+        ]
+    }
+},
+
+{
+    id: 9,
+    name: "冰塔",
+    type: "自然奇观",
+    description: "凛冬将至",
+    image: 10,
+    icon: "fa-tornado",
+    coordinates: {
+        server1: [
+            { id: 1, x: -1365, y: 192, z: 429, description: "" },
+
+        ],
+        server2: [
+            { id: 1, x: 0, y: 192, z: 0, description: "喵" },
+        ]
+    }
+},
+
+];
+
+
+// 保存结构数据到本地存储
+function saveStructures(structures) {
+    localStorage.setItem('mcStructures', JSON.stringify(structures));
+}
+
+// 加载结构数据
+function loadStructures() {
+    const storedStructures = localStorage.getItem('mcStructures');
+    return storedStructures ? JSON.parse(storedStructures) : defaultStructures;
+}
+
+// 添加新结构
+function addStructure(structure) {
+    const structures = loadStructures();
     
-    <!-- Tailwind 配置 -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3B82F6',
-                        secondary: '#10B981',
-                        accent: '#F59E0B',
-                        dark: '#1E293B',
-                        server1: '#3B82F6',
-                        server2: '#10B981'
-                    },
-                    fontFamily: {
-                        inter: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    // 为新结构生成唯一ID
+    const newId = structures.length > 0 ? Math.max(...structures.map(s => s.id)) + 1 : 1;
     
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .card-hover {
-                transition: all 0.3s ease;
-            }
-            .card-hover:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            }
-            .structure-image {
-                background-color: #f0f0f0;
-                background-size: cover;
-                background-position: center;
-            }
-            .chart-container {
-                transition: all 0.2s ease;
-            }
-            .chart-container:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            }
-            .chart-modal-backdrop {
-                background-color: rgba(0, 0, 0, 0.7);
-                backdrop-filter: blur(4px);
-            }
-            .chart-modal-content {
-                max-height: 80vh;
-                width: 90vw;
-                max-width: 800px;
-            }
-            #gitalk-container {
-                font-family: 'Inter', sans-serif;
-                color: #1E293B; /* 使用 dark 颜色 */
-            }
-            #gitalk-container .gt-comment-content {
-                border-radius: 0.375rem; /* 与其他卡片的圆角一致 */
-            }
+    // 创建新结构对象
+    const newStructure = {
+        id: newId,
+        name: structure.name,
+        type: structure.type,
+        description: structure.description,
+        image: parseInt(structure.image),
+        icon: structure.icon,
+        coordinates: {
+            server1: [],
+            server2: []
         }
-    </style>
-</head>
-<body class="bg-gray-50 font-inter">
-    <!-- 导航栏 -->
-    <header class="bg-white shadow-md fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-4">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-2">
-                    <i class="fa fa-map-o text-primary text-2xl"></i>
-                    <h1 class="text-xl font-bold text-dark">Baka 村 <span class="text-primary">结构坐标</span></h1>
-                </div>
-                
-                <nav class="hidden md:flex space-x-6">
-                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors">首页</a>
-                    <a href="#structures" class="text-gray-700 hover:text-primary transition-colors">结构列表</a>
-                    <a href="#add-structure" class="text-gray-700 hover:text-primary transition-colors">添加结构</a>
-                    <a href="#about" class="text-gray-700 hover:text-primary transition-colors">关于我们</a>
-                </nav>
-                
-                <div class="flex items-center space-x-4">
-                    <div class="relative">
-                        <input type="text" id="searchInput" placeholder="搜索结构或坐标..." class="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
-                        <i class="fa fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                    </div>
-                    
-                    <button class="md:hidden text-gray-700 focus:outline-none" id="mobileMenuBtn">
-                        <i class="fa fa-bars text-xl"></i>
-                    </button>
+    };
+    
+    // 添加到结构列表
+    structures.push(newStructure);
+    
+    // 保存到本地存储
+    saveStructures(structures);
+    
+    return newStructure;
+}
+
+// 渲染结构卡片
+function renderStructureCard(structure, server) {
+    const serverClass = server === 'server1' ? 'server1' : 'server2';
+    const coordinates = structure.coordinates[server] || [];
+    
+    return `
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="${structure.id}" data-server="${server}">
+            <div class="relative">
+                <div class="structure-image w-full h-48" style="background-image: url('${structure.image}.png')"></div>
+                <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
+                    <i class="fa fa-map-marker mr-1 text-${serverClass}"></i> ${coordinates.length}个坐标
                 </div>
             </div>
             
-            <!-- 移动端菜单 -->
-            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
-                <a href="#home" class="block py-2 text-gray-700 hover:text-primary transition-colors">首页</a>
-                <a href="#structures" class="block py-2 text-gray-700 hover:text-primary transition-colors">结构列表</a>
-                <a href="#add-structure" class="block py-2 text-gray-700 hover:text-primary transition-colors">添加结构</a>
-                <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition-colors">关于我们</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- 主内容区 -->
-    <main class="container mx-auto px-4 pt-24 pb-16">
-        <!-- 欢迎部分 -->
-        <section id="home" class="mb-12">
-            <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 shadow-lg">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-6 md:mb-0">
-                        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">欢迎来到 Baka 村结构坐标库</h2>
-                        <p class="text-gray-600 mb-6 text-lg">探索并分享《我的世界》中各种独特结构的坐标，让冒险更加便捷！</p>
-                        <div class="flex flex-wrap gap-4">
-                            <a href="#structures" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center">
-                                <i class="fa fa-map-marker mr-2"></i> 浏览结构
-                            </a>
-                            <a href="#add-structure" class="px-6 py-3 bg-white text-primary border border-primary rounded-lg hover:bg-primary/5 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加新结构
-                            </a>
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-dark">${structure.name}</h3>
+                        <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">${structure.type}</span>
+                    </div>
+                    <div class="text-${serverClass} text-2xl">
+                        <i class="fa ${structure.icon}"></i>
+                    </div>
+                </div>
+                
+                <div class="mb-6 text-gray-600">
+                    <p>${structure.description}</p>
+                </div>
+                
+                <!-- 坐标分布图 -->
+                <div class="mt-6 mb-6 cursor-pointer chart-container" data-structure="${structure.id}" data-server="${server}">
+                    <h4 class="font-medium text-gray-700 mb-3">坐标分布 (X-Z 平面)</h4>
+                    <div class="relative mx-auto h-48 w-[90%] bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+                        ${coordinates.length > 0 ? `
+                            <canvas id="${server}-${structure.id}-chart" class="w-full h-full"></canvas>
+                        ` : `
+                            <div class="absolute inset-0 flex items-center justify-center text-gray-500">
+                                <p>暂无坐标数据</p>
+                            </div>
+                        `}
+                    </div>
+                </div>
+                
+                <!-- 坐标列表 -->
+                <div id="${server}-${structure.id}-coordinates" class="space-y-3 mb-6 max-h-60 overflow-y-hidden" data-expanded="false">
+                    ${coordinates.length > 0 ? coordinates.map(coord => `
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="font-medium">
+                                    #${coord.id} ${coord.description}
+                                </div>
+                                <div class="text-xs text-gray-500">
+                                    <i class="fa fa-user mr-1"></i> 匿名
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="grid grid-cols-3 gap-2 text-sm">
+                                    <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
+                                        <i class="fa fa-arrow-right text-gray-500 mr-2"></i>
+                                        <span class="font-mono">X: ${coord.x}</span>
+                                    </div>
+                                    <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
+                                        <i class="fa fa-arrow-up text-gray-500 mr-2"></i>
+                                        <span class="font-mono">Y: ${coord.y}</span>
+                                    </div>
+                                    <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
+                                        <i class="fa fa-arrow-left text-gray-500 mr-2"></i>
+                                        <span class="font-mono">Z: ${coord.z}</span>
+                                    </div>
+                                </div>
+                                <button class="text-red-500 hover:text-red-700 transition-colors delete-coordinate-btn" data-server="${server}" data-structure="${structure.id}" data-id="${coord.id}">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('') : '<p class="text-center text-gray-500 py-4">暂无坐标数据</p>'}
+                </div>
+                
+                <!-- 添加坐标表单 - 默认隐藏 -->
+                <div id="${server}-${structure.id}-add-form" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
+                    <h4 class="font-medium mb-3">添加新坐标</h4>
+                    <div class="grid grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
+                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="X">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
+                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="Y">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
+                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="Z">
                         </div>
                     </div>
-                    <div class="md:w-1/2 flex justify-center">
-                        <div class="structure-image w-full h-64 rounded-xl" style="background-image: url('1.png')"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 服务器选择和筛选 -->
-        <section class="mb-8">
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <div class="flex items-center gap-4">
-                        <label for="serverSelector" class="font-medium text-gray-700">服务器:</label>
-                        <select id="serverSelector" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
-                            <option value="server1">一区</option>
-                            <option value="server2">二区</option>
-                        </select>
-                    </div>
-                    
-                    <div class="flex items-center gap-4">
-                        <label for="sortSelect" class="font-medium text-gray-700">排序方式:</label>
-                        <select id="sortSelect" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
-                            <option value="nameAsc">名称 (升序)</option>
-                            <option value="nameDesc">名称 (降序)</option>
-                            <option value="type">结构类型</option>
-                            <option value="coordinateCount">坐标数量</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 添加结构部分 -->
-        <section id="add-structure" class="mb-12 bg-white rounded-xl shadow-md p-6">
-            <h2 class="text-2xl font-bold text-dark mb-6">添加新结构</h2>
-            <form id="addStructureForm">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">结构名称</label>
-                        <input type="text" id="structureName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="例如：海底神殿" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">结构类型</label>
-                        <select id="structureType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" required>
-                            <option value="">选择类型</option>
-                            <option value="遗迹">遗迹</option>
-                            <option value="自然奇观">自然奇观</option>
-                            <option value="村庄">村庄</option>
-                            <option value="要塞">要塞</option>
-                            <option value="其他">其他</option>
-                        </select>
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">结构描述</label>
-                        <textarea id="structureDescription" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="描述这个结构的特征和重要性..." required></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">图片编号</label>
-                        <div class="flex items-center">
-                            <span class="px-4 py-3 bg-gray-100 rounded-l-lg border border-r-0 border-gray-300">img</span>
-                            <input type="number" id="structureImage" min="2" max="20" class="w-full px-4 py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-primary/50 focus:border-primary" placeholder="2-20" required>
-                            <span class="ml-2 text-gray-500">.png</span>
+                    <div class="flex justify-between items-center">
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="描述 (可选)">
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition-colors cancel-add-coordinate-btn">取消</button>
+                            <button class="px-4 py-2 bg-${serverClass} text-white rounded-md hover:bg-${serverClass}/90 transition-colors add-coordinate-btn" data-structure="${structure.id}" data-server="${server}">添加坐标</button>
                         </div>
-                        <p class="text-xs text-gray-500 mt-2">输入2-20之间的数字，对应本地图片文件 (如输入"2"对应"2.png")</p>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">结构图标</label>
-                        <select id="structureIcon" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" required>
-                            <option value="">选择图标</option>
-                            <option value="fa-fort-awesome">堡垒</option>
-                            <option value="fa-tree">丛林</option>
-                            <option value="fa-sun-o">沙漠</option>
-                            <option value="fa-tornado">旋风</option>
-                            <option value="fa-cloud">云朵</option>
-                            <option value="fa-home">村庄</option>
-                            <option value="fa-diamond">宝藏</option>
-                            <option value="fa-ship">沉船</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="flex justify-end gap-4">
-                    <button type="reset" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
-                        重置表单
-                    </button>
-                    <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center">
-                        <i class="fa fa-plus mr-2"></i> 添加结构
-                    </button>
-                </div>
-            </form>
-        </section>
-
-        <!-- 结构列表 -->
-        <section id="structures" class="space-y-6">
-            <!-- 一区内容 -->
-            <div id="server1Content">
-                <!-- 结构卡片将通过JavaScript动态生成 -->
-            </div>
-            
-            <!-- 二区内容 -->
-            <div id="server2Content" class="hidden">
-                <!-- 结构卡片将通过JavaScript动态生成 -->
-            </div>
-        </section>
-    </main>
-
-    <!-- 关于我们 -->
-    <section id="about" class="bg-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-dark mb-4">关于 Baka 村</h2>
-                <p class="text-gray-600 max-w-3xl mx-auto">我们是一群热爱《我的世界》的玩家，致力于收集和分享游戏中各种独特结构的坐标，让大家的游戏体验更加丰富多彩。</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
-                    <div class="text-primary text-3xl mb-4">
-                        <i class="fa fa-map-signs"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-dark mb-3">结构坐标库</h3>
-                    <p class="text-gray-600">我们收集了各种稀有和独特的结构坐标，包括遗迹、自然奇观和特殊地点，让你无需探索即可轻松找到它们。</p>
                 </div>
                 
-                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
-                    <div class="text-primary text-3xl mb-4">
-                        <i class="fa fa-users"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-dark mb-3">社区共享</h3>
-                    <p class="text-gray-600">Baka 村是一个开放的社区，所有玩家都可以贡献自己发现的坐标，与其他玩家分享游戏中的精彩发现。</p>
-                </div>
-                
-                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
-                    <div class="text-primary text-3xl mb-4">
-                        <i class="fa fa-gamepad"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-dark mb-3">游戏指南</h3>
-                    <p class="text-gray-600">除了坐标库，我们还提供各种游戏攻略和指南，帮助你更好地探索《我的世界》的奇妙世界。</p>
+                <!-- 操作按钮 -->
+                <div class="flex justify-between items-center">
+                    <button class="px-4 py-2 border border-${serverClass} text-${serverClass} rounded-md hover:bg-${serverClass}/10 transition-colors flex items-center toggle-coordinates-btn" data-structure="${structure.id}" data-server="${server}">
+                        <span>展开全部</span>
+                        <i class="fa fa-chevron-down ml-2"></i>
+                    </button>
+                    <button class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center show-add-form-btn" data-structure="${structure.id}" data-server="${server}">
+                        <i class="fa fa-plus mr-2"></i> 添加坐标
+                    </button>
                 </div>
             </div>
             
-            <div class="mt-12 text-center">
-                <h3 class="text-2xl font-bold text-dark mb-6">加入我们</h3>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#" class="px-6 py-3 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors shadow-lg shadow-pink-200 flex items-center">
-                        <i class="fa fa-youtube-play mr-2"></i> 哔哩哔哩
-                    </a>
-                    <a href="#" class="px-6 py-3 bg-white text-primary border border-primary rounded-lg hover:bg-primary/5 transition-colors flex items-center">
-                        <i class="fa fa-qq mr-2"></i> QQ 群
-                    </a>
-                    <a href="#" class="px-6 py-3 bg-dark text-white rounded-lg hover:bg-dark/90 transition-colors flex items-center">
-                        <i class="fa fa-github mr-2"></i> GitHub
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 坐标分布大图模态框 -->
-    <div id="chartModal" class="fixed inset-0 z-50 hidden items-center justify-center chart-modal-backdrop">
-        <div class="bg-white rounded-xl shadow-2xl p-6 chart-modal-content">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-dark" id="modalChartTitle">坐标分布详情</h3>
-                <button id="closeChartModal" class="text-gray-500 hover:text-gray-700">
-                    <i class="fa fa-times text-xl"></i>
+            <div class="bg-gray-50 p-4 flex justify-between items-center">
+                <span class="text-xs text-gray-500">
+                    <i class="fa fa-clock-o mr-1"></i> ${new Date().toLocaleDateString('zh-CN')}
+                </span>
+                <button class="text-red-500 hover:text-red-700 text-sm delete-structure-btn" data-id="${structure.id}">
+                    <i class="fa fa-trash mr-1"></i> 删除结构
                 </button>
             </div>
-            <div class="relative h-[calc(80vh-80px)]">
-                <canvas id="modalChart" class="w-full h-full"></canvas>
-            </div>
         </div>
-    </div>
+    `;
+}
 
-    <!-- 评论容器 -->
-    <div class="container mx-auto px-4 mb-12">
-        <div id="gitalk-container" class="bg-white rounded-xl shadow-md p-6"></div>
-    </div>
+// 渲染所有结构
+function renderAllStructures() {
+    const structures = loadStructures();
+    const server1Content = document.getElementById('server1Content');
+    const server2Content = document.getElementById('server2Content');
+
+    server1Content.innerHTML = '';
+    server2Content.innerHTML = '';
+
+    structures.forEach(structure => {
+        server1Content.innerHTML += renderStructureCard(structure, 'server1');
+        server2Content.innerHTML += renderStructureCard(structure, 'server2');
+    });
+
+    // 恢复展开状态
+    Object.keys(expandedStates).forEach(key => {
+        const [server, structureId] = key.split('-');
+        const container = document.getElementById(`${server}-${structureId}-coordinates`);
+        const btn = document.querySelector(`.toggle-coordinates-btn[data-server="${server}"][data-structure="${structureId}"]`);
+        if (container && btn) {
+            if (expandedStates[key]) {
+                container.setAttribute('data-expanded', 'true');
+                container.classList.remove('max-h-60', 'overflow-y-hidden');
+                btn.innerHTML = '<span>收起</span><i class="fa fa-chevron-up ml-2"></i>';
+            } else {
+                container.setAttribute('data-expanded', 'false');
+                container.classList.add('max-h-60', 'overflow-y-hidden');
+                btn.innerHTML = '<span>展开全部</span><i class="fa fa-chevron-down ml-2"></i>';
+            }
+        }
+    });
+
+    // 绘制所有图表
+    drawAllCharts();
+
+    // 重新绑定事件
+    bindEvents();
+}
+
+// 绘制所有坐标分布图
+function drawAllCharts() {
+    const structures = loadStructures();
+    
+    // 清除现有图表
+    if (window.allCharts) {
+        window.allCharts.forEach(chart => chart.destroy());
+    }
+    window.allCharts = [];
+    
+    structures.forEach(structure => {
+        ['server1', 'server2'].forEach(server => {
+            const coordinates = structure.coordinates[server] || [];
+            if (coordinates.length === 0) return;
+            
+            const ctx = document.getElementById(`${server}-${structure.id}-chart`);
+            if (!ctx) return;
+            
+            // 计算坐标轴范围
+            const allX = coordinates.map(coord => coord.x);
+            const allZ = coordinates.map(coord => coord.z);
+            const minX = Math.min(...allX);
+            const maxX = Math.max(...allX);
+            const minZ = Math.min(...allZ);
+            const maxZ = Math.max(...allZ);
+            
+            // 添加边距
+            const xRange = maxX - minX;
+            const zRange = maxZ - minZ;
+            const xMargin = xRange * 0.1 || 10;
+            const zMargin = zRange * 0.1 || 10;
+            
+            // 准备图表数据
+            const data = coordinates.map(coord => ({
+                x: coord.x,
+                y: coord.z,
+                id: coord.id,
+                description: coord.description
+            }));
+            
+            // 创建小图表
+            const chart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: `${server === 'server1' ? '一区' : '二区'}坐标点`,
+                        data: data,
+                        backgroundColor: server === 'server1' ? '#3B82F6' : '#10B981',
+                        borderColor: server === 'server1' ? '#3B82F6' : '#10B981',
+                        borderWidth: 1,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: false
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: false
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const point = context.raw;
+                                    return [
+                                        `位置: (${point.x}, ${point.y})`,
+                                        `描述: ${point.description}`
+                                    ];
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 300
+                    }
+                }
+            });
+            
+            // 保存图表引用
+            window.allCharts.push(chart);
+        });
+    });
+}
+
+// 显示放大的坐标分布图
+function showLargeChart(server, structureId) {
+    const structures = loadStructures();
+    const structure = structures.find(s => s.id === structureId);
+    if (!structure) return;
+
+    const coordinates = structure.coordinates[server] || [];
+    if (coordinates.length === 0) return;
+
+    // 更新模态框标题
+    document.getElementById('modalChartTitle').textContent = 
+        `${structure.name} (${server === 'server1' ? '一区' : '二区'}) 坐标分布`;
+
+    // 清除现有模态框图表
+    if (window.modalChartInstance) {
+        window.modalChartInstance.destroy();
+    }
+
+    // 计算坐标轴范围
+    const allX = coordinates.map(coord => coord.x);
+    const allZ = coordinates.map(coord => coord.z);
+    const minX = Math.min(...allX);
+    const maxX = Math.max(...allX);
+    const minZ = Math.min(...allZ);
+    const maxZ = Math.max(...allZ);
+
+    // 添加边距
+    const xRange = maxX - minX;
+    const zRange = maxZ - minZ;
+    const xMargin = xRange * 0.1 || 10;
+    const zMargin = zRange * 0.1 || 10;
+
+    // 准备图表数据
+    const data = coordinates.map(coord => ({
+        x: coord.x,
+        y: coord.z,
+        id: coord.id,
+        description: coord.description
+    }));
+
+    // 创建放大的图表
+    const ctx = document.getElementById('modalChart').getContext('2d');
+    window.modalChartInstance = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: `${server === 'server1' ? '一区' : '二区'}坐标点`,
+                data: data,
+                backgroundColor: server === 'server1' ? '#3B82F6' : '#10B981',
+                borderColor: server === 'server1' ? '#3B82F6' : '#10B981',
+                borderWidth: 1,
+                pointRadius: 6,
+                pointHoverRadius: 9,
+                pointHoverBackgroundColor: '#ffffff',
+                pointHoverBorderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'X 坐标',
+                        font: {
+                            size: 14
+                        }
+                    },
+                    min: minX - xMargin,
+                    max: maxX + xMargin,
+                    ticks: {
+                        font: {
+                            size: 12
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.05)'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Z 坐标',
+                        font: {
+                            size: 14
+                        }
+                    },
+                    min: minZ - zMargin,
+                    max: maxZ + zMargin,
+                    ticks: {
+                        font: {
+                            size: 12
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.05)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const point = context.raw;
+                            const coord = coordinates.find(c => c.id === point.id);
+                            return [
+                                `ID: ${point.id}`,
+                                `X: ${coord.x}`,
+                                `Y: ${coord.y}`,
+                                `Z: ${coord.z}`,
+                                `描述: ${point.description}`
+                            ];
+                        }
+                    }
+                }
+            },
+            interaction: {
+                mode: 'nearest',
+                axis: 'xy',
+                intersect: false
+            },
+            animation: {
+                duration: 500,
+                easing: 'easeOutQuart'
+            }
+        }
+    });
+
+    // 显示模态框
+    document.getElementById('chartModal').classList.remove('hidden');
+    document.getElementById('chartModal').classList.add('flex');
+    document.body.style.overflow = 'hidden'; // 防止背景滚动
+}
+
+// 隐藏放大的坐标分布图
+function hideLargeChart() {
+    document.getElementById('chartModal').classList.add('hidden');
+    document.getElementById('chartModal').classList.remove('flex');
+    document.body.style.overflow = ''; // 恢复背景滚动
+}
+
+// 添加坐标
+function addCoordinate(server, structureId) {
+    const form = document.getElementById(`${server}-${structureId}-add-form`);
+    const inputs = form.querySelectorAll('input');
+    const xInput = inputs[0];
+    const yInput = inputs[1];
+    const zInput = inputs[2];
+    const descInput = inputs[3];
+    
+    // 验证输入
+    if (!xInput.value || !yInput.value || !zInput.value) {
+        showNotification('请填写完整的坐标信息', 'error');
+        return;
+    }
+    
+    const structures = loadStructures();
+    const structure = structures.find(s => s.id === structureId);
+    
+    if (!structure) {
+        showNotification('结构不存在', 'error');
+        return;
+    }
+    
+    // 创建新坐标对象
+    const newId = structure.coordinates[server].length > 0 ? Math.max(...structure.coordinates[server].map(coord => coord.id)) + 1 : 1;
+    const newCoordinate = {
+        id: newId,
+        x: parseInt(xInput.value),
+        y: parseInt(yInput.value),
+        z: parseInt(zInput.value),
+        description: descInput.value || '无描述'
+    };
+    
+    // 添加到坐标列表
+    structure.coordinates[server].push(newCoordinate);
+    
+    // 保存结构数据
+    saveStructures(structures);
+    
+    // 重新渲染结构
+    renderAllStructures();
+    
+    // 隐藏表单
+    hideAddForm(server, structureId);
+    
+    // 显示成功消息
+    showNotification('坐标已添加！', 'success');
+}
+
+// 删除坐标
+function deleteCoordinate(server, structureId, coordId) {
+    const structures = loadStructures();
+    const structure = structures.find(s => s.id === structureId);
+    
+    if (!structure) {
+        showNotification('结构不存在', 'error');
+        return;
+    }
+    
+    // 过滤掉要删除的坐标
+    structure.coordinates[server] = structure.coordinates[server].filter(coord => coord.id !== coordId);
+    
+    // 保存结构数据
+    saveStructures(structures);
+    
+    // 重新渲染结构
+    renderAllStructures();
+    
+    // 显示成功消息
+    showNotification('坐标已删除！', 'success');
+}
+
+// 删除结构
+function deleteStructure(structureId) {
+    if (!confirm('确定要删除这个结构吗？这将删除所有相关坐标数据！')) {
+        return;
+    }
+    
+    const structures = loadStructures();
+    const newStructures = structures.filter(s => s.id !== structureId);
+    
+    // 保存结构数据
+    saveStructures(newStructures);
+    
+    // 重新渲染结构
+    renderAllStructures();
+    
+    // 显示成功消息
+    showNotification('结构已删除！', 'success');
+}
+
+// 切换服务器内容
+function switchServer(server) {
+    const server1Content = document.getElementById('server1Content');
+    const server2Content = document.getElementById('server2Content');
+
+    if (server === 'server1') {
+        server1Content.classList.remove('hidden');
+        server2Content.classList.add('hidden');
+    } else {
+        server1Content.classList.add('hidden');
+        server2Content.classList.remove('hidden');
+    }
+    
+    // 更新服务器选择器状态
+    const serverSelector = document.getElementById('serverSelector');
+    serverSelector.value = server;
+}
+
+// 切换坐标列表展开/收起状态
+function toggleCoordinates(server, structureId) {
+    const container = document.getElementById(`${server}-${structureId}-coordinates`);
+    const btn = document.querySelector(`.toggle-coordinates-btn[data-server="${server}"][data-structure="${structureId}"]`);
+    
+    if (!container || !btn) return;
+    
+    const isExpanded = container.getAttribute('data-expanded') === 'true';
+    
+    if (isExpanded) {
+        container.setAttribute('data-expanded', 'false');
+        container.classList.add('max-h-60', 'overflow-y-hidden');
+        btn.innerHTML = '<span>展开全部</span><i class="fa fa-chevron-down ml-2"></i>';
+        expandedStates[`${server}-${structureId}`] = false;
+    } else {
+        container.setAttribute('data-expanded', 'true');
+        container.classList.remove('max-h-60', 'overflow-y-hidden');
+        btn.innerHTML = '<span>收起</span><i class="fa fa-chevron-up ml-2"></i>';
+        expandedStates[`${server}-${structureId}`] = true;
+    }
+}
+
+// 显示添加坐标表单
+function showAddForm(server, structureId) {
+    const form = document.getElementById(`${server}-${structureId}-add-form`);
+    if (!form) return;
+    
+    // 隐藏其他表单
+    document.querySelectorAll('[id$="-add-form"]').forEach(el => {
+        if (el.id !== `${server}-${structureId}-add-form`) {
+            el.classList.add('hidden');
+        }
+    });
+    
+    // 显示当前表单
+    form.classList.remove('hidden');
+    
+    // 聚焦第一个输入框
+    form.querySelector('input').focus();
+}
+
+// 隐藏添加坐标表单
+function hideAddForm(server, structureId) {
+    const form = document.getElementById(`${server}-${structureId}-add-form`);
+    if (form) {
+        form.classList.add('hidden');
+    }
+}
+
+// 显示通知
+function showNotification(message, type = 'info') {
+    // 创建通知元素
+    const notification = document.createElement('div');
+    notification.classList.add('fixed', 'top-4', 'right-4', 'bg-white', 'shadow-md', 'p-4', 'rounded-lg', 'z-50');
+    notification.classList.add(type === 'success' ? 'border-l-4 border-green-500' : type === 'error' ? 'border-l-4 border-red-500' : 'border-l-4 border-blue-500');
+    notification.textContent = message;
+    
+    // 添加到页面
+    document.body.appendChild(notification);
+    
+    // 定时消失
+    setTimeout(() => {
+        notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// 绑定事件
+function bindEvents() {
+// 服务器切换
+document.getElementById('serverSelector').addEventListener('change', function() {
+    switchServer(this.value);
+});
+
+// 添加结构表单提交
+document.getElementById('addStructureForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const nameInput = document.getElementById('structureName');
+    const typeInput = document.getElementById('structureType');
+    const descInput = document.getElementById('structureDescription');
+    const imageInput = document.getElementById('structureImage');
+    const iconInput = document.getElementById('structureIcon');
+    
+    // 验证输入
+    if (!nameInput.value || !typeInput.value || !descInput.value || !imageInput.value || !iconInput.value) {
+        showNotification('请填写完整的结构信息', 'error');
+        return;
+    }
+    
+    // 创建新结构
+    const newStructure = {
+        name: nameInput.value,
+        type: typeInput.value,
+        description: descInput.value,
+        image: imageInput.value,
+        icon: iconInput.value
+    };
+    
+    // 添加结构
+    addStructure(newStructure);
+    
+    // 重置表单
+    this.reset();
+    
+    // 重新渲染结构
+    renderAllStructures();
+    
+    // 显示成功消息
+    showNotification('结构添加成功！', 'success');
+});
+
+// 展开/收起坐标列表按钮
+document.querySelectorAll('.toggle-coordinates-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const server = this.getAttribute('data-server');
+        const structureId = parseInt(this.getAttribute('data-structure'));
+        toggleCoordinates(server, structureId);
+    });
+});
+
+// 显示添加坐标表单按钮
+document.querySelectorAll('.show-add-form-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const server = this.getAttribute('data-server');
+        const structureId = parseInt(this.getAttribute('data-structure'));
+        showAddForm(server, structureId);
+    });
+});
+
+// 取消添加坐标按钮
+document.querySelectorAll('.cancel-add-coordinate-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const form = this.closest('[id$="-add-form"]');
+        const [server, structureId] = form.id.split('-');
+        hideAddForm(server, structureId);
+    });
+});
+
+// 添加坐标按钮
+document.querySelectorAll('.add-coordinate-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const server = this.getAttribute('data-server');
+        const structureId = parseInt(this.getAttribute('data-structure'));
+        addCoordinate(server, structureId);
+    });
+});
+
+// 删除坐标按钮
+document.querySelectorAll('.delete-coordinate-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const server = this.getAttribute('data-server');
+        const structureId = parseInt(this.getAttribute('data-structure'));
+        const coordId = parseInt(this.getAttribute('data-id'));
+        deleteCoordinate(server, structureId, coordId);
+    });
+});
+
+// 删除结构按钮
+document.querySelectorAll('.delete-structure-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const structureId = parseInt(this.getAttribute('data-id'));
+        deleteStructure(structureId);
+    });
+});
+
+// 移动端菜单切换
+document.getElementById ('mobileMenuBtn').addEventListener ('click', function () {
+    const mobileMenu = document.getElementById ('mobileMenu');
+    mobileMenu.classList.toggle ('hidden');
+});
+
+// 坐标分布图点击事件（放大）
+document.querySelectorAll ('.chart-container').forEach (container => {
+    container.addEventListener ('click', function () {
+    const server = this.getAttribute ('data-server');
+    const structureId = parseInt (this.getAttribute ('data-structure'));
+    showLargeChart (server, structureId);
+    });
+});
+
+// 关闭模态框按钮
+document.getElementById ('closeChartModal').addEventListener ('click', hideLargeChart);
+
+// 点击模态框背景关闭
+document.getElementById ('chartModal').addEventListener ('click', function (e) {
+    if (e.target === this) {
+    hideLargeChart ();
+    }
+});
+
+// ESC 键关闭模态框
+document.addEventListener ('keydown', function (e) {
+    if (e.key === 'Escape' && !document.getElementById ('chartModal').classList.contains ('hidden')) {
+    hideLargeChart ();
+    }
+});
+
+// 搜索功能
+document.getElementById('searchInput').addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const structures = document.querySelectorAll('.card-hover');
+    
+    structures.forEach(structure => {
+        const name = structure.querySelector('h3').textContent.toLowerCase();
+        const type = structure.querySelector('.rounded-full').textContent.toLowerCase();
+        const description = structure.querySelector('p').textContent.toLowerCase();
+        
+        if (name.includes(searchTerm) || type.includes(searchTerm) || description.includes(searchTerm)) {
+            structure.classList.remove('hidden');
+        } else {
+            structure.classList.add('hidden');
+        }
+    });
+});
+
+// 滚动时导航栏样式变化
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    if (window.scrollY > 50) {
+        header.classList.add('bg-white/95', 'backdrop-blur-sm', 'py-2');
+        header.classList.remove('py-4');
+    } else {
+        header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'py-2');
+        header.classList.add('py-4');
+    }
+});
+
+// 排序功能
+document.getElementById ('sortSelect').addEventListener ('change', function () {
+    const sortType = this.value;
+    const structures = loadStructures ();
+    let sortedStructures = [...structures];
+
+    switch (sortType) {
+    case 'nameAsc':
+    sortedStructures.sort ((a, b) => a.name.localeCompare (b.name));
+    break;
+    case 'nameDesc':
+    sortedStructures.sort ((a, b) => b.name.localeCompare (a.name));
+    break;
+    case 'type':
+    sortedStructures.sort ((a, b) => a.type.localeCompare (b.type));
+    break;
+    case 'coordinateCount':
+    const currentServer = document.getElementById ('serverSelector').value;
+    sortedStructures.sort ((a, b) => {
+    const aCount = (a.coordinates [currentServer] || []).length;
+    const bCount = (b.coordinates [currentServer] || []).length;
+    return bCount - aCount; // 降序排列
+    });
+    break;
+    }
+
+    // 保存排序后的结构
+    saveStructures (sortedStructures);
+    // 重新渲染
+    renderAllStructures ();
+});
+
+}
 
 
 
-    <footer class="bg-white shadow-md py-6">
-        <div class="container mx-auto px-4 text-center text-gray-600">
-            <p>&copy; 2025 Baka 村结构坐标库. 保留所有权利.</p>
-        </div>
-    </footer>
+// 初始化Gitalk
+document.addEventListener('DOMContentLoaded', function() {
+    const gitalk = new Gitalk({
+        clientID: 'Ov23lir8R3Vh9Zzynyvy',
+        clientSecret: 'b7b652dc0032f772142895a06b45e0fe66d197c2',
+        repo: 'mc-map',
+        owner: 'waddiwasibiu',
+        admin: ['waddiwasibiu'],
+        id: location.pathname,
+        distractionFreeMode: false
+    });
 
-    <!-- 引入外部 JavaScript 文件 -->
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-</body>
-</html>
+    gitalk.render('gitalk-container');
+});
+// 调用绑定事件函数
+bindEvents();
+
+
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', function() {
+        // 渲染所有结构
+        renderAllStructures();
+        
+        // 默认显示一区内容
+        switchServer('server1');
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 关闭移动菜单（如果打开）
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                    
+                    // 滚动到目标位置
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
