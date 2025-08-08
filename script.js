@@ -305,6 +305,9 @@ function addStructure(structure) {
 // 渲染结构卡片
 function renderStructureCard(structure, server) {
     const serverClass = server === 'server1' ? 'server1' : 'server2';
+    const server1Coordinates = structure.coordinates.server1 || [];
+    const server2Coordinates = structure.coordinates.server2 || [];
+    const totalCoordinates = server1Coordinates.length + server2Coordinates.length; // 计算所有服务器坐标总和
     const coordinates = structure.coordinates[server] || [];
     
     return `
@@ -312,7 +315,7 @@ function renderStructureCard(structure, server) {
             <div class="relative">
                 <div class="structure-image w-full h-48" style="background-image: url('${structure.image}.png')"></div>
                 <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                    <i class="fa fa-map-marker mr-1 text-${serverClass}"></i> ${coordinates.length}个坐标
+                    <i class="fa fa-map-marker mr-1 text-${serverClass}"></i> ${totalCoordinates}个坐标 <!-- 显示总数 -->
                 </div>
             </div>
             
