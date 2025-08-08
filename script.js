@@ -226,11 +226,14 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+            { id: 1, x: , y: 192, z: , description: "地狱坐标" },
 
         ],
         server2: [
-            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+            { id: 1, x: 4009, y: 192, z: -4389, description: "地狱坐标" },
+            { id: 1, x: 3203, y: 192, z: -5192, description: "地狱坐标" },
+            { id: 1, x: 2805, y: 192, z: -5194, description: "地狱坐标" },
+            { id: 1, x: 1609, y: 192, z: -4000, description: "地狱坐标" },
         
         ]
     }
