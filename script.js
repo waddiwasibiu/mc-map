@@ -552,7 +552,8 @@ function drawAllCharts() {
                             },
                             ticks: {
                                 display: false
-                            }
+                            },
+                            reverse: true  // 反转Y轴方向，实现负负在左上，正正在右下
                         }
                     },
                     plugins: {
@@ -586,7 +587,7 @@ function drawAllCharts() {
 // 显示放大的坐标分布图
 function showLargeChart(server, structureId) {
     const structures = loadStructures();
-    const structure = structures.find(s => s.id === structureId);
+    const structure = structuresstructures.find(s => s.id === structureId);
     if (!structure) return;
 
     const coordinates = structure.coordinates[server] || [];
@@ -678,7 +679,8 @@ function showLargeChart(server, structureId) {
                     },
                     grid: {
                         color: 'rgba(0, 0, 0, 0.05)'
-                    }
+                    },
+                    reverse: true  // 反转Y轴，实现负负在左上，正正在右下
                 }
             },
             plugins: {
