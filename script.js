@@ -217,6 +217,25 @@ const defaultStructures = [
     }
 },
 
+{
+    id: 12,
+    name: "三叉戟试炼",
+    type: "遗迹",
+    description: "深海的主宰",
+    image: 13,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+
+        ],
+        server2: [
+            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+        
+        ]
+    }
+},
+
 ];
 
 
