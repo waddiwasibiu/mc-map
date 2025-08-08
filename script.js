@@ -179,7 +179,7 @@ const defaultStructures = [
     id: 10,
     name: "六级试炼",
     type: "遗迹",
-    description: "六级",
+    description: "地底最大的试炼",
     image: 11,
     icon: "fa-fort-awesome",
     coordinates: {
@@ -188,7 +188,7 @@ const defaultStructures = [
 
         ],
         server2: [
-            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+            { id: 1, x: -1685, y: 192, z: 4417, description: "地狱坐标" },
         
         ]
     }
