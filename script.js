@@ -103,7 +103,7 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 192, z: 0, description: "4靶场1女巫" },
+            { id: 1, x: 0, y: 192, z: 0, description: "0靶场0女巫" },
 
 
         ],
@@ -187,7 +187,7 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: -1365, y: 192, z: 439, description: "地狱坐标" },
+            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
 
         ],
         server2: [
