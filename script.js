@@ -111,8 +111,9 @@ const defaultStructures = [
 
         ],
         server2: [
-            { id: 1, x: 1909, y: 192, z: 4929, description: "0靶场2女巫" }
-            { id: 1, x: 1188, y: 192, z: -4692, description: "2靶场2女巫" }
+            { id: 1, x: 1909, y: 192, z: 4929, description: "0靶场2女巫" },
+            { id: 2, x: 1188, y: 192, z: -4692, description: "2靶场2女巫" },
+            { id: 3, x: -4691, y: 192, z: 3531, description: "0靶场3女巫" },
         ]
     }
 },
