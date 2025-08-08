@@ -196,18 +196,18 @@ const defaultStructures = [
 
 {
     id: 11,
-    name: "末地堡垒",
+    name: "冰塔",
     type: "遗迹",
     description: "凛冬将至",
     image: 12,
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+            { id: 1, x: -1365, y: 192, z: 439, description: "地狱坐标" },
 
         ],
         server2: [
-            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
         
         ]
     }
