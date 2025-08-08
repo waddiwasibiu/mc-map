@@ -67,8 +67,8 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
-            { id: 1, x: -3661, y: 192, z: 60, description: "大" },
-            { id: 2, x: -2581, y: 192, z: 73, description: "大" },
+            { id: 1, x: -457, y: 192, z: 7, description: "地狱坐标" },
+            { id: 2, x: -322, y: 192, z: 9, description: "地狱坐标" },
 
         ],
         server2: [
