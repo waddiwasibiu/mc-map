@@ -51,7 +51,7 @@ const defaultStructures = [
             { id: 1, x: -9830, y: 63, z: 1501, description: "嗷" }
         ],
         server2: [
-            { id: 1, x: 0, y: 63, z: 0, description: "嗷" }
+            { id: 1, x: -2048, y: 63, z: -3277, description: "嗷" }
         ]
     }
 },
