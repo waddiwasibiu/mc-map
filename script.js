@@ -175,6 +175,7 @@ const defaultStructures = [
             { id: 3, x: -3892, y: 192, z: -3557, description: "" },
             { id: 4, x: -1182, y: 192, z: -2028, description: "" },
             { id: 5, x: -3450, y: 192, z: -7906, description: "" },
+            { id: 6, x: 4269, y: 192, z: -17271, description: "" },
         
         ]
     }
