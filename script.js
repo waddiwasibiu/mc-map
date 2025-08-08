@@ -29,13 +29,13 @@ const defaultStructures = [
     icon: "fa-tree",
     coordinates: {
         server1: [
-            { id: 1, x: -48622, y: 192, z: 70041, description: "一" },
-            { id: 2, x: -6320, y: 192, z: -24639, description: "一" },
-             { id: 3, x: -9446, y: 192, z: -8585, description: "一" },
+            { id: 1, x: -6077, y: 192, z: 8755, description: "一" },
+            { id: 2, x: -790, y: 192, z: -3079, description: "一" },
+             { id: 3, x: -1180, y: 192, z: -1073, description: "一" },
 
         ],
         server2: [
-            { id: 1, x: 0, y: 192, z: 0, description: "哦" }
+            { id: 1380, x: 0, y: 192, z: 3127, description: "" }
         ]
     }
 },
@@ -159,11 +159,12 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+            { id: 1, x: 0, y: 192, z: 0, description: "" },
 
         ],
         server2: [
-            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+            { id: 1, x: -807, y: 192, z: 1409, description: "" },
+            { id: 2, x: 5500, y: 192, z: -1727, description: "" },
         
         ]
     }
