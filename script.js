@@ -29,7 +29,9 @@ const defaultStructures = [
     icon: "fa-tree",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+            { id: 1, x: -48622, y: 192, z: 70041, description: "一" },
+            { id: 2, x: -6320, y: 192, z: -24639, description: "一" },
+             { id: 3, x: -9446, y: 192, z: -8585, description: "一" },
 
         ],
         server2: [
