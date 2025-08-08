@@ -29,11 +29,13 @@ const defaultStructures = [
     icon: "fa-tree",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+            { id: 1, x: -6077, y: 192, z: 8755, description: "一" },
+            { id: 2, x: -790, y: 192, z: -3079, description: "一" },
+             { id: 3, x: -1180, y: 192, z: -1073, description: "一" },
 
         ],
         server2: [
-            { id: 1, x: 0, y: 192, z: 0, description: "哦" }
+            { id: 1380, x: 0, y: 192, z: 3127, description: "" }
         ]
     }
 },
@@ -46,10 +48,11 @@ const defaultStructures = [
     icon: "fa-sun-o",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 63, z: 0, description: "嗷" }
+            { id: 1, x: -9830, y: 63, z: 1501, description: "嗷" },
         ],
         server2: [
-            { id: 1, x: 0, y: 63, z: 0, description: "嗷" }
+            { id: 1, x: -2048, y: 63, z: -3277, description: "嗷" },
+            { id: 2, x: 923, y: 98, z: -4101, description: "嗷" },
         ]
     }
 },
@@ -69,6 +72,8 @@ const defaultStructures = [
         server2: [
             { id: 1, x: -2, y: 192, z: 8474, description: "喵" },
             { id: 2, x: 43, y: 192, z: 8452, description: "" },
+            { id: 3, x:257, y: 192, z: 2306, description: "" },
+            { id: 4, x:270, y: 192, z: 2208, descriptiom: "" },
         ]
     }
 },
@@ -140,6 +145,7 @@ const defaultStructures = [
             { id: 2, x: -719, y: 192, z: -1435, description: "" },
             { id: 3, x: 2898, y: 192, z: 728, description: "" },
             { id: 4, x: -2156, y: 192, z: -688, description: "" },
+            { id: 5, x: -1437, y: 192, z: 772, description: "" },
         ],
         server2: [
             { id: 1, x: 23, y: 192, z: 51, description: "" },
@@ -147,6 +153,110 @@ const defaultStructures = [
     }
 },
 
+
+{
+    id: 9,
+    name: "末地堡垒",
+    type: "遗迹",
+    description: "世界尽头最大的城市",
+    image: 10,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: 17540, y: 192, z: 2208, description: "" },
+            { id: 2, x: 11727, y: 192, z: 850, description: "" },
+
+        ],
+        server2: [
+            { id: 1, x: -807, y: 192, z: 1409, description: "" },
+            { id: 2, x: 5500, y: 192, z: -1727, description: "" },
+            { id: 3, x: -3892, y: 192, z: -3557, description: "" },
+            { id: 4, x: -1182, y: 192, z: -2028, description: "" },
+            { id: 5, x: -3450, y: 192, z: -7906, description: "" },
+        
+        ]
+    }
+},
+
+{
+    id: 10,
+    name: "五级试炼",
+    type: "遗迹",
+    description: "最有性价比的水电梯",
+    image: 11,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: -1365, y: 192, z: 439, description: "地狱坐标" },
+
+        ],
+        server2: [
+            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+        
+        ]
+    }
+},
+
+{
+    id: 11,
+    name: "六级试炼",
+    type: "遗迹",
+    description: "地底最大的试炼",
+    image: 12,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+
+        ],
+        server2: [
+            { id: 1, x: -1685, y: 192, z: 4417, description: "地狱坐标" },
+        
+        ]
+    }
+},
+
+
+{
+    id: 12,
+    name: "冰塔",
+    type: "遗迹",
+    description: "凛冬将至",
+    image: 13,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: -1365, y: 192, z: 439, description: "地狱坐标" },
+
+        ],
+        server2: [
+            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+        
+        ]
+    }
+},
+
+{
+    id: 13,
+    name: "三叉戟试炼",
+    type: "遗迹",
+    description: "深海的主宰",
+    image: 14,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: , y: 192, z: , description: "地狱坐标" },
+
+        ],
+        server2: [
+            { id: 1, x: 4009, y: 192, z: -4389, description: "地狱坐标" },
+            { id: 1, x: 3203, y: 192, z: -5192, description: "地狱坐标" },
+            { id: 1, x: 2805, y: 192, z: -5194, description: "地狱坐标" },
+            { id: 1, x: 1609, y: 192, z: -4000, description: "地狱坐标" },
+        
+        ]
+    }
+},
 
 ];
 
