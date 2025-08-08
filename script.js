@@ -150,6 +150,66 @@ const defaultStructures = [
 },
 
 
+{
+    id: 9,
+    name: "末地堡垒",
+    type: "遗迹",
+    description: "世界尽头最大的城市",
+    image: 10,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+
+        ],
+        server2: [
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+        
+        ]
+    }
+},
+
+
+
+{
+    id: 10,
+    name: "六级试炼",
+    type: "遗迹",
+    description: "六级",
+    image: 11,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+
+        ],
+        server2: [
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+        
+        ]
+    }
+},
+
+
+{
+    id: 11,
+    name: "末地堡垒",
+    type: "遗迹",
+    description: "凛冬将至",
+    image: 12,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+
+        ],
+        server2: [
+            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+        
+        ]
+    }
+},
+
 ];
 
 
