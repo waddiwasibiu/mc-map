@@ -104,7 +104,8 @@ const defaultStructures = [
             { id: 2, x: 5185, y: 192, z: 3081, description: "地狱坐标" },
             { id: 3, x: 5737, y: 192, z: -190, description: "小云 地狱坐标" },
             { id: 4, x: 5276, y: 192, z: 3094, description: "小云 地狱坐标" },
-            { id: 2, x: 5185, y: 192, z: 3081, description: "地狱坐标" },
+            { id: 5, x: -1132, y: 192, z: 3119, description: "地狱坐标" },
+            
 
             ],
         server2: [
