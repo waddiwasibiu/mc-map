@@ -172,7 +172,7 @@ const defaultStructures = [
         server2: [
             { id: 1, x: 23, y: 192, z: 51, description: "地狱坐标" },
             { id: 2, x: 4386, y: 192, z: -3594, description: "地狱坐标" },
-             { id: 3, x: 3680, y: 192, z: -8626, description: "地狱坐标" },
+            { id: 3, x: 3680, y: 192, z: -8626, description: "地狱坐标" },
         ]
     }
 },
@@ -198,6 +198,7 @@ const defaultStructures = [
             { id: 4, x: -1182, y: 192, z: -2028, description: "" },
             { id: 5, x: -3450, y: 192, z: -7906, description: "" },
             { id: 6, x: 4269, y: 192, z: -17271, description: "" },
+            
         
         ]
     }
@@ -212,9 +213,12 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 5926, y: 192, z: -169, description: "地狱坐标" },
+            { id: 1, x: 5926, y: 192, z: -169, description: "五级试炼 地狱坐标" },
             { id: 2, x: 5141, y: 192, z: 2941, description: "三级试炼 地狱坐标" },
             { id: 3, x: 5235, y: 192, z: 3036, description: "三级试炼 地狱坐标" },
+            { id: 4, x: 5427, y: 192, z: 3941, description: "四级试炼 地狱坐标" },
+            { id: 5, x: 5532, y: 192, z: 4135, description: "四级试炼 地狱坐标" },
+            { id: 6, x: -9882, y: 192, z: -1076, description: "五级试炼 地狱坐标" },
 
         ],
         server2: [
@@ -291,6 +295,8 @@ const defaultStructures = [
             { id: 8, x: 407, y: 192, z: -3992, description: "地狱坐标" },
             { id: 9, x: 2818, y: 192, z: -2385, description: "地狱坐标" },
             { id: 10, x: 2808, y: 192, z: -3189, description: "地狱坐标" },
+            { id: 11, x: 2817, y: 192, z: -2385, description: "地狱坐标" },
+            { id: 12, x: 2806, y: 192, z: -3189, description: "地狱坐标" },
         
         ]
     }
