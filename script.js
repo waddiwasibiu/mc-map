@@ -53,10 +53,12 @@ const defaultStructures = [
     coordinates: {
         server1: [
             { id: 1, x: -9830, y: 63, z: 1501, description: "地狱坐标" },
+            { id: 2, x: 5513, y: 63, z: 2275, description: "地狱坐标" },
         ],
         server2: [
             { id: 1, x: -2048, y: 63, z: -3277, description: "地狱坐标" },
             { id: 2, x: 923, y: 98, z: -4101, description: "地狱坐标" },
+            { id: 3, x: 3530, y: 98, z: 3123, description: "地狱坐标" },
         ]
     }
 },
@@ -80,6 +82,7 @@ const defaultStructures = [
             { id: 4, x:270, y: 192, z: 2208, descriptiom: "地狱坐标" },
             { id: 5, x:20, y: 192, z: 3515, descriptiom: "地狱坐标" },
             { id: 6, x: 4100, y: 192, z: -8347, description: "地狱坐标" },
+            
         ]
     }
 },
@@ -93,6 +96,9 @@ const defaultStructures = [
     coordinates: {
         server1: [
             { id: 1, x: -2831, y: 192, z: -943, description: "地狱坐标" },
+            { id: 2, x: 5185, y: 192, z: 3081, description: "地狱坐标" },
+            { id: 3, x: 5737, y: 192, z: -190, description: "小云 地狱坐标" },
+            { id: 4, x: 5276, y: 192, z: 3094, description: "小云 地狱坐标" },
 
             ],
         server2: [
@@ -200,7 +206,9 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+            { id: 1, x: 5926, y: 192, z: -169, description: "地狱坐标" },
+            { id: 2, x: 5141, y: 192, z: 2941, description: "三级试炼 地狱坐标" },
+            { id: 3, x: 5235, y: 192, z: 3036, description: "三级试炼 地狱坐标" },
 
         ],
         server2: [
@@ -261,6 +269,8 @@ const defaultStructures = [
             { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标 主城边上" },
             { id: 2, x: -1191, y: 192, z: -1192, description: "地狱坐标 罗德岛边上" },
             { id: 3, x: 5611, y: 192, z: 2, description: "地狱坐标" },
+            { id: 4, x: 5217, y: 192, z: 2816, description: "地狱坐标" },
+            { id: 5, x: 4816, y: 192, z: 2799, description: "地狱坐标" },
 
         ],
         server2: [
@@ -270,6 +280,7 @@ const defaultStructures = [
             { id: 4, x: 1609, y: 192, z: -4000, description: "地狱坐标" },
             { id: 5, x: -2001, y: 192, z: 1215, description: "地狱坐标" },
             { id: 6, x: 2390, y: 192, z: -387, description: "地狱坐标" },
+            { id: 7, x: 0, y: 192, z: -5624, description: "地狱坐标 边上有海底城市" },
         
         ]
     }
