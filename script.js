@@ -274,6 +274,7 @@ const defaultStructures = [
             { id: 3, x: 5611, y: 192, z: 2, description: "地狱坐标" },
             { id: 4, x: 5217, y: 192, z: 2816, description: "地狱坐标" },
             { id: 5, x: 4816, y: 192, z: 2799, description: "地狱坐标" },
+            { id: 6, x: -1583, y: 192, z: -1585, description: "地狱坐标 罗德岛边上的边上" },
 
         ],
         server2: [
