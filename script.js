@@ -41,6 +41,9 @@ const defaultStructures = [
             { id: 3, x: 3729, y: 192, z: 3938, description: "地狱坐标" },
             { id: 4, x: 1171, y: 192, z: -4078, description: "旁边100m就是嘎吱村" },
             { id: 5, x: 49, y: 192, z: 3950, description: "地狱坐标" },
+            { id: 6, x: -312, y: 192, z: 8619, description: "地狱坐标" },
+            { id: 7, x: -509, y: 192, z: 8362, description: "地狱坐标" },
+            { id: 8, x: -624, y: 192, z: 1627, description: "地狱坐标" },
         ]
     }
 },
@@ -101,6 +104,7 @@ const defaultStructures = [
             { id: 2, x: 5185, y: 192, z: 3081, description: "地狱坐标" },
             { id: 3, x: 5737, y: 192, z: -190, description: "小云 地狱坐标" },
             { id: 4, x: 5276, y: 192, z: 3094, description: "小云 地狱坐标" },
+            { id: 2, x: 5185, y: 192, z: 3081, description: "地狱坐标" },
 
             ],
         server2: [
