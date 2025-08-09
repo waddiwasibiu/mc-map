@@ -32,6 +32,7 @@ const defaultStructures = [
             { id: 1, x: -6077, y: 192, z: 8755, description: "地狱坐标" },
             { id: 2, x: -790, y: 192, z: -3079, description: "地狱坐标" },
             { id: 3, x: -1180, y: 192, z: -1073, description: "地狱坐标" },
+            { id: 4, x: 983, y: 192, z: -4949, description: "地狱坐标 地狱离第三个光合500m" },
 
         ],
         server2: [
@@ -54,6 +55,7 @@ const defaultStructures = [
         server1: [
             { id: 1, x: -9830, y: 63, z: 1501, description: "地狱坐标" },
             { id: 2, x: 5513, y: 63, z: 2275, description: "地狱坐标" },
+            { id: 3, x: 638, y: 63, z: -4790, description: "地狱坐标" },
         ],
         server2: [
             { id: 1, x: -2048, y: 63, z: -3277, description: "地狱坐标" },
