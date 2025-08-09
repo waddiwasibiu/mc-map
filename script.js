@@ -29,16 +29,17 @@ const defaultStructures = [
     icon: "fa-tree",
     coordinates: {
         server1: [
-            { id: 1, x: -6077, y: 192, z: 8755, description: "一" },
-            { id: 2, x: -790, y: 192, z: -3079, description: "一" },
-            { id: 3, x: -1180, y: 192, z: -1073, description: "一" },
+            { id: 1, x: -6077, y: 192, z: 8755, description: "地狱坐标" },
+            { id: 2, x: -790, y: 192, z: -3079, description: "地狱坐标" },
+            { id: 3, x: -1180, y: 192, z: -1073, description: "地狱坐标" },
 
         ],
         server2: [
-            { id: 1, x: 1380, y: 192, z: 3127, description: "" },
-            { id: 2, x: 379, y: 192, z: 4069, description: "" },
-            { id: 3, x: 3729, y: 192, z: 3938, description: "" },
+            { id: 1, x: 1380, y: 192, z: 3127, description: "地狱坐标" },
+            { id: 2, x: 379, y: 192, z: 4069, description: "地狱坐标" },
+            { id: 3, x: 3729, y: 192, z: 3938, description: "地狱坐标" },
             { id: 4, x: 1171, y: 192, z: -4078, description: "旁边100m就是嘎吱村" },
+            { id: 5, x: 49, y: 192, z: 3950, description: "地狱坐标" },
         ]
     }
 },
@@ -51,11 +52,11 @@ const defaultStructures = [
     icon: "fa-sun-o",
     coordinates: {
         server1: [
-            { id: 1, x: -9830, y: 63, z: 1501, description: "嗷" },
+            { id: 1, x: -9830, y: 63, z: 1501, description: "地狱坐标" },
         ],
         server2: [
-            { id: 1, x: -2048, y: 63, z: -3277, description: "嗷" },
-            { id: 2, x: 923, y: 98, z: -4101, description: "嗷" },
+            { id: 1, x: -2048, y: 63, z: -3277, description: "地狱坐标" },
+            { id: 2, x: 923, y: 98, z: -4101, description: "地狱坐标" },
         ]
     }
 },
@@ -73,10 +74,11 @@ const defaultStructures = [
 
         ],
         server2: [
-            { id: 1, x: -2, y: 192, z: 8474, description: "喵" },
-            { id: 2, x: 43, y: 192, z: 8452, description: "" },
-            { id: 3, x:257, y: 192, z: 2306, description: "" },
-            { id: 4, x:270, y: 192, z: 2208, descriptiom: "" },
+            { id: 1, x: -2, y: 192, z: 8474, description: "地狱坐标" },
+            { id: 2, x: 43, y: 192, z: 8452, description: "地狱坐标" },
+            { id: 3, x:257, y: 192, z: 2306, description: "地狱坐标" },
+            { id: 4, x:270, y: 192, z: 2208, descriptiom: "地狱坐标" },
+            { id: 5, x:20, y: 192, z: 3515, descriptiom: "地狱坐标" },
         ]
     }
 },
@@ -89,11 +91,12 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
-            { id: 1, x: -2831, y: 192, z: -943, description: "大" },
+            { id: 1, x: -2831, y: 192, z: -943, description: "地狱坐标" },
 
             ],
         server2: [
-            { id: 1, x: 235, y: 192, z: 8362, description: "大" },
+            { id: 1, x: 235, y: 192, z: 8362, description: "地狱坐标" },
+            { id: 2, x: -266, y: 192, z: 3387, description: "地狱坐标" },
         ]
     }
 },
@@ -251,14 +254,18 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标 主城边上" },
+            { id: 2, x: -1191, y: 192, z: -1192, description: "地狱坐标 罗德岛边上" },
+            { id: 3, x: 5611, y: 192, z: 2, description: "地狱坐标" },
 
         ],
         server2: [
             { id: 1, x: 4009, y: 192, z: -4389, description: "地狱坐标" },
-            { id: 1, x: 3203, y: 192, z: -5192, description: "地狱坐标" },
-            { id: 1, x: 2805, y: 192, z: -5194, description: "地狱坐标" },
-            { id: 1, x: 1609, y: 192, z: -4000, description: "地狱坐标" },
+            { id: 2, x: 3203, y: 192, z: -5192, description: "地狱坐标" },
+            { id: 3, x: 2805, y: 192, z: -5194, description: "地狱坐标" },
+            { id: 4, x: 1609, y: 192, z: -4000, description: "地狱坐标" },
+            { id: 5, x: -2001, y: 192, z: 1215, description: "地狱坐标" },
+            { id: 6, x: 2390, y: 192, z: -387, description: "地狱坐标" },
         
         ]
     }
