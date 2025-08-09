@@ -310,10 +310,29 @@ const defaultStructures = [
 
 {
     id: 14,
+    name: "剧毒魔窟",
+    type: "遗迹",
+    description: "丛林深处的回响",
+    image: 15,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+
+        ],
+        server2: [
+            { id: 1, x: 4220, y: 192, z: -5666, description: "地狱坐标" },
+        
+        ]
+    }
+},
+
+{
+    id: 15,
     name: "蜂窝",
     type: "遗迹",
     description: "蜂王浆",
-    image: 15,
+    image: 16,
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
