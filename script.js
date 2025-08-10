@@ -12,7 +12,7 @@ const defaultStructures = [
     coordinates: {
         server1: [
             { id: 1, x: -9164, y: 192, z: -2182, description: "近" },
-            { id: 1, x: -5782, y: 192, z: -3527, description: "近" },
+            { id: 2, x: -5782, y: 192, z: -3527, description: "近" },
 
         ],
         server2: [
@@ -357,6 +357,7 @@ const defaultStructures = [
 ];
 
 
+
 // 保存结构数据到本地存储
 function saveStructures(structures) {
     localStorage.setItem('mcStructures', JSON.stringify(structures));
@@ -401,9 +402,6 @@ function addStructure(structure) {
 // 渲染结构卡片
 function renderStructureCard(structure, server) {
     const serverClass = server === 'server1' ? 'server1' : 'server2';
-    const server1Coordinates = structure.coordinates.server1 || [];
-    const server2Coordinates = structure.coordinates.server2 || [];
-    const totalCoordinates = server1Coordinates.length + server2Coordinates.length; // 计算所有服务器坐标总和
     const coordinates = structure.coordinates[server] || [];
     
     return `
@@ -411,7 +409,7 @@ function renderStructureCard(structure, server) {
             <div class="relative">
                 <div class="structure-image w-full h-48" style="background-image: url('${structure.image}.png')"></div>
                 <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                    <i class="fa fa-map-marker mr-1 text-${serverClass}"></i> ${totalCoordinates}个坐标 <!-- 显示总数 -->
+                    <i class="fa fa-map-marker mr-1 text-${serverClass}"></i> ${coordinates.length}个坐标
                 </div>
             </div>
             
@@ -646,8 +644,7 @@ function drawAllCharts() {
                             },
                             ticks: {
                                 display: false
-                            },
-                            reverse: true  // 反转Y轴方向，实现负负在左上，正正在右下
+                            }
                         }
                     },
                     plugins: {
@@ -681,7 +678,7 @@ function drawAllCharts() {
 // 显示放大的坐标分布图
 function showLargeChart(server, structureId) {
     const structures = loadStructures();
-    const structure = structuresstructures.find(s => s.id === structureId);
+    const structure = structures.find(s => s.id === structureId);
     if (!structure) return;
 
     const coordinates = structure.coordinates[server] || [];
@@ -773,8 +770,7 @@ function showLargeChart(server, structureId) {
                     },
                     grid: {
                         color: 'rgba(0, 0, 0, 0.05)'
-                    },
-                    reverse: true  // 反转Y轴，实现负负在左上，正正在右下
+                    }
                 }
             },
             plugins: {
