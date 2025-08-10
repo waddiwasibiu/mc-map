@@ -231,7 +231,8 @@ const defaultStructures = [
 
         ],
         server2: [
-            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+            { id: 1, x: 10462, y: 192, z: -4578, description: "五级试炼 地狱坐标" },
+            { id: 2, x: 9776, y: 192, z: -4702, description: "五级试炼 地狱坐标" },
         
         ]
     }
@@ -324,11 +325,12 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+            { id: 1, x: 2014, y: 192, z: -1086, description: "地狱坐标" },
 
         ],
         server2: [
             { id: 1, x: 4220, y: 192, z: -5666, description: "地狱坐标" },
+            { id: 2, x: -1813, y: 192, z: 2630, description: "地狱坐标" },
         
         ]
     }
