@@ -12,7 +12,7 @@ const defaultStructures = [
     coordinates: {
         server1: [
             { id: 1, x: -9164, y: 192, z: -2182, description: "近" },
-            { id: 2, x: -5782, y: 192, z: -3527, description: "近" },
+            { id: 2, x: -5782, y: 192, z: 3527, description: "近" },
 
         ],
         server2: [
@@ -644,7 +644,9 @@ function drawAllCharts() {
                             },
                             ticks: {
                                 display: false
-                            }
+                            },
+                            // 添加这行代码：反转Y轴（Z坐标）方向
+                            reverse: true
                         }
                     },
                     plugins: {
@@ -770,7 +772,9 @@ function showLargeChart(server, structureId) {
                     },
                     grid: {
                         color: 'rgba(0, 0, 0, 0.05)'
-                    }
+                    },
+                    // 添加这行代码：反转Y轴（Z坐标）方向
+                    reverse: true
                 }
             },
             plugins: {
@@ -818,6 +822,7 @@ function hideLargeChart() {
     document.getElementById('chartModal').classList.remove('flex');
     document.body.style.overflow = ''; // 恢复背景滚动
 }
+
 
 // 添加坐标
 function addCoordinate(server, structureId) {
