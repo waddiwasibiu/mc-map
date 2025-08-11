@@ -227,6 +227,8 @@ const defaultStructures = [
             { id: 8, x: -6077, y: 192, z: 5374, description: "" },
             { id: 9, x: 1062, y: 192, z: -4919, description: "" },
             { id: 10, x: 8400, y: 192, z: -12096, description: "" },
+            { id: 11, x: 3864, y: 192, z: 3521, description: "" },
+            { id: 12, x: -4672, y: 192, z: 1502, description: "" },
             
         
         ]
@@ -355,6 +357,7 @@ const defaultStructures = [
         server2: [
             { id: 1, x: 4220, y: 192, z: -5666, description: "地狱坐标" },
             { id: 2, x: -1813, y: 192, z: 2630, description: "地狱坐标" },
+            { id: 3, x: 1646, y: 192, z: 516, description: "地狱坐标" },
         
         ]
     }
