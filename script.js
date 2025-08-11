@@ -65,6 +65,8 @@ const defaultStructures = [
             { id: 1, x: -2048, y: 63, z: -3277, description: "地狱坐标" },
             { id: 2, x: 923, y: 98, z: -4101, description: "地狱坐标" },
             { id: 3, x: 3530, y: 98, z: 3123, description: "地狱坐标" },
+            { id: 4, x: 985, y: 98, z: -4090, description: "地狱坐标 旁边100m就是第5个" },
+            { id: 5, x: 924, y: 98, z: -4101, description: "地狱坐标" },
         ]
     }
 },
@@ -95,6 +97,7 @@ const defaultStructures = [
             { id: 4, x:270, y: 192, z: 2208, descriptiom: "地狱坐标" },
             { id: 5, x:20, y: 192, z: 3515, descriptiom: "地狱坐标" },
             { id: 6, x: 4100, y: 192, z: -8347, description: "地狱坐标" },
+            { id: 7, x: 2586, y: 192, z: 6124, description: "地狱坐标" },
             
         ]
     }
@@ -126,6 +129,8 @@ const defaultStructures = [
             { id: 2, x: -266, y: 192, z: 3387, description: "地狱坐标" },
             { id: 3, x: 3985, y: 192, z: -8465, description: "地狱坐标" },
             { id: 4, x: 4209, y: 192, z: -8447, description: "地狱坐标" },
+            { id: 4, x: 2622, y: 192, z: 6135, description: "地狱坐标" },
+            { id: 4, x: 2736, y: 192, z: 6214, description: "地狱坐标" },
         ]
     }
 },
@@ -185,7 +190,7 @@ const defaultStructures = [
             { id: 4, x: -2156, y: 192, z: -688, description: "" },
             { id: 5, x: -1437, y: 192, z: 772, description: "" },
             { id: 6, x: -5000, y: 192, z: -1375, description: "" },
-            { id: 7, x: -5750, y: 192, z: -1375, description: "" },
+            { id: 7, x: -5752, y: 192, z: -1438, description: "" },
             { id: 8, x: -2836, y: 192, z: 1502, description: "" },
             { id: 9, x: -8592, y: 192, z: -1412, description: "" },
         ],
@@ -369,7 +374,7 @@ const defaultStructures = [
 
         ],
         server2: [
-            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+            { id: 1, x: 4324, y: 192, z: -8965, description: "地狱坐标" },
         
         ]
     }
