@@ -85,8 +85,8 @@ const defaultStructures = [
         server1: [
             { id: 1, x: -457, y: 192, z: 7, description: "地狱坐标" },
             { id: 2, x: -322, y: 192, z: 9, description: "地狱坐标" },
-            { id: 3, x: 1877, y: 192, z: -5268, description: "地狱坐标 旋风云乐魂云" },
-            { id: 4, x: 1992, y: 192, z: -5270, description: "地狱坐标 旋风云乐魂云" },
+            { id: 3, x: 1877, y: 192, z: -5268, description: "地狱坐标 旋风云+乐魂云" },
+            { id: 4, x: 1992, y: 192, z: -5270, description: "地狱坐标 旋风云+乐魂云" },
             { id: 5, x: 3744, y: 192, z: -5167, description: "地狱坐标" },
             { id: 6, x: -810, y: 192, z: 1450, description: "地狱坐标" },
             { id: 7, x: -951, y: 192, z: 1350, description: "地狱坐标" },
