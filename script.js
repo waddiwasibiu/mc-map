@@ -356,6 +356,7 @@ const defaultStructures = [
             { id: 7, x: -2386, y: 192, z: -2000, description: "地狱坐标 罗德岛边上的边上" },
             { id: 8, x: 4406, y: 192, z: 3603, description: "地狱坐标" },
             { id: 9, x: -8383, y: 192, z: -8382, description: "地狱坐标" },
+            { id: 10, x: 7211, y: 192, z: -4383, description: "地狱坐标" },
 
         ],
         server2: [
@@ -377,6 +378,7 @@ const defaultStructures = [
             { id: 16, x: 7, y: 192, z: 3217, description: "地狱坐标" },
             { id: 17, x: 3602, y: 192, z: -382, description: "地狱坐标" },
             { id: 18, x: 4404, y: 192, z: -395, description: "地狱坐标" },
+            { id: 19, x: -2400, y: 192, z: 4405, description: "地狱坐标" },
         
         ]
     }
@@ -415,10 +417,14 @@ const defaultStructures = [
         server1: [
             { id: 1, x: 5575, y: 192, z: -2099, description: "地狱坐标" },
             { id: 2, x: -236, y: 192, z: -5662, description: "地狱坐标" },
+            { id: 3, x: 8742, y: 192, z: -6060, description: "地狱坐标" },
+            { id: 4, x: 5863, y: 192, z: -3558, description: "地狱坐标" },
 
         ],
         server2: [
             { id: 1, x: 4324, y: 192, z: -8965, description: "地狱坐标" },
+            { id: 2, x: 9425, y: 192, z: 8594, description: "地狱坐标" },
+            { id: 3, x: 8891, y: 192, z: 9624, description: "地狱坐标" },
         
         ]
     }
