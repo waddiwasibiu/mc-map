@@ -48,6 +48,7 @@ const defaultStructures = [
             { id: 7, x: -509, y: 192, z: 8362, description: "地狱坐标" },
             { id: 8, x: -624, y: 192, z: 1627, description: "地狱坐标 逐空边上" },
             { id: 9, x: 4118, y: 192, z: -7989, description: "地狱坐标" },
+            { id: 10, x: 6525, y: 192, z: -9265, description: "地狱坐标" },
         ]
     }
 },
@@ -154,6 +155,7 @@ const defaultStructures = [
             { id: 4, x: 4209, y: 192, z: -8447, description: "地狱坐标" },
             { id: 5, x: 2622, y: 192, z: 6135, description: "地狱坐标" },
             { id: 6, x: 2736, y: 192, z: 6214, description: "地狱坐标" },
+            { id: 7, x: 2528, y: 192, z: -647, description: "地狱坐标" },
         ]
     }
 },
@@ -278,12 +280,15 @@ const defaultStructures = [
             { id: 6, x: -9882, y: 192, z: -1076, description: "五级试炼 地狱坐标" },
             { id: 7, x: -1097, y: 192, z: -1755, description: "五级试炼 地狱坐标 地狱离第8个200m" },
             { id: 8, x: -1156, y: 192, z: -1889, description: "五级试炼 地狱坐标" },
+            { id: 9, x: 22, y: 192, z: -8477, description: "五级试炼 地狱坐标" },
 
 
         ],
         server2: [
             { id: 1, x: 10462, y: 192, z: -4578, description: "五级试炼 地狱坐标" },
             { id: 2, x: 9776, y: 192, z: -4702, description: "五级试炼 地狱坐标" },
+            { id: 3, x: 2325, y: 192, z: 147, description: "五级试炼 地狱坐标" },
+            { id: 4, x: 4009, y: 192, z: -373, description: "五级试炼 地狱坐标" },
         
         ]
     }
@@ -369,6 +374,8 @@ const defaultStructures = [
             { id: 14, x: 7, y: 192, z: 5191, description: "地狱坐标" },
             { id: 15, x: -406, y: 192, z: -6019, description: "地狱坐标" },
             { id: 16, x: 7, y: 192, z: 3217, description: "地狱坐标" },
+            { id: 17, x: 3602, y: 192, z: -382, description: "地狱坐标" },
+            { id: 18, x: 4404, y: 192, z: -395, description: "地狱坐标" },
         
         ]
     }
