@@ -298,7 +298,7 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 192, z: 0, description: "近" },
+            { id: 1, x: 3319, y: 192, z: -996, description: "地狱坐标" },
 
         ],
         server2: [
