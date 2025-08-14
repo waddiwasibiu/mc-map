@@ -294,8 +294,8 @@ const defaultStructures = [
 
         ],
         server2: [
-            { id: 1, x: 10462, y: 192, z: -4578, description: "五级试炼 地狱坐标" },
-            { id: 2, x: 9776, y: 192, z: -4702, description: "五级试炼 地狱坐标" },
+            { id: 1, x: 1307, y: 192, z: -572, description: "五级试炼 地狱坐标" },
+            { id: 2, x: 1222, y: 192, z: -587, description: "五级试炼 地狱坐标" },
             { id: 3, x: 2325, y: 192, z: 147, description: "五级试炼 地狱坐标" },
             { id: 4, x: 4009, y: 192, z: -373, description: "五级试炼 地狱坐标" },
         
