@@ -1363,32 +1363,32 @@ document.addEventListener('DOMContentLoaded', function() {
 bindEvents();
 
 
-    // 页面加载完成后初始化
-    document.addEventListener('DOMContentLoaded', function() {
-        // 渲染所有结构
-        renderAllStructures();
-        
-        // 默认显示一区内容
-        switchServer('server1');
-        
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
+// 页面加载完成后初始化
+document.addEventListener('DOMContentLoaded', function() {
+    // 渲染所有结构
+    renderAllStructures();
+    
+    // 默认显示一区内容
+    switchServer('server1');
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // 关闭移动菜单（如果打开）
+                document.getElementById('mobileMenu').classList.add('hidden');
                 
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    // 关闭移动菜单（如果打开）
-                    document.getElementById('mobileMenu').classList.add('hidden');
-                    
-                    // 滚动到目标位置
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+                // 滚动到目标位置
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
+});
