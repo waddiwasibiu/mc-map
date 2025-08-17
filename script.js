@@ -22,6 +22,7 @@ const defaultStructures = [
             { id: 1, x: 6562, y: 192, z: -9506, description: "地狱坐标" },
             { id: 2, x: -9795, y: 192, z: 3234, description: "地狱坐标" },
             { id: 3, x: 2305, y: 192, z: 8814, description: "地狱坐标" },
+            { id: 4, x: -1689, y: 192, z: 8335, description: "地狱坐标" },
         
         ]
     }
@@ -37,8 +38,9 @@ const defaultStructures = [
         server1: [
             { id: 1, x: -6077, y: 192, z: 8755, description: "地狱坐标" },
             { id: 2, x: -1180, y: 192, z: -1073, description: "地狱坐标" },
-            { id: 3, x: 983, y: 192, z: -4949, description: "地狱坐标 地狱离第3个光合500m" },
+            { id: 3, x: 983, y: 192, z: -4949, description: "地狱坐标" },
             { id: 4, x: 132, y: 192, z: 322, description: "地狱坐标 主城边上" },
+            { id: 5, x: -7223, y: 192, z: 1514, description: "地狱坐标" },
 
         ],
         server2: [
@@ -55,6 +57,7 @@ const defaultStructures = [
             { id: 11, x: 213, y: 192, z: 83, description: "地狱坐标 主城边上" },
             { id: 12, x: -790, y: 192, z: -3079, description: "地狱坐标" },
             { id: 13, x: -790, y: 192, z: -8561, description: "地狱坐标" },
+            { id: 14, x: -1564, y: 192, z: 7727, description: "地狱坐标" },
         ]
     }
 },
@@ -70,6 +73,8 @@ const defaultStructures = [
             { id: 1, x: -9830, y: 63, z: 1501, description: "地狱坐标" },
             { id: 2, x: 5513, y: 63, z: 2275, description: "地狱坐标" },
             { id: 3, x: 638, y: 63, z: -4790, description: "地狱坐标" },
+            { id: 4, x: -9958, y: 98, z: -1349, description: "地狱坐标 旁边100m就是第5个" },
+            { id: 5, x: -9889, y: 98, z: -1408, description: "地狱坐标" },
         ],
         server2: [
             { id: 1, x: -2048, y: 63, z: -3277, description: "地狱坐标" },
@@ -77,6 +82,7 @@ const defaultStructures = [
             { id: 3, x: 985, y: 98, z: -4090, description: "地狱坐标" },
             { id: 4, x: 3530, y: 98, z: 3123, description: "地狱坐标" },
             { id: 5, x: -777, y: 98, z: 9222, description: "地狱坐标" },
+            
             
 
         ]
