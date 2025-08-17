@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <!-- 新增Three.js库用于3D可视化 -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
     
     <!-- Tailwind 配置 -->
     <script>
@@ -31,6 +34,9 @@
     </script>
     
     <style type="text/tailwindcss">
+
+        #canvas-container { position: relative !important; }
+        
         @layer utilities {
             .content-auto {
                 content-visibility: auto;
@@ -70,6 +76,9 @@
             #gitalk-container .gt-comment-content {
                 border-radius: 0.375rem; /* 与其他卡片的圆角一致 */
             }
+            .shadow-soft {
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            }
         }
     </style>
 </head>
@@ -86,8 +95,9 @@
                 <nav class="hidden md:flex space-x-6">
                     <a href="#home" class="text-gray-700 hover:text-primary transition-colors">首页</a>
                     <a href="#structures" class="text-gray-700 hover:text-primary transition-colors">结构列表</a>
-                    <a href="#add-structure" class="text-gray-700 hover:text-primary transition-colors">添加结构</a>
+                    <a href="#3d-coordinates" class="text-gray-700 hover:text-primary transition-colors">坐标立体图</a>
                     <a href="#about" class="text-gray-700 hover:text-primary transition-colors">关于我们</a>
+                    <a href="#comments" class="text-gray-700 hover:text-primary transition-colors">评论区</a>
                 </nav>
                 
                 <div class="flex items-center space-x-4">
@@ -106,8 +116,9 @@
             <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
                 <a href="#home" class="block py-2 text-gray-700 hover:text-primary transition-colors">首页</a>
                 <a href="#structures" class="block py-2 text-gray-700 hover:text-primary transition-colors">结构列表</a>
-                <a href="#add-structure" class="block py-2 text-gray-700 hover:text-primary transition-colors">添加结构</a>
+                <a href="#3d-coordinates" class="block py-2 text-gray-700 hover:text-primary transition-colors">坐标立体图</a>
                 <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition-colors">关于我们</a>
+                <a href="#comments" class="block py-2 text-gray-700 hover:text-primary transition-colors">评论区</a>
             </div>
         </div>
     </header>
@@ -233,6 +244,57 @@
                 <!-- 结构卡片将通过JavaScript动态生成 -->
             </div>
         </section>
+
+        <!-- 新增坐标立体图部分 -->
+        <section id="3d-coordinates" class="mt-16 mb-16">
+            <div class="bg-white rounded-xl shadow-soft p-6">
+                <h2 class="text-2xl font-bold text-dark mb-6">坐标立体图</h2>
+                <p class="text-gray-600 mb-6">3D可视化展示所有服务器的坐标点，可使用鼠标旋转、缩放和平移视图。</p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    <!-- 3D Visualization Area -->
+                    <div class="lg:col-span-3 bg-white rounded-xl shadow-soft p-4 h-[600px]">
+                        <div id="canvas-container" class="w-full h-full rounded-lg overflow-hidden border border-slate-200"></div>
+                    </div>
+                    
+                    <!-- Points List -->
+                    <div class="lg:col-span-1 bg-white rounded-xl shadow-soft p-4 h-[600px] overflow-y-auto">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fa fa-list-ul text-primary mr-2"></i> 坐标点列表
+                        </h3>
+                        <div id="points-list" class="space-y-3">
+                            <!-- 坐标点将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Controls -->
+                <div class="mt-6 flex flex-wrap gap-4 justify-center">
+
+                    <!-- 新增结构筛选下拉框 -->
+                    <div class="relative">
+                        <select id="structure-filter" class="appearance-none px-4 py-2 pr-8 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="all">所有结构</option>
+                            <!-- 结构选项将通过JavaScript动态添加 -->
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                            <i class="fa fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
+
+                    <button id="reset-view" class="flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all">
+                        <i class="fa fa-refresh mr-2"></i> 重置视图
+                    </button>
+                    <button id="show-axes" class="flex items-center px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all">
+                        <i class="fa fa-arrows mr-2"></i> 显示/隐藏坐标轴
+                    </button>
+                    <button id="show-labels" class="flex items-center px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all">
+                        <i class="fa fa-tag mr-2"></i> 显示/隐藏标签
+                    </button>
+                </div>
+                
+            </div>
+        </section>
     </main>
 
     <!-- 关于我们 -->
@@ -302,11 +364,9 @@
     </div>
 
     <!-- 评论容器 -->
-    <div class="container mx-auto px-4 mb-12">
+    <div id="comments" class="container mx-auto px-4 mb-12">
         <div id="gitalk-container" class="bg-white rounded-xl shadow-md p-6"></div>
     </div>
-
-
 
     <footer class="bg-white shadow-md py-6">
         <div class="container mx-auto px-4 text-center text-gray-600">

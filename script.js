@@ -479,7 +479,6 @@ const defaultStructures = [
 
 ];
 
-
 // 保存结构数据到本地存储
 function saveStructures(structures) {
     localStorage.setItem('mcStructures', JSON.stringify(structures));
@@ -526,18 +525,31 @@ function renderStructureCard(structure, server) {
     const serverClass = server === 'server1' ? 'server1' : 'server2';
     const server1Coordinates = structure.coordinates.server1 || [];
     const server2Coordinates = structure.coordinates.server2 || [];
-    const totalCoordinates = server1Coordinates.length + server2Coordinates.length; // 计算所有服务器坐标总和
+    const totalCoordinates = server1Coordinates.length + server2Coordinates.length;
     const coordinates = structure.coordinates[server] || [];
     
+    // 确保图片路径安全处理
+    const imageUrl = structure.image 
+        ? `${structure.image}.png` 
+        : 'default-structure.png'; // 添加默认图片
+    
     return `
-        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover" data-structure="${structure.id}" data-server="${server}">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-100 mb-6" 
+             data-structure="${structure.id}" data-server="${server}">
+            <!-- 结构图片展示区 -->
             <div class="relative">
-                <div class="structure-image w-full h-48" style="background-image: url('${structure.image}.png')"></div>
+                <div class="structure-image w-full h-48 bg-cover bg-center transition-transform duration-500 hover:scale-105" 
+                     style="background-image: url('${imageUrl}')">
+                    <!-- 图片加载失败处理 -->
+                    <img src="${imageUrl}" class="hidden" onError="this.parentElement.style.backgroundImage='url(default-structure.png)'">
+                </div>
                 <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
-                    <i class="fa fa-map-marker mr-1 text-${serverClass}"></i> ${totalCoordinates}个坐标 <!-- 显示总数 -->
+                    <i class="fa fa-map-marker mr-1 text-${serverClass}"></i> 
+                    ${totalCoordinates}个坐标
                 </div>
             </div>
             
+            <!-- 结构信息区 -->
             <div class="p-6">
                 <div class="flex justify-between items-start mb-4">
                     <div>
@@ -545,18 +557,19 @@ function renderStructureCard(structure, server) {
                         <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">${structure.type}</span>
                     </div>
                     <div class="text-${serverClass} text-2xl">
-                        <i class="fa ${structure.icon}"></i>
+                        <i class="fa ${structure.icon || 'fa-question-circle'}"></i>
                     </div>
                 </div>
                 
                 <div class="mb-6 text-gray-600">
-                    <p>${structure.description}</p>
+                    <p>${structure.description || '暂无描述信息'}</p>
                 </div>
                 
                 <!-- 坐标分布图 -->
-                <div class="mt-6 mb-6 cursor-pointer chart-container" data-structure="${structure.id}" data-server="${server}">
+                <div class="mt-6 mb-6 cursor-pointer chart-container border border-gray-200 rounded-lg p-1" 
+                     data-structure="${structure.id}" data-server="${server}">
                     <h4 class="font-medium text-gray-700 mb-3">坐标分布 (X-Z 平面)</h4>
-                    <div class="relative h-48 w-full bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+                    <div class="relative h-48 w-full bg-white rounded-lg overflow-hidden shadow-sm">
                         ${coordinates.length > 0 ? `
                             <canvas id="${server}-${structure.id}-chart" class="w-full h-full"></canvas>
                         ` : `
@@ -568,83 +581,58 @@ function renderStructureCard(structure, server) {
                 </div>
                 
                 <!-- 坐标列表 -->
-                <div id="${server}-${structure.id}-coordinates" class="space-y-3 mb-6 max-h-60 overflow-y-hidden" data-expanded="false">
+                <div id="${server}-${structure.id}-coordinates" 
+                     class="space-y-3 mb-6 max-h-60 overflow-y-auto border border-gray-100 rounded-lg" 
+                     data-expanded="false">
                     ${coordinates.length > 0 ? coordinates.map(coord => `
-                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-${serverClass}/50 transition-colors">
                             <div class="flex justify-between items-start mb-2">
                                 <div class="font-medium">
-                                    #${coord.id} ${coord.description}
+                                    #${coord.id} ${coord.description || '无描述'}
                                 </div>
                                 <div class="text-xs text-gray-500">
                                     <i class="fa fa-user mr-1"></i> 匿名
                                 </div>
                             </div>
-                            <div class="flex justify-between items-center">
-                                <div class="grid grid-cols-3 gap-2 text-sm">
-                                    <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
-                                        <i class="fa fa-arrow-right text-gray-500 mr-2"></i>
-                                        <span class="font-mono">X: ${coord.x}</span>
-                                    </div>
-                                    <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
-                                        <i class="fa fa-arrow-up text-gray-500 mr-2"></i>
-                                        <span class="font-mono">Y: ${coord.y}</span>
-                                    </div>
-                                    <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
-                                        <i class="fa fa-arrow-left text-gray-500 mr-2"></i>
-                                        <span class="font-mono">Z: ${coord.z}</span>
-                                    </div>
+                            <div class="flex flex-wrap gap-2 text-sm">
+                                <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
+                                    <i class="fa fa-arrow-right text-gray-500 mr-2"></i>
+                                    <span class="font-mono">X: ${coord.x}</span>
                                 </div>
-                                <button class="text-red-500 hover:text-red-700 transition-colors delete-coordinate-btn" data-server="${server}" data-structure="${structure.id}" data-id="${coord.id}">
-                                    <i class="fa fa-trash"></i>
-                                </button>
+                                <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
+                                    <i class="fa fa-arrow-up text-gray-500 mr-2"></i>
+                                    <span class="font-mono">Y: ${coord.y}</span>
+                                </div>
+                                <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
+                                    <i class="fa fa-arrow-left text-gray-500 mr-2"></i>
+                                    <span class="font-mono">Z: ${coord.z}</span>
+                                </div>
                             </div>
                         </div>
                     `).join('') : '<p class="text-center text-gray-500 py-4">暂无坐标数据</p>'}
                 </div>
                 
-                <!-- 添加坐标表单 - 默认隐藏 -->
-                <div id="${server}-${structure.id}-add-form" class="hidden bg-gray-50 p-4 rounded-lg border border-gray-200 mt-4">
-                    <h4 class="font-medium mb-3">添加新坐标</h4>
-                    <div class="grid grid-cols-3 gap-4 mb-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">X 坐标</label>
-                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="X">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Y 坐标</label>
-                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="Y">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Z 坐标</label>
-                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="Z">
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-${serverClass}/50 focus:border-${serverClass}" placeholder="描述 (可选)">
-                        <div class="flex gap-2">
-                            <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition-colors cancel-add-coordinate-btn">取消</button>
-                            <button class="px-4 py-2 bg-${serverClass} text-white rounded-md hover:bg-${serverClass}/90 transition-colors add-coordinate-btn" data-structure="${structure.id}" data-server="${server}">添加坐标</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 操作按钮 -->
-                <div class="flex justify-between items-center">
-                    <button class="px-4 py-2 border border-${serverClass} text-${serverClass} rounded-md hover:bg-${serverClass}/10 transition-colors flex items-center toggle-coordinates-btn" data-structure="${structure.id}" data-server="${server}">
+                <!-- 操作按钮区 -->
+                <div class="flex flex-wrap justify-between items-center gap-3">
+                    <button class="px-4 py-2 border border-${serverClass} text-${serverClass} rounded-md hover:bg-${serverClass}/10 transition-colors flex items-center toggle-coordinates-btn" 
+                            data-structure="${structure.id}" data-server="${server}">
                         <span>展开全部</span>
                         <i class="fa fa-chevron-down ml-2"></i>
                     </button>
-                    <button class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center show-add-form-btn" data-structure="${structure.id}" data-server="${server}">
+                    <button class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center show-add-form-btn" 
+                            data-structure="${structure.id}" data-server="${server}">
                         <i class="fa fa-plus mr-2"></i> 添加坐标
                     </button>
                 </div>
             </div>
             
-            <div class="bg-gray-50 p-4 flex justify-between items-center">
+            <!-- 底部信息栏 -->
+            <div class="bg-gray-50 p-4 flex justify-between items-center border-t border-gray-100">
                 <span class="text-xs text-gray-500">
                     <i class="fa fa-clock-o mr-1"></i> ${new Date().toLocaleDateString('zh-CN')}
                 </span>
-                <button class="text-red-500 hover:text-red-700 text-sm delete-structure-btn" data-id="${structure.id}">
+                <button class="text-red-500 hover:text-red-700 text-sm delete-structure-btn transition-colors" 
+                        data-id="${structure.id}">
                     <i class="fa fa-trash mr-1"></i> 删除结构
                 </button>
             </div>
@@ -654,44 +642,76 @@ function renderStructureCard(structure, server) {
 
 // 渲染所有结构
 function renderAllStructures() {
-    const structures = loadStructures();
-    const server1Content = document.getElementById('server1Content');
-    const server2Content = document.getElementById('server2Content');
+    try {
+        const structures = loadStructures();
+        const server1Content = document.getElementById('server1Content');
+        const server2Content = document.getElementById('server2Content');
 
-    server1Content.innerHTML = '';
-    server2Content.innerHTML = '';
-
-    structures.forEach(structure => {
-        server1Content.innerHTML += renderStructureCard(structure, 'server1');
-        server2Content.innerHTML += renderStructureCard(structure, 'server2');
-    });
-
-    // 恢复展开状态
-    Object.keys(expandedStates).forEach(key => {
-        const [server, structureId] = key.split('-');
-        const container = document.getElementById(`${server}-${structureId}-coordinates`);
-        const btn = document.querySelector(`.toggle-coordinates-btn[data-server="${server}"][data-structure="${structureId}"]`);
-        if (container && btn) {
-            if (expandedStates[key]) {
-                container.setAttribute('data-expanded', 'true');
-                container.classList.remove('max-h-60', 'overflow-y-hidden');
-                btn.innerHTML = '<span>收起</span><i class="fa fa-chevron-up ml-2"></i>';
-            } else {
-                container.setAttribute('data-expanded', 'false');
-                container.classList.add('max-h-60', 'overflow-y-hidden');
-                btn.innerHTML = '<span>展开全部</span><i class="fa fa-chevron-down ml-2"></i>';
-            }
+        // 检查容器是否存在
+        if (!server1Content || !server2Content) {
+            console.error('结构展示容器不存在，请检查HTML中是否有id为server1Content和server2Content的元素');
+            return;
         }
-    });
 
-    // 绘制所有图表
-    drawAllCharts();
+        server1Content.innerHTML = '';
+        server2Content.innerHTML = '';
 
-    // 重新绑定事件
-    bindEvents();
+        // 如果没有结构数据，显示提示信息
+        if (structures.length === 0) {
+            const emptyMessage = `
+                <div class="text-center py-10 text-gray-500">
+                    <i class="fa fa-folder-open-o text-4xl mb-3"></i>
+                    <p>暂无结构数据，请添加新结构</p>
+                </div>
+            `;
+            server1Content.innerHTML = emptyMessage;
+            server2Content.innerHTML = emptyMessage;
+            return;
+        }
+
+        // 渲染每个结构卡片
+        structures.forEach(structure => {
+            server1Content.innerHTML += renderStructureCard(structure, 'server1');
+            server2Content.innerHTML += renderStructureCard(structure, 'server2');
+        });
+
+        // 恢复展开状态
+        Object.keys(expandedStates).forEach(key => {
+            const [server, structureId] = key.split('-');
+            const container = document.getElementById(`${server}-${structureId}-coordinates`);
+            const btn = document.querySelector(`.toggle-coordinates-btn[data-server="${server}"][data-structure="${structureId}"]`);
+            if (container && btn) {
+                if (expandedStates[key]) {
+                    container.setAttribute('data-expanded', 'true');
+                    container.classList.remove('max-h-60');
+                    btn.innerHTML = '<span>收起</span><i class="fa fa-chevron-up ml-2"></i>';
+                }
+            }
+        });
+
+        // 绘制图表和更新3D坐标
+        drawAllCharts();
+        update3DCoordinates();
+
+        // 重新绑定事件
+        bindEvents();
+        
+    } catch (error) {
+        console.error('渲染结构列表时发生错误:', error);
+        // 显示错误提示
+        const errorMessage = `
+            <div class="text-center py-10 text-red-500">
+                <i class="fa fa-exclamation-triangle text-4xl mb-3"></i>
+                <p>加载结构数据失败，请刷新页面重试</p>
+            </div>
+        `;
+        if (server1Content) server1Content.innerHTML = errorMessage;
+        if (server2Content) server2Content.innerHTML = errorMessage;
+    }
 }
 
-// 绘制所有坐标分布图（更新图表配置）
+
+// 绘制所有坐标分布图
 function drawAllCharts() {
     const structures = loadStructures();
     
@@ -887,10 +907,6 @@ function showLargeChart(server, structureId) {
                         stepSize: Math.ceil(rangeWithMargin / 5)
                     },
                     grid: {
-                        color: 'rgba(0, 0, 0, 0.05)'
-                    },
-                    // 添加原点参考线
-                    grid: {
                         color: 'rgba(0, 0, 0, 0.05)',
                         zeroLineColor: 'rgba(0, 0, 0, 0.2)',
                         zeroLineWidth: 1.5
@@ -968,7 +984,6 @@ function hideLargeChart() {
     document.getElementById('chartModal').classList.remove('flex');
     document.body.style.overflow = ''; // 恢复背景滚动
 }
-
 
 // 添加坐标
 function addCoordinate(server, structureId) {
@@ -1148,202 +1163,537 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// 绑定事件
-function bindEvents() {
-// 服务器切换
-document.getElementById('serverSelector').addEventListener('change', function() {
-    switchServer(this.value);
-});
+// 3D坐标可视化相关变量和函数
+let scene, camera, renderer, controls;
+let points = [];
+let labels = [];
+let axesHelper;
+let showAxes = true;
+let showLabels = true;
+let pointIdCounter = 1;
 
-// 添加结构表单提交
-document.getElementById('addStructureForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+// 初始化3D场景
+function init3DScene() {
+    // 创建场景
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf8fafc);
+
+    // 创建相机
+    const container = document.getElementById('canvas-container');
+    camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 50000);
+    camera.position.z = 20000;
+    camera.position.y = 10000;
+    camera.lookAt(0, 0, 0);
+
+    // 创建渲染器
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
+
+    // 创建控制器
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.1;
+
+    // 创建坐标轴辅助线
+    axesHelper = new THREE.AxesHelper(10000);
+    scene.add(axesHelper);
+
+    // 处理窗口大小变化
+    window.addEventListener('resize', onWindowResize);
+
+    // 启动动画循环
+    animate3D();
+}
+
+//
+// 全局变量存储当前筛选条件
+let currentFilter = 'all';
+
+// 初始化结构筛选器
+function initStructureFilter() {
+    const filterSelect = document.getElementById('structure-filter');
+    if (!filterSelect) return;
     
-    const nameInput = document.getElementById('structureName');
-    const typeInput = document.getElementById('structureType');
-    const descInput = document.getElementById('structureDescription');
-    const imageInput = document.getElementById('structureImage');
-    const iconInput = document.getElementById('structureIcon');
+    // 获取所有结构并添加到筛选器
+    const structures = loadStructures();
+    const structureNames = [...new Set(structures.map(s => s.name))]; // 去重
     
-    // 验证输入
-    if (!nameInput.value || !typeInput.value || !descInput.value || !imageInput.value || !iconInput.value) {
-        showNotification('请填写完整的结构信息', 'error');
+    // 清空现有选项（保留"所有结构"）
+    while (filterSelect.options.length > 1) {
+        filterSelect.remove(1);
+    }
+    
+    // 添加结构选项
+    structureNames.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        option.textContent = name;
+        filterSelect.appendChild(option);
+    });
+    
+    // 设置当前筛选条件
+    filterSelect.value = currentFilter;
+    
+    // 添加筛选事件监听
+    filterSelect.addEventListener('change', function() {
+        currentFilter = this.value;
+        update3DCoordinates(); // 筛选变化时重新渲染3D坐标
+    });
+}
+
+// 修改update3DCoordinates函数以支持筛选
+function update3DCoordinates() {
+    // 清除现有点和标签
+    points.forEach(point => scene.remove(point));
+    points = [];
+    
+    labels.forEach(label => {
+        if (label.element && label.element.parentNode) {
+            label.element.parentNode.removeChild(label.element);
+        }
+    });
+    labels = [];
+
+    // 获取3D画布容器
+    const canvasContainer = document.getElementById('canvas-container');
+    if (canvasContainer) {
+        canvasContainer.style.position = 'relative';
+        canvasContainer.style.overflow = 'hidden';
+    } else {
+        console.error('canvas-container元素未找到，无法正确定位标签');
         return;
     }
     
-    // 创建新结构
-    const newStructure = {
-        name: nameInput.value,
-        type: typeInput.value,
-        description: descInput.value,
-        image: imageInput.value,
-        icon: iconInput.value
-    };
-    
-    // 添加结构
-    addStructure(newStructure);
-    
-    // 重置表单
-    this.reset();
-    
-    // 重新渲染结构
-    renderAllStructures();
-    
-    // 显示成功消息
-    showNotification('结构添加成功！', 'success');
-});
-
-// 展开/收起坐标列表按钮
-document.querySelectorAll('.toggle-coordinates-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const server = this.getAttribute('data-server');
-        const structureId = parseInt(this.getAttribute('data-structure'));
-        toggleCoordinates(server, structureId);
-    });
-});
-
-// 显示添加坐标表单按钮
-document.querySelectorAll('.show-add-form-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const server = this.getAttribute('data-server');
-        const structureId = parseInt(this.getAttribute('data-structure'));
-        showAddForm(server, structureId);
-    });
-});
-
-// 取消添加坐标按钮
-document.querySelectorAll('.cancel-add-coordinate-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const form = this.closest('[id$="-add-form"]');
-        const [server, structureId] = form.id.split('-');
-        hideAddForm(server, structureId);
-    });
-});
-
-// 添加坐标按钮
-document.querySelectorAll('.add-coordinate-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const server = this.getAttribute('data-server');
-        const structureId = parseInt(this.getAttribute('data-structure'));
-        addCoordinate(server, structureId);
-    });
-});
-
-// 删除坐标按钮
-document.querySelectorAll('.delete-coordinate-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const server = this.getAttribute('data-server');
-        const structureId = parseInt(this.getAttribute('data-structure'));
-        const coordId = parseInt(this.getAttribute('data-id'));
-        deleteCoordinate(server, structureId, coordId);
-    });
-});
-
-// 删除结构按钮
-document.querySelectorAll('.delete-structure-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const structureId = parseInt(this.getAttribute('data-id'));
-        deleteStructure(structureId);
-    });
-});
-
-// 移动端菜单切换
-document.getElementById ('mobileMenuBtn').addEventListener ('click', function () {
-    const mobileMenu = document.getElementById ('mobileMenu');
-    mobileMenu.classList.toggle ('hidden');
-});
-
-// 坐标分布图点击事件（放大）
-document.querySelectorAll ('.chart-container').forEach (container => {
-    container.addEventListener ('click', function () {
-    const server = this.getAttribute ('data-server');
-    const structureId = parseInt (this.getAttribute ('data-structure'));
-    showLargeChart (server, structureId);
-    });
-});
-
-// 关闭模态框按钮
-document.getElementById ('closeChartModal').addEventListener ('click', hideLargeChart);
-
-// 点击模态框背景关闭
-document.getElementById ('chartModal').addEventListener ('click', function (e) {
-    if (e.target === this) {
-    hideLargeChart ();
-    }
-});
-
-// ESC 键关闭模态框
-document.addEventListener ('keydown', function (e) {
-    if (e.key === 'Escape' && !document.getElementById ('chartModal').classList.contains ('hidden')) {
-    hideLargeChart ();
-    }
-});
-
-// 搜索功能
-document.getElementById('searchInput').addEventListener('input', function() {
-    const searchTerm = this.value.toLowerCase();
-    const structures = document.querySelectorAll('.card-hover');
+    // 获取所有坐标点并应用筛选
+    const structures = loadStructures();
+    const allPoints = [];
     
     structures.forEach(structure => {
-        const name = structure.querySelector('h3').textContent.toLowerCase();
-        const type = structure.querySelector('.rounded-full').textContent.toLowerCase();
-        const description = structure.querySelector('p').textContent.toLowerCase();
-        
-        if (name.includes(searchTerm) || type.includes(searchTerm) || description.includes(searchTerm)) {
-            structure.classList.remove('hidden');
-        } else {
-            structure.classList.add('hidden');
+        // 应用筛选条件：如果不是"所有结构"，只添加匹配的结构
+        if (currentFilter !== 'all' && structure.name !== currentFilter) {
+            return;
         }
+        
+        (structure.coordinates.server1 || []).forEach(coord => {
+            allPoints.push({
+                ...coord,
+                structureName: structure.name,
+                server: 'server1',
+                serverName: '一区'
+            });
+        });
+        
+        (structure.coordinates.server2 || []).forEach(coord => {
+            allPoints.push({
+                ...coord,
+                structureName: structure.name,
+                server: 'server2',
+                serverName: '二区'
+            });
+        });
     });
-});
 
-// 滚动时导航栏样式变化
-window.addEventListener('scroll', function() {
-    const header = document.querySelector('header');
-    if (window.scrollY > 50) {
-        header.classList.add('bg-white/95', 'backdrop-blur-sm', 'py-2');
-        header.classList.remove('py-4');
-    } else {
-        header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'py-2');
-        header.classList.add('py-4');
+    // 创建点列表UI
+    const pointsListEl = document.getElementById('points-list');
+    pointsListEl.innerHTML = '';
+    
+    // 如果没有匹配的点，显示提示信息
+    if (allPoints.length === 0) {
+        pointsListEl.innerHTML = `
+            <div class="text-center py-6 text-gray-500">
+                <i class="fa fa-search fa-2x mb-2"></i>
+                <p>没有找到匹配的坐标点</p>
+                <button id="reset-filter" class="mt-2 text-sm text-primary hover:underline">
+                    重置筛选条件
+                </button>
+            </div>
+        `;
+        
+        // 添加重置筛选条件的事件
+        document.getElementById('reset-filter').addEventListener('click', function() {
+            currentFilter = 'all';
+            document.getElementById('structure-filter').value = 'all';
+            update3DCoordinates();
+        });
+        
+        // 强制更新一次标签位置
+        updateLabels();
+        return;
     }
-});
+    
+    // 创建3D点和列表项
+    allPoints.forEach((point, index) => {
+        // 使用索引+1作为ID
+        const pointId = index + 1;
+        
+        // 创建3D点
+        const geometry = new THREE.SphereGeometry(300, 16, 16);
+        const material = new THREE.MeshBasicMaterial({ 
+            color: point.server === 'server1' ? 0x3B82F6 : 0x10B981,
+            transparent: true,
+            opacity: 0.8
+        });
+        
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(point.x, point.y, point.z);
+        mesh.userData = {
+            id: pointId,
+            structureName: point.structureName,
+            serverName: point.serverName,
+            description: point.description,
+            x: point.x,
+            y: point.y,
+            z: point.z
+        };
+        
+        scene.add(mesh);
+        points.push(mesh);
 
-// 排序功能
-document.getElementById ('sortSelect').addEventListener ('change', function () {
-    const sortType = this.value;
-    const structures = loadStructures ();
-    let sortedStructures = [...structures];
+        // 创建标签 - 只显示服务器和结构名
+        const div = document.createElement('div');
+        // 基础样式中设置默认z-index为10
+        div.className = 'absolute bg-dark/90 text-white text-xs px-2 py-1 rounded-md transition-all duration-200 z-10 whitespace-nowrap cursor-pointer';
+        div.textContent = `${point.serverName}: ${point.structureName}`;
+        div.style.opacity = showLabels ? '1' : '0';
+        
+        // 鼠标悬停效果 - 提高z-index到20，确保显示在其他标签上方
+        div.addEventListener('mouseenter', function() {
+            this.innerHTML = `
+                <div class="font-bold">${point.structureName}</div>
+                <div>${point.serverName}</div>
+                <div class="grid grid-cols-3 gap-1 text-[10px] mt-1">
+                    <div class="flex items-center"><span class="text-red-400 mr-1">X:</span> ${point.x}</div>
+                    <div class="flex items-center"><span class="text-green-400 mr-1">Y:</span> ${point.y}</div>
+                    <div class="flex items-center"><span class="text-blue-400 mr-1">Z:</span> ${point.z}</div>
+                </div>
+            `;
+            this.classList.add('p-2', 'bg-dark', 'z-20'); // 添加更高的z-index
+            this.classList.remove('px-2', 'py-1', 'z-10'); // 移除默认z-index
+        });
+        
+        div.addEventListener('mouseleave', function() {
+            this.textContent = `${point.serverName}: ${point.structureName}`;
+            this.classList.remove('p-2', 'bg-dark', 'z-20'); // 移除高z-index
+            this.classList.add('px-2', 'py-1', 'z-10'); // 恢复默认z-index
+        });
+        
+        canvasContainer.appendChild(div);
+        labels.push({
+            element: div,
+            mesh: mesh
+        });
 
-    switch (sortType) {
-    case 'nameAsc':
-    sortedStructures.sort ((a, b) => a.name.localeCompare (b.name));
-    break;
-    case 'nameDesc':
-    sortedStructures.sort ((a, b) => b.name.localeCompare (a.name));
-    break;
-    case 'type':
-    sortedStructures.sort ((a, b) => a.type.localeCompare (b.type));
-    break;
-    case 'coordinateCount':
-    const currentServer = document.getElementById ('serverSelector').value;
-    sortedStructures.sort ((a, b) => {
-    const aCount = (a.coordinates [currentServer] || []).length;
-    const bCount = (b.coordinates [currentServer] || []).length;
-    return bCount - aCount; // 降序排列
+        // 创建列表项
+        const pointEl = document.createElement('div');
+        pointEl.className = `p-3 border border-slate-200 rounded-lg hover:border-${point.server} transition-colors`;
+        pointEl.innerHTML = `
+            <div class="font-medium flex justify-between items-center">
+                <span>${point.structureName} (${point.serverName})</span>
+                <span class="text-xs px-2 py-1 bg-${point.server}/10 text-${point.server} rounded-full">ID: ${pointId}</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-1">${point.description || '无描述'}</div>
+            <div class="grid grid-cols-3 gap-1 mt-2 text-sm text-slate-600">
+                <div class="flex items-center"><span class="text-red-500 mr-1">X:</span> ${point.x}</div>
+                <div class="flex items-center"><span class="text-green-500 mr-1">Y:</span> ${point.y}</div>
+                <div class="flex items-center"><span class="text-blue-500 mr-1">Z:</span> ${point.z}</div>
+            </div>
+        `;
+        pointsListEl.appendChild(pointEl);
     });
-    break;
-    }
-
-    // 保存排序后的结构
-    saveStructures (sortedStructures);
-    // 重新渲染
-    renderAllStructures ();
-});
-
+    
+    // 强制更新一次标签位置
+    updateLabels();
 }
 
 
+
+
+// 更新标签位置 - 精确计算坐标
+function updateLabels() {
+    const container = document.getElementById('canvas-container');
+    if (!container) return;
+    
+    // 获取容器的位置和尺寸信息
+    const rect = container.getBoundingClientRect();
+    const containerLeft = rect.left;
+    const containerTop = rect.top;
+    const containerWidth = rect.width;
+    const containerHeight = rect.height;
+    
+    labels.forEach(label => {
+        const element = label.element;
+        const mesh = label.mesh;
+        
+        // 计算3D点在屏幕上的位置
+        const position = new THREE.Vector3();
+        position.setFromMatrixPosition(mesh.matrixWorld);
+        position.project(camera);
+        
+        // 转换为容器内的相对坐标
+        // 计算基于容器的X坐标
+        const x = (position.x * 0.5 + 0.5) * containerWidth;
+        // 计算基于容器的Y坐标
+        const y = (-position.y * 0.5 + 0.5) * containerHeight;
+        
+        // 应用定位，使用transform进行精确控制
+        element.style.left = '0';
+        element.style.top = '0';
+        element.style.transform = `translate(calc(${x}px - 50%), calc(${y}px - 100%))`;
+        
+        // 限制标签在容器可视范围内
+        if (x < 0) {
+            element.style.transform = `translate(0, calc(${y}px - 100%))`;
+        } else if (x > containerWidth) {
+            element.style.transform = `translate(${containerWidth}px, calc(${y}px - 100%))`;
+        }
+        
+        if (y < 0) {
+            element.style.transform = `translate(calc(${x}px - 50%), 0)`;
+        } else if (y > containerHeight) {
+            element.style.transform = `translate(calc(${x}px - 50%), ${containerHeight}px)`;
+        }
+        
+        // 调试信息 - 可以取消注释查看计算过程
+        // console.log(`标签ID: ${mesh.userData.id}, 计算位置: (${x}, ${y}), 容器尺寸: (${containerWidth}, ${containerHeight})`);
+    });
+}
+
+// 同时更新窗口大小变化处理函数
+function onWindowResize() {
+    const container = document.getElementById('canvas-container');
+    if (!container) return;
+    
+    const rect = container.getBoundingClientRect();
+    camera.aspect = rect.width / rect.height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(rect.width, rect.height);
+    
+    // 窗口大小变化时重新计算标签位置
+    updateLabels();
+}
+
+
+// 3D动画循环
+function animate3D() {
+    requestAnimationFrame(animate3D);
+    controls.update();
+    updateLabels();
+    renderer.render(scene, camera);
+}
+
+// 绑定事件
+function bindEvents() {
+    // 服务器切换
+    document.getElementById('serverSelector').addEventListener('change', function() {
+        switchServer(this.value);
+    });
+
+    // 添加结构表单提交
+    document.getElementById('addStructureForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nameInput = document.getElementById('structureName');
+        const typeInput = document.getElementById('structureType');
+        const descInput = document.getElementById('structureDescription');
+        const imageInput = document.getElementById('structureImage');
+        const iconInput = document.getElementById('structureIcon');
+        
+        // 验证输入
+        if (!nameInput.value || !typeInput.value || !descInput.value || !imageInput.value || !iconInput.value) {
+            showNotification('请填写完整的结构信息', 'error');
+            return;
+        }
+        
+        // 创建新结构
+        const newStructure = {
+            name: nameInput.value,
+            type: typeInput.value,
+            description: descInput.value,
+            image: imageInput.value,
+            icon: iconInput.value
+        };
+        
+        // 添加结构
+        addStructure(newStructure);
+        
+        // 重置表单
+        this.reset();
+        
+        // 重新渲染结构
+        renderAllStructures();
+        
+        // 显示成功消息
+        showNotification('结构添加成功！', 'success');
+    });
+
+    // 展开/收起坐标列表按钮
+    document.querySelectorAll('.toggle-coordinates-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const server = this.getAttribute('data-server');
+            const structureId = parseInt(this.getAttribute('data-structure'));
+            toggleCoordinates(server, structureId);
+        });
+    });
+
+    // 显示添加坐标表单按钮
+    document.querySelectorAll('.show-add-form-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const server = this.getAttribute('data-server');
+            const structureId = parseInt(this.getAttribute('data-structure'));
+            showAddForm(server, structureId);
+        });
+    });
+
+    // 取消添加坐标按钮
+    document.querySelectorAll('.cancel-add-coordinate-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const form = this.closest('[id$="-add-form"]');
+            const [server, structureId] = form.id.split('-');
+            hideAddForm(server, structureId);
+        });
+    });
+
+    // 添加坐标按钮
+    document.querySelectorAll('.add-coordinate-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const server = this.getAttribute('data-server');
+            const structureId = parseInt(this.getAttribute('data-structure'));
+            addCoordinate(server, structureId);
+        });
+    });
+
+    // 删除坐标按钮
+    document.querySelectorAll('.delete-coordinate-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const server = this.getAttribute('data-server');
+            const structureId = parseInt(this.getAttribute('data-structure'));
+            const coordId = parseInt(this.getAttribute('data-id'));
+            deleteCoordinate(server, structureId, coordId);
+        });
+    });
+
+    // 删除结构按钮
+    document.querySelectorAll('.delete-structure-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const structureId = parseInt(this.getAttribute('data-id'));
+            deleteStructure(structureId);
+        });
+    });
+
+    // 移动端菜单切换
+    document.getElementById ('mobileMenuBtn').addEventListener ('click', function () {
+        const mobileMenu = document.getElementById ('mobileMenu');
+        mobileMenu.classList.toggle ('hidden');
+    });
+
+    // 坐标分布图点击事件（放大）
+    document.querySelectorAll ('.chart-container').forEach (container => {
+        container.addEventListener ('click', function () {
+            const server = this.getAttribute ('data-server');
+            const structureId = parseInt (this.getAttribute ('data-structure'));
+            showLargeChart (server, structureId);
+        });
+    });
+
+    // 关闭模态框按钮
+    document.getElementById ('closeChartModal').addEventListener ('click', hideLargeChart);
+
+    // 点击模态框背景关闭
+    document.getElementById ('chartModal').addEventListener ('click', function (e) {
+        if (e.target === this) {
+            hideLargeChart ();
+        }
+    });
+
+    // ESC 键关闭模态框
+    document.addEventListener ('keydown', function (e) {
+        if (e.key === 'Escape' && !document.getElementById ('chartModal').classList.contains ('hidden')) {
+            hideLargeChart ();
+        }
+    });
+
+    // 搜索功能
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const structures = document.querySelectorAll('.card-hover');
+        
+        structures.forEach(structure => {
+            const name = structure.querySelector('h3').textContent.toLowerCase();
+            const type = structure.querySelector('.rounded-full').textContent.toLowerCase();
+            const description = structure.querySelector('p').textContent.toLowerCase();
+            
+            if (name.includes(searchTerm) || type.includes(searchTerm) || description.includes(searchTerm)) {
+                structure.classList.remove('hidden');
+            } else {
+                structure.classList.add('hidden');
+            }
+        });
+    });
+
+    // 滚动时导航栏样式变化
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+            header.classList.add('bg-white/95', 'backdrop-blur-sm', 'py-2');
+            header.classList.remove('py-4');
+        } else {
+            header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'py-2');
+            header.classList.add('py-4');
+        }
+    });
+
+    // 排序功能
+    document.getElementById ('sortSelect').addEventListener ('change', function () {
+        const sortType = this.value;
+        const structures = loadStructures ();
+        let sortedStructures = [...structures];
+
+        switch (sortType) {
+            case 'nameAsc':
+                sortedStructures.sort ((a, b) => a.name.localeCompare (b.name));
+                break;
+            case 'nameDesc':
+                sortedStructures.sort ((a, b) => b.name.localeCompare (a.name));
+                break;
+            case 'type':
+                sortedStructures.sort ((a, b) => a.type.localeCompare (b.type));
+                break;
+            case 'coordinateCount':
+                const currentServer = document.getElementById ('serverSelector').value;
+                sortedStructures.sort ((a, b) => {
+                    const aCount = (a.coordinates [currentServer] || []).length;
+                    const bCount = (b.coordinates [currentServer] || []).length;
+                    return bCount - aCount; // 降序排列
+                });
+                break;
+        }
+
+        // 保存排序后的结构
+        saveStructures (sortedStructures);
+        // 重新渲染
+        renderAllStructures ();
+    });
+
+    // 3D坐标图控制按钮
+    document.getElementById('reset-view').addEventListener('click', () => {
+        camera.position.set(0, 10000, 20000);
+        camera.lookAt(0, 0, 0);
+        controls.reset();
+    });
+
+    document.getElementById('show-axes').addEventListener('click', () => {
+        showAxes = !showAxes;
+        axesHelper.visible = showAxes;
+    });
+
+    document.getElementById('show-labels').addEventListener('click', () => {
+        showLabels = !showLabels;
+        labels.forEach(label => {
+            label.element.style.opacity = showLabels ? '1' : '0';
+        });
+    });
+}
 
 // 初始化Gitalk
 document.addEventListener('DOMContentLoaded', function() {
@@ -1359,36 +1709,151 @@ document.addEventListener('DOMContentLoaded', function() {
 
     gitalk.render('gitalk-container');
 });
-// 调用绑定事件函数
-bindEvents();
-
 
 // 页面加载完成后初始化
+
 document.addEventListener('DOMContentLoaded', function() {
+    // 检查必要的DOM元素是否存在
+    const requiredElements = [
+        'server1Content', 
+        'server2Content', 
+        'searchInput', 
+        'sortSelect',
+        'canvas-container'
+    ];
+    
+    requiredElements.forEach(id => {
+        if (!document.getElementById(id)) {
+            console.warn(`缺少必要的DOM元素: ${id}，部分功能可能无法正常工作`);
+        }
+    });
+
+    // 初始化3D场景
+    init3DScene();
+    
     // 渲染所有结构
     renderAllStructures();
     
     // 默认显示一区内容
     switchServer('server1');
     
-    // 平滑滚动
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+    document.addEventListener('DOMContentLoaded', function() {
+    // 专门针对导航栏中的锚点链接进行事件绑定
+    const navLinks = document.querySelectorAll('header a[href^="#"]');
+    
+    // 为每个导航链接添加事件监听器
+    navLinks.forEach(anchor => {
+        // 先移除可能存在的旧监听器，避免重复绑定
+        const newAnchor = anchor.cloneNode(true);
+        anchor.parentNode.replaceChild(newAnchor, anchor);
+        
+        newAnchor.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             
             const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+            console.log('导航点击:', targetId); // 调试信息
             
-            if (targetElement) {
-                // 关闭移动菜单（如果打开）
-                document.getElementById('mobileMenu').classList.add('hidden');
-                
-                // 滚动到目标位置
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+            // 确保目标ID有效
+            if (targetId === '#' || !targetId) return;
+            
+            // 查找目标元素
+            const targetElement = document.querySelector(targetId);
+            if (!targetElement) {
+                console.error(`未找到目标元素: ${targetId}`);
+                showNotification(`无法找到目标区域: ${targetId}`, 'error');
+                return;
             }
-        });
+            
+            // 关闭移动菜单（如果打开）
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+            
+            // 计算滚动目标位置
+            const header = document.querySelector('header');
+            if (!header) {
+                console.error('未找到header元素');
+                return;
+            }
+            
+            const headerHeight = header.offsetHeight;
+            const targetRect = targetElement.getBoundingClientRect();
+            const targetPosition = window.pageYOffset + targetRect.top - headerHeight;
+            
+            console.log('滚动目标位置:', targetPosition); // 调试信息
+            
+            // 平滑滚动实现
+            const scrollToTarget = () => {
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 800; // 滚动持续时间
+                let startTime = null;
+                
+                const animation = currentTime => {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    // 使用缓动函数使滚动更自然
+                    const easeProgress = progress < 0.5 
+                        ? 4 * progress * progress * progress 
+                        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                    
+                    window.scrollTo(0, startPosition + distance * easeProgress);
+                    
+                    if (timeElapsed < duration) {
+                        requestAnimationFrame(animation);
+                    } else {
+                        // 滚动完成后
+                        window.scrollTo(0, targetPosition);
+                        
+                        // 对于3D坐标区域，额外处理确保视图正确
+                        if (targetId === '#3d-coordinates') {
+                            console.log('滚动到3D坐标区域完成'); // 调试信息
+                            
+                            // 确保3D场景已初始化
+                            if (typeof scene === 'undefined' || !camera || !controls) {
+                                console.error('3D场景尚未初始化');
+                                return;
+                            }
+                            
+                            // 重置3D视图，确保用户看到完整场景
+                            camera.position.set(0, 10000, 20000);
+                            camera.lookAt(0, 0, 0);
+                            controls.reset();
+                            
+                            // 触发窗口大小调整，确保3D视图正确渲染
+                            setTimeout(() => {
+                                window.dispatchEvent(new Event('resize'));
+                            }, 100);
+                        }
+                    }
+                };
+                
+                requestAnimationFrame(animation);
+            };
+            
+            // 执行滚动
+            scrollToTarget();
+        }, { capture: true });
     });
+});
+// 初始化结构筛选器
+    initStructureFilter();
+    
+    // 当结构数据变化时（如添加/删除结构），更新筛选器选项
+    // 可以在添加/删除结构的函数中调用此方法
+    const originalAddStructure = addStructure;
+    addStructure = function(structure) {
+        const result = originalAddStructure(structure);
+        initStructureFilter(); // 更新筛选器
+        return result;
+    };
+    
+    const originalDeleteStructure = deleteStructure;
+    deleteStructure = function(structureId) {
+        originalDeleteStructure(structureId);
+        initStructureFilter(); // 更新筛选器
+    };
 });
