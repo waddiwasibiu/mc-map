@@ -184,7 +184,10 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
-            { id: 1, x: -1575, y: 192, z: -9641, description: "-靶场-女巫" },
+            { id: 1, x: -1575, y: 192, z: -9641, description: "-靶场-女巫1幻术" },
+            { id: 2, x: 2434, y: 192, z: -694, description: "3靶场-女巫" },
+            { id: 3, x: 5111, y: 192, z: -4917, description: "-靶场-女巫" },
+            { id: 4, x: 7991, y: 192, z: -4862, description: "4靶场1女巫" },
 
 
         ],
