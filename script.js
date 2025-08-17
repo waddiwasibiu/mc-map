@@ -192,6 +192,8 @@ const defaultStructures = [
             { id: 2, x: 2434, y: 192, z: -694, description: "3靶场-女巫" },
             { id: 3, x: 5111, y: 192, z: -4917, description: "-靶场-女巫" },
             { id: 4, x: 7991, y: 192, z: -4862, description: "4靶场1女巫" },
+            { id: 5, x: -9729, y: 192, z: -1078, description: "-靶场-女巫" },
+            { id: 6, x: -8717, y: 192, z: 462, description: "-靶场-女巫" },
 
 
         ],
