@@ -447,6 +447,7 @@ const defaultStructures = [
             { id: 1, x: 4220, y: 192, z: -5666, description: "地狱坐标" },
             { id: 2, x: -1813, y: 192, z: 2630, description: "地狱坐标" },
             { id: 3, x: 1646, y: 192, z: 516, description: "地狱坐标" },
+            { id: 4, x: -618, y: 192, z: 9504, description: "地狱坐标" },
         
         ]
     }
@@ -555,7 +556,7 @@ function renderStructureCard(structure, server) {
                 <!-- 坐标分布图 -->
                 <div class="mt-6 mb-6 cursor-pointer chart-container" data-structure="${structure.id}" data-server="${server}">
                     <h4 class="font-medium text-gray-700 mb-3">坐标分布 (X-Z 平面)</h4>
-                    <div class="relative mx-auto h-48 w-[90%] bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+                    <div class="relative h-48 w-full bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
                         ${coordinates.length > 0 ? `
                             <canvas id="${server}-${structure.id}-chart" class="w-full h-full"></canvas>
                         ` : `
@@ -690,7 +691,7 @@ function renderAllStructures() {
     bindEvents();
 }
 
-// 绘制所有坐标分布图
+// 绘制所有坐标分布图（更新图表配置）
 function drawAllCharts() {
     const structures = loadStructures();
     
@@ -708,19 +709,16 @@ function drawAllCharts() {
             const ctx = document.getElementById(`${server}-${structure.id}-chart`);
             if (!ctx) return;
             
-            // 计算坐标轴范围
+            // 计算所有坐标点的X和Z值的最大绝对值
             const allX = coordinates.map(coord => coord.x);
             const allZ = coordinates.map(coord => coord.z);
-            const minX = Math.min(...allX);
-            const maxX = Math.max(...allX);
-            const minZ = Math.min(...allZ);
-            const maxZ = Math.max(...allZ);
+            const maxAbsX = Math.max(...allX.map(x => Math.abs(x)));
+            const maxAbsZ = Math.max(...allZ.map(z => Math.abs(z)));
             
-            // 添加边距
-            const xRange = maxX - minX;
-            const zRange = maxZ - minZ;
-            const xMargin = xRange * 0.1 || 10;
-            const zMargin = zRange * 0.1 || 10;
+            // 确定一个合适的范围，确保X轴和Y轴范围相同，原点在中心
+            const maxRange = Math.max(maxAbsX, maxAbsZ);
+            // 添加10%的边距
+            const rangeWithMargin = maxRange > 0 ? maxRange * 1.1 : 100; // 处理没有坐标的情况
             
             // 准备图表数据
             const data = coordinates.map(coord => ({
@@ -747,32 +745,6 @@ function drawAllCharts() {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            title: {
-                                display: false
-                            },
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.05)'
-                            },
-                            ticks: {
-                                display: false
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: false
-                            },
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.05)'
-                            },
-                            ticks: {
-                                display: false
-                            },
-                            // 添加这行代码：反转Y轴（Z坐标）方向
-                            reverse: true
-                        }
-                    },
                     plugins: {
                         legend: {
                             display: false
@@ -787,6 +759,46 @@ function drawAllCharts() {
                                     ];
                                 }
                             }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: false
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            // 设置X轴范围，原点在中心
+                            min: -rangeWithMargin,
+                            max: rangeWithMargin,
+                            ticks: {
+                                // 添加回调函数确保只显示整数
+                                callback: function(value) {
+                                    return Math.round(value);
+                                },
+                                stepSize: Math.ceil(rangeWithMargin / 5)
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: false
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            // 设置Y轴范围，原点在中心
+                            min: -rangeWithMargin,
+                            max: rangeWithMargin,
+                            ticks: {
+                                // 添加回调函数确保只显示整数
+                                callback: function(value) {
+                                    return Math.round(value);
+                                },
+                                stepSize: Math.ceil(rangeWithMargin / 5)
+                            },
+                            // 反转Y轴（Z坐标）方向
+                            reverse: true
                         }
                     },
                     animation: {
@@ -819,19 +831,16 @@ function showLargeChart(server, structureId) {
         window.modalChartInstance.destroy();
     }
 
-    // 计算坐标轴范围
+    // 计算所有坐标点的X和Z值的最大绝对值
     const allX = coordinates.map(coord => coord.x);
     const allZ = coordinates.map(coord => coord.z);
-    const minX = Math.min(...allX);
-    const maxX = Math.max(...allX);
-    const minZ = Math.min(...allZ);
-    const maxZ = Math.max(...allZ);
-
-    // 添加边距
-    const xRange = maxX - minX;
-    const zRange = maxZ - minZ;
-    const xMargin = xRange * 0.1 || 10;
-    const zMargin = zRange * 0.1 || 10;
+    const maxAbsX = Math.max(...allX.map(x => Math.abs(x)));
+    const maxAbsZ = Math.max(...allZ.map(z => Math.abs(z)));
+    
+    // 确定一个合适的范围，确保X轴和Y轴范围相同，原点在中心
+    const maxRange = Math.max(maxAbsX, maxAbsZ);
+    // 添加10%的边距
+    const rangeWithMargin = maxRange * 1.1;
 
     // 准备图表数据
     const data = coordinates.map(coord => ({
@@ -868,15 +877,23 @@ function showLargeChart(server, structureId) {
                             size: 14
                         }
                     },
-                    min: minX - xMargin,
-                    max: maxX + xMargin,
+                    // 设置X轴范围，原点在中心
+                    min: -rangeWithMargin,
+                    max: rangeWithMargin,
                     ticks: {
                         font: {
                             size: 12
-                        }
+                        },
+                        stepSize: Math.ceil(rangeWithMargin / 5)
                     },
                     grid: {
                         color: 'rgba(0, 0, 0, 0.05)'
+                    },
+                    // 添加原点参考线
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.05)',
+                        zeroLineColor: 'rgba(0, 0, 0, 0.2)',
+                        zeroLineWidth: 1.5
                     }
                 },
                 y: {
@@ -887,17 +904,21 @@ function showLargeChart(server, structureId) {
                             size: 14
                         }
                     },
-                    min: minZ - zMargin,
-                    max: maxZ + zMargin,
+                    // 设置Y轴范围，原点在中心
+                    min: -rangeWithMargin,
+                    max: rangeWithMargin,
                     ticks: {
                         font: {
                             size: 12
-                        }
+                        },
+                        stepSize: Math.ceil(rangeWithMargin / 5)
                     },
                     grid: {
-                        color: 'rgba(0, 0, 0, 0.05)'
+                        color: 'rgba(0, 0, 0, 0.05)',
+                        zeroLineColor: 'rgba(0, 0, 0, 0.2)',
+                        zeroLineWidth: 1.5
                     },
-                    // 添加这行代码：反转Y轴（Z坐标）方向
+                    // 反转Y轴（Z坐标）方向
                     reverse: true
                 }
             },
@@ -930,7 +951,8 @@ function showLargeChart(server, structureId) {
             animation: {
                 duration: 500,
                 easing: 'easeOutQuart'
-            }
+            },
+            maintainAspectRatio: true // 保持宽高比以确保比例尺一致
         }
     });
 
