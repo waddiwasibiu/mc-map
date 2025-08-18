@@ -206,6 +206,7 @@ const defaultStructures = [
             { id: 4, x: 7991, y: 192, z: -4862, description: "4靶场1女巫" },
             { id: 5, x: -9729, y: 192, z: -1078, description: "-靶场-女巫" },
             { id: 6, x: -8717, y: 192, z: 462, description: "-靶场-女巫" },
+            { id: 7, x: 9015, y: 192, z: 8560, description: "2靶场0女巫" },
 
 
         ],
@@ -389,6 +390,7 @@ const defaultStructures = [
             { id: 3, x: -1222, y: 192, z: -1927, description: "地狱坐标" },
             { id: 4, x: -3017, y: 192, z: -9285, description: "地狱坐标" },
             { id: 5, x: -2949, y: 192, z: -9422, description: "地狱坐标" },
+            { id: 6, x: 9799, y: 192, z: 7850, description: "地狱坐标" },
 
         ],
         server2: [
@@ -423,6 +425,7 @@ const defaultStructures = [
             { id: 14, x: -3586, y: 192, z: -4393, description: "地狱坐标 铁锤边上" },
             { id: 15, x: 1218, y: 192, z: 807, description: "地狱坐标" },
             { id: 16, x: 2411, y: 192, z: -1197, description: "地狱坐标" },
+            { id: 17, x: 7599, y: 192, z: 5613, description: "地狱坐标" },
             
 
         ],
