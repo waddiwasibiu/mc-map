@@ -336,6 +336,7 @@ const defaultStructures = [
             { id: 7, x: -1097, y: 192, z: -1755, description: "五级试炼 地狱坐标 地狱离第8个200m" },
             { id: 8, x: -1156, y: 192, z: -1889, description: "五级试炼 地狱坐标" },
             { id: 9, x: 22, y: 192, z: -8477, description: "五级试炼 地狱坐标" },
+            { id: 10, x: 728, y: 192, z: -1090, description: "五级试炼 地狱坐标" },
 
 
         ],
@@ -418,6 +419,7 @@ const defaultStructures = [
             { id: 13, x: -3986, y: 192, z: -4390, description: "地狱坐标 铁锤边上" },
             { id: 14, x: -3586, y: 192, z: -4393, description: "地狱坐标 铁锤边上" },
             { id: 15, x: 1218, y: 192, z: 807, description: "地狱坐标" },
+            { id: 16, x: 2411, y: 192, z: -1197, description: "地狱坐标" },
             
 
         ],
@@ -432,7 +434,7 @@ const defaultStructures = [
             { id: 8, x: 407, y: 192, z: -3992, description: "地狱坐标" },
             { id: 9, x: 2818, y: 192, z: -2385, description: "地狱坐标" },
             { id: 10, x: 2808, y: 192, z: -3189, description: "地狱坐标" },
-            { id: 11, x: 2817, y: 192, z: -2385, description: "地狱坐标 ?" },
+            { id: 11, x: 2817, y: 192, z: -2385, description: "地狱坐标" },
             { id: 12, x: 5614, y: 192, z: 1602, description: "地狱坐标" },
             { id: 13, x: 7, y: 192, z: 5191, description: "地狱坐标" },
             { id: 14, x: -406, y: 192, z: -6019, description: "地狱坐标" },
