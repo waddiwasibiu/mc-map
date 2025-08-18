@@ -126,6 +126,7 @@ const defaultStructures = [
             { id: 21, x: 6018, y: 192, z: -4880, description: "地狱坐标" },
             { id: 22, x: -3341, y: 192, z: -4286, description: "地狱坐标 铁锤边上" },
             { id: 23, x: -3794, y: 192, z: -5495, description: "地狱坐标 铁锤边上" },
+            { id: 24, x: 1377, y: 192, z: 877, description: "地狱坐标" },
 
 
         ],
@@ -171,6 +172,7 @@ const defaultStructures = [
             { id: 19, x: 3939, y: 192, z: -3110, description: "地狱坐标" },
             { id: 20, x: -3228, y: 192, z: -4407, description: "地狱坐标 铁锤边上" },
             { id: 21, x: -2866, y: 192, z: -4785, description: "地狱坐标 铁锤边上" },
+            
             
 
             ],
@@ -414,6 +416,7 @@ const defaultStructures = [
             { id: 12, x: 5208, y: 192, z: -3986, description: "地狱坐标" },
             { id: 13, x: -3986, y: 192, z: -4390, description: "地狱坐标 铁锤边上" },
             { id: 14, x: -3586, y: 192, z: -4393, description: "地狱坐标 铁锤边上" },
+            { id: 15, x: 1218, y: 192, z: 807, description: "地狱坐标" },
             
 
         ],
@@ -429,16 +432,15 @@ const defaultStructures = [
             { id: 9, x: 2818, y: 192, z: -2385, description: "地狱坐标" },
             { id: 10, x: 2808, y: 192, z: -3189, description: "地狱坐标" },
             { id: 11, x: 2817, y: 192, z: -2385, description: "地狱坐标" },
-            { id: 12, x: 2806, y: 192, z: -3189, description: "地狱坐标" },
-            { id: 13, x: 5614, y: 192, z: 1602, description: "地狱坐标" },
-            { id: 14, x: 7, y: 192, z: 5191, description: "地狱坐标" },
-            { id: 15, x: -406, y: 192, z: -6019, description: "地狱坐标" },
-            { id: 16, x: 7, y: 192, z: 3217, description: "地狱坐标" },
-            { id: 17, x: 3602, y: 192, z: -382, description: "地狱坐标" },
-            { id: 18, x: 4404, y: 192, z: -395, description: "地狱坐标" },
-            { id: 19, x: -2400, y: 192, z: 4405, description: "地狱坐标" },
-            { id: 20, x: -387, y: 192, z: -7598, description: "地狱坐标" },
-            { id: 21, x: -1587, y: 192, z: 7609, description: "地狱坐标" },
+            { id: 12, x: 5614, y: 192, z: 1602, description: "地狱坐标" },
+            { id: 13, x: 7, y: 192, z: 5191, description: "地狱坐标" },
+            { id: 14, x: -406, y: 192, z: -6019, description: "地狱坐标" },
+            { id: 15, x: 7, y: 192, z: 3217, description: "地狱坐标" },
+            { id: 16, x: 3602, y: 192, z: -382, description: "地狱坐标" },
+            { id: 17, x: 4404, y: 192, z: -395, description: "地狱坐标" },
+            { id: 18, x: -2400, y: 192, z: 4405, description: "地狱坐标" },
+            { id: 19, x: -387, y: 192, z: -7598, description: "地狱坐标" },
+            { id: 20, x: -1587, y: 192, z: 7609, description: "地狱坐标" },
         
         ]
     }
@@ -486,6 +488,7 @@ const defaultStructures = [
             { id: 1, x: 4324, y: 192, z: -8965, description: "地狱坐标" },
             { id: 2, x: 9425, y: 192, z: 8594, description: "地狱坐标" },
             { id: 3, x: 8891, y: 192, z: 9624, description: "地狱坐标" },
+            { id: 4, x: 69, y: 192, z: 2137, description: "地狱坐标" },
         
         ]
     }
