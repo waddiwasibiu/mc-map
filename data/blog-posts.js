@@ -4,7 +4,7 @@ const blogPosts = [
         id: 1,
         title: "桃花源冰球场",
         content: "十周目",
-        fullContent: `桃花源冰球场是我们村的一个特色建筑，为村民们提供了冬季娱乐的好去处。冰球场周围设有观众席和休息区，是社区活动的重要场所。`,
+        fullContent: `桃花源冰球场`,
         author: "桃花源",
         date: "2025-07-27",
         category: "合影留念",
@@ -14,7 +14,7 @@ const blogPosts = [
         id: 2,
         title: "逐空欧式建筑",
         content: "十周目",
-        fullContent: `逐空欧式建筑群是我们村的标志性景观之一，融合了古典与现代的设计元素，展示了村民们精湛的建筑技艺。`,
+        fullContent: `逐空欧式建筑群`,
         author: "逐空之域",
         date: "2025-07-27",
         category: "合影留念",
@@ -24,7 +24,7 @@ const blogPosts = [
         id: 3,
         title: "柚子社麦田",
         content: "十周目",
-        fullContent: `柚子社的麦田是我们村的主要粮食产地之一，采用了自动化灌溉系统，每年都能收获丰富的小麦。`,
+        fullContent: `柚子社的麦田`,
         author: "柚子社",
         date: "2025-03-29",
         category: "合影留念",
@@ -34,7 +34,7 @@ const blogPosts = [
         id: 4,
         title: "菲亚梅塔生日",
         content: "十周目",
-        fullContent: `为庆祝菲亚梅塔的生日，村民们举办了一场盛大的派对，大家一起分享美食、唱歌跳舞，度过了一个愉快的夜晚。`,
+        fullContent: `Fiametta0403`,
         author: "罗德岛",
         date: "2025-03-24",
         category: "合影留念",
@@ -44,7 +44,7 @@ const blogPosts = [
         id: 5,
         title: "逐空主岛樱花树",
         content: "十周目",
-        fullContent: `逐空主岛的樱花树是村里的一大景观，每到春天，粉色的樱花盛开，吸引了许多村民前来观赏和拍照。`,
+        fullContent: `逐空主岛的樱花树`,
         author: "逐空之域",
         date: "2025-04-03",
         category: "合影留念",
@@ -55,16 +55,10 @@ const blogPosts = [
         title: "灵冻的盔甲架",
         content: "十周目",
         fullContent: `
-            <h3>灵冻的盔甲架收藏展示</h3>
-            <p>灵冻收集了各种稀有的盔甲，并用精心制作的盔甲架展示出来。这些盔甲不仅具有实用价值，还具有很高的观赏价值。</p>
-            <p>收藏包括：</p>
-            <ul>
-                <li>全套钻石盔甲（附魔）</li>
-                <li>下界合金盔甲</li>
-                <li>各种生物头颅</li>
-                <li>特殊效果的 Elytra（鞘翅）</li>
-            </ul>
-            <p>参观的村民可以学到很多关于盔甲制作和附魔的知识。</p>
+            <h3>灵冻的盔甲架展示</h3>
+            <p>Fiametta0403</p>
+            <p>KKNM231</p>
+            <p>waddiwasibiu</p>
         `,
         author: "罗德岛",
         date: "2025-04-08",
