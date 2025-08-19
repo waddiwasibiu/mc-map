@@ -65,4 +65,14 @@ const blogPosts = [
         category: "合影留念",
         image: 106,
     },
+    {
+        id: 7,
+        title: "逐空主城拼好人",
+        content: "十周目",
+        fullContent: `盔甲架`,
+        author: "逐空之域",
+        date: "2025-06-01",
+        category: "合影留念",
+        image: 107,
+    },
 ];
