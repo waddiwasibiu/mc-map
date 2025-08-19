@@ -34,7 +34,6 @@
     </script>
     
     <style type="text/tailwindcss">
-
         #canvas-container { position: relative !important; }
         
         @layer utilities {
@@ -79,6 +78,25 @@
             .shadow-soft {
                 box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
             }
+            .blog-post-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                cursor: pointer;
+            }
+            .blog-post-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            .post-detail-content {
+                line-height: 1.8;
+            }
+            .post-detail-content p {
+                margin-bottom: 1rem;
+            }
+            .post-detail-content h3 {
+                font-size: 1.25rem;
+                font-weight: 600;
+                margin: 1.5rem 0 1rem;
+            }
         }
     </style>
 </head>
@@ -93,11 +111,12 @@
                 </div>
                 
                 <nav class="hidden md:flex space-x-6">
-                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors">首页</a>
-                    <a href="#structures" class="text-gray-700 hover:text-primary transition-colors">结构列表</a>
-                    <a href="#3d-coordinates" class="text-gray-700 hover:text-primary transition-colors">坐标立体图</a>
-                    <a href="#about" class="text-gray-700 hover:text-primary transition-colors">关于我们</a>
-                    <a href="#comments" class="text-gray-700 hover:text-primary transition-colors">评论区</a>
+                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors main-nav-link">首页</a>
+                    <a href="#structures" class="text-gray-700 hover:text-primary transition-colors main-nav-link">结构列表</a>
+                    <a href="#3d-coordinates" class="text-gray-700 hover:text-primary transition-colors main-nav-link">坐标立体图</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary transition-colors main-nav-link">关于我们</a>
+                    <a href="#comments" class="text-gray-700 hover:text-primary transition-colors main-nav-link">评论区</a>
+                    <a href="#blog" class="text-gray-700 hover:text-primary transition-colors blog-nav-link">帖子</a>
                 </nav>
                 
                 <div class="flex items-center space-x-4">
@@ -114,17 +133,18 @@
             
             <!-- 移动端菜单 -->
             <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
-                <a href="#home" class="block py-2 text-gray-700 hover:text-primary transition-colors">首页</a>
-                <a href="#structures" class="block py-2 text-gray-700 hover:text-primary transition-colors">结构列表</a>
-                <a href="#3d-coordinates" class="block py-2 text-gray-700 hover:text-primary transition-colors">坐标立体图</a>
-                <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition-colors">关于我们</a>
-                <a href="#comments" class="block py-2 text-gray-700 hover:text-primary transition-colors">评论区</a>
+                <a href="#home" class="block py-2 text-gray-700 hover:text-primary transition-colors main-nav-link">首页</a>
+                <a href="#structures" class="block py-2 text-gray-700 hover:text-primary transition-colors main-nav-link">结构列表</a>
+                <a href="#3d-coordinates" class="block py-2 text-gray-700 hover:text-primary transition-colors main-nav-link">坐标立体图</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition-colors main-nav-link">关于我们</a>
+                <a href="#comments" class="block py-2 text-gray-700 hover:text-primary transition-colors main-nav-link">评论区</a>
+                <a href="#blog" class="block py-2 text-gray-700 hover:text-primary transition-colors blog-nav-link">帖子</a>
             </div>
         </div>
     </header>
 
     <!-- 主内容区 -->
-    <main class="container mx-auto px-4 pt-24 pb-16">
+    <main id="main-content" class="container mx-auto px-4 pt-24 pb-16">
         <!-- 欢迎部分 -->
         <section id="home" class="mb-12">
             <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 shadow-lg">
@@ -142,7 +162,7 @@
                         </div>
                     </div>
                     <div class="md:w-1/2 flex justify-center">
-                        <div class="structure-image w-full h-64 rounded-xl" style="background-image: url('1.png')"></div>
+                        <div class="structure-image w-full h-64 rounded-xl" style="background-image: url('images/structures/1.png')"></div>
                     </div>
                 </div>
             </div>
@@ -297,6 +317,46 @@
         </section>
     </main>
 
+    <!-- 博客页面 -->
+    <section id="blog-page" class="hidden container mx-auto px-4 pt-24 pb-16">
+        <div class="mb-12 text-center">
+            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">Baka 村帖子</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">这里是玩家们分享的各种帖子，包括游戏心得、攻略和合影。</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blog-posts-container">
+            <!-- 帖子内容将通过JavaScript动态生成 -->
+        </div>
+    </section>
+
+    <!-- 帖子详情模态框 -->
+    <div id="postDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center chart-modal-backdrop">
+        <div class="bg-white rounded-xl shadow-2xl p-6 chart-modal-content max-w-4xl w-95">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-dark" id="postDetailTitle">帖子详情</h3>
+                <button id="closePostDetailModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="relative max-h-[80vh] overflow-y-auto">
+                <!-- 帖子图片 -->
+                <div id="postDetailImage" class="w-full h-64 mb-6 rounded-lg structure-image" style="background-image: url('images/posts/${post.image}.png')"></div>
+                
+                <!-- 帖子元数据 -->
+                <div class="flex flex-wrap justify-between items-center mb-6 text-sm text-gray-500">
+                    <div class="flex items-center gap-4">
+                        <span><i class="fa fa-user mr-1"></i> <span id="postDetailAuthor"></span></span>
+                        <span><i class="fa fa-calendar mr-1"></i> <span id="postDetailDate"></span></span>
+                    </div>
+                    <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs" id="postDetailCategory"></span>
+                </div>
+                
+                <!-- 帖子内容 -->
+                <div id="postDetailContent" class="post-detail-content text-gray-700"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- 关于我们 -->
     <section id="about" class="bg-white py-12">
         <div class="container mx-auto px-4">
@@ -375,7 +435,11 @@
     </footer>
 
     <!-- 引入外部 JavaScript 文件 -->
-    <script src="script.js"></script>
+    <script src="data/structures.js"></script>
+    <script src="data/blog-posts.js"></script>
+    <script src="js/coordinates.js"></script>
+    <script src="js/blog.js"></script>
+    <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 </body>
 </html>
