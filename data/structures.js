@@ -68,6 +68,8 @@ const defaultStructures = [
             { id: 12, x: -790, y: 192, z: -3079, description: "地狱坐标" },
             { id: 13, x: -790, y: 192, z: -8561, description: "地狱坐标" },
             { id: 14, x: -1564, y: 192, z: 7727, description: "地狱坐标" },
+            { id: 15, x: -5311, y: 192, z: -9696, description: "地狱坐标" },
+            { id: 16, x: -5329, y: 192, z: -4435, description: "地狱坐标" },
         ]
     }
 },
@@ -221,6 +223,7 @@ const defaultStructures = [
             { id: 3, x: -4691, y: 192, z: 3531, description: "0靶场3女巫" },
             { id: 4, x: 4125, y: 192, z: -8897, description: "4靶场0女巫" },
             { id: 5, x: -2581, y: 192, z: 6776, description: "2靶场0女巫" },
+            { id: 6, x: -5164, y: 192, z: -9715, description: "2靶场2女巫" },
         ]
     }
 },
@@ -357,6 +360,9 @@ const defaultStructures = [
             { id: 5, x: -9990, y: 192, z: 3313, description: "三级试炼 地狱坐标" },
             { id: 6, x: -1370, y: 192, z: 7512, description: "五级试炼 地狱坐标" },
             { id: 7, x: -2195, y: 192, z: 3100, description: "五级试炼 地狱坐标" },
+            { id: 8, x: -4996, y: 192, z: 5136, description: "五级试炼 地狱坐标" },
+            { id: 9, x: -5100, y: 192, z: -5777, description: "五级试炼 地狱坐标" },
+            { id: 10, x: -4957, y: 192, z: -5770, description: "五级试炼 地狱坐标" },
         
         ]
     }
@@ -400,7 +406,7 @@ const defaultStructures = [
 
         ],
         server2: [
-            { id: 1, x: 0, y: 192, z: 0, description: "地狱坐标" },
+            { id: 1, x: -5819, y: 192, z: 1737, description: "地狱坐标" },
         
         ]
     }
@@ -457,6 +463,9 @@ const defaultStructures = [
             { id: 19, x: -387, y: 192, z: -7598, description: "地狱坐标" },
             { id: 20, x: -1587, y: 192, z: 7609, description: "地狱坐标" },
             { id: 21, x: -981, y: 192, z: 2818, description: "地狱坐标" },
+            { id: 22, x: -5184, y: 192, z: -3586, description: "地狱坐标" },
+            { id: 23, x: -5197, y: 192, z: -6790, description: "地狱坐标 地狱离第24个400m" },
+            { id: 24, x: -5184, y: 192, z: -7184, description: "地狱坐标" },
             
         
         ]
