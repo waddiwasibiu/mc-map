@@ -6,9 +6,9 @@
 
 ├── data/
 
-│   ├── structures.js       # 结构数据定义和存储操作
+    ├── structures.js       # 结构数据定义和存储操作
 
-│   └── blog-posts.js       # 博客帖子数据定义
+    └── blog-posts.js       # 博客帖子数据定义
 
 └── js/
 
