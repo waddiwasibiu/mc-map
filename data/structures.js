@@ -527,6 +527,30 @@ const defaultStructures = [
     }
 },
 
+
+
+{
+    id: 16,
+    name: "女巫庄园",
+    type: "遗迹",
+    description: "渡劫诅咒",
+    image: 17,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+
+
+        ],
+        server2: [
+            { id: 1, x: -8590, y: 192, z: -5230, description: "地狱坐标" },
+
+        
+        ]
+    }
+},
+
+
+
 ];
 
 // 保存结构数据到本地存储
