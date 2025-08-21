@@ -72,6 +72,7 @@ const defaultStructures = [
             { id: 14, x: -1564, y: 192, z: 7727, description: "地狱坐标" },
             { id: 15, x: -5311, y: 192, z: -9696, description: "地狱坐标" },
             { id: 16, x: -5329, y: 192, z: -4435, description: "地狱坐标" },
+            { id: 17, x: -4865, y: 192, z: 6369, description: "地狱坐标" },
         ]
     }
 },
@@ -365,6 +366,7 @@ const defaultStructures = [
             { id: 8, x: -4996, y: 192, z: 5136, description: "五级试炼 地狱坐标" },
             { id: 9, x: -5100, y: 192, z: -5777, description: "五级试炼 地狱坐标" },
             { id: 10, x: -4957, y: 192, z: -5770, description: "五级试炼 地狱坐标" },
+            { id: 11, x: -4756, y: 192, z: 6322, description: "五级试炼 地狱坐标" },
         
         ]
     }
