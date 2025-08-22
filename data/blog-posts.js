@@ -104,4 +104,14 @@ const blogPosts = [
         category: "技术攻略",
         image: 109,
     },
+    {
+        id: 10,
+        title: "铜傀儡诞生",
+        content: "十周目",
+        fullContent: `KK和铜傀儡`,
+        author: "KKNM231",
+        date: "2025-07-17",
+        category: "合影留念",
+        image: 110,
+    },
 ];
