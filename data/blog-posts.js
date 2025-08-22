@@ -111,7 +111,7 @@ const blogPosts = [
         fullContent: `KK和铜傀儡`,
         author: "KKNM231",
         date: "2025-07-17",
-        category: "合影留念",
+        category: "新闻记录",
         image: 110,
     },
 ];
