@@ -7,7 +7,7 @@ const blogPosts = [
         fullContent: `粉毛、绿毛、IDK、郡主`,
         author: "毛毛家族",
         date: "2025-08-21",
-        category: "合影留念",
+        category: "新闻记录",
         image: 101,
     },
     {
