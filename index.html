@@ -35,6 +35,23 @@
     
     <style type="text/tailwindcss">
         #canvas-container { position: relative !important; }
+
+        .category-other {
+            background-color: rgba(59, 130, 246, 0.9); /* 蓝色背景 */
+            color: #ffffff; /* 白色文字 */
+        }
+        .category-1 {
+            background-color: rgba(16, 185, 129, 0.9); /* 绿色背景 */
+            color: #ffffff; /* 白色文字 */
+        }
+        .category-2 {
+            background-color: rgba(249, 115, 22, 0.9); /* 橙色背景 */
+            color: #ffffff; /* 白色文字 */
+        }
+        .category-3 {
+            background-color: rgba(107, 114, 128, 0.9); /* 灰色背景 */
+            color: #ffffff; /* 白色文字 */
+        }
         
         @layer utilities {
             .content-auto {
@@ -330,17 +347,17 @@
     </section>
 
     <!-- 帖子详情模态框 -->
-    <div id="postDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center chart-modal-backdrop">
-        <div class="bg-white rounded-xl shadow-2xl p-6 chart-modal-content max-w-4xl w-95">
+    <div id="postDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center chart-modal-backdrop p-4">
+        <div class="bg-white rounded-xl shadow-2xl p-6 chart-modal-content max-w-4xl w-95 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold text-dark" id="postDetailTitle">帖子详情</h3>
                 <button id="closePostDetailModal" class="text-gray-500 hover:text-gray-700">
                     <i class="fa fa-times text-xl"></i>
                 </button>
             </div>
-            <div class="relative max-h-[80vh] overflow-y-auto">
-                <!-- 帖子图片 -->
-                <div id="postDetailImage" class="w-full h-64 mb-6 rounded-lg structure-image" style="background-image: url('images/posts/${post.image}.png')"></div>
+            <div class="relative">
+                <!-- 帖子图片 - 自适应高度并显示完整图片 -->
+                <div id="postDetailImage" class="w-full mb-6 rounded-lg structure-image bg-contain bg-no-repeat bg-center" style="min-height: 200px;"></div>
                 
                 <!-- 帖子元数据 -->
                 <div class="flex flex-wrap justify-between items-center mb-6 text-sm text-gray-500">

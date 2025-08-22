@@ -6,6 +6,13 @@ function renderBlogPosts() {
     container.innerHTML = '';
     
     blogPosts.forEach(post => {
+        // 根据分类选择对应的样式类
+        let categoryClass = 'category-other'; // 默认样式
+        if (post.category === '合影留念') categoryClass = 'category-1';
+        else if (post.category === '技术攻略') categoryClass = 'category-2';
+        else if (post.category === '新闻记录') categoryClass = 'category-3';
+        // 可以继续添加更多分类的判断
+        
         const postCard = `
             <div class="bg-white rounded-xl shadow-md overflow-hidden blog-post-card" data-post-id="${post.id}">
                 <div class="relative h-48">
@@ -13,8 +20,16 @@ function renderBlogPosts() {
                 <div class="structure-image w-full h-full bg-cover bg-center" 
                     style="background-image: url('images/posts/${post.image}.png')">
                     <img src="images/posts/${post.image}.png" class="hidden" onError="this.parentElement.style.backgroundImage='url(images/posts/default-post.png)'">
-                    <div class="absolute top-3 left-3 bg-primary/90 text-white text-xs px-2 py-1 rounded">
+                    
+                    <!-- 分类标签 -->
+                    <!-- 这里使用动态样式类 -->
+                    <div class="absolute top-3 left-3 ${categoryClass} text-xs px-2 py-1 rounded">
                         ${post.category}
+                    </div>
+                    
+                    <!-- 标题显示在图片上 -->
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                        <h3 class="text-white font-bold text-sm md:text-base line-clamp-2">${post.title}</h3>
                     </div>
                 </div>
                 <div class="p-5">
@@ -29,7 +44,7 @@ function renderBlogPosts() {
         `;
         container.innerHTML += postCard;
     });
-
+    
     // 为帖子卡片添加点击事件
     document.querySelectorAll('.blog-post-card').forEach(card => {
         card.addEventListener('click', function() {
@@ -46,7 +61,33 @@ function openPostDetail(postId) {
 
     // 填充详情内容
     document.getElementById('postDetailTitle').textContent = post.title;
-    document.getElementById('postDetailImage').style.backgroundImage = `url(images/posts/${post.image}.png)`;
+    
+    // 修改图片设置方式，确保完整显示
+    const imgContainer = document.getElementById('postDetailImage');
+    imgContainer.style.backgroundImage = `url(images/posts/${post.image}.png)`;
+    
+    // 添加图片加载完成后调整容器高度的逻辑
+    const tempImg = new Image();
+    tempImg.src = `images/posts/${post.image}.png`;
+    tempImg.onload = function() {
+        // 根据图片比例设置容器高度
+        const containerWidth = imgContainer.offsetWidth;
+        const imgRatio = this.height / this.width;
+        imgContainer.style.height = `${containerWidth * imgRatio}px`;
+    };
+    
+    // 错误处理，使用默认图片
+    tempImg.onerror = function() {
+        imgContainer.style.backgroundImage = 'url(images/posts/default-post.png)';
+        const defaultImg = new Image();
+        defaultImg.src = 'images/posts/default-post.png';
+        defaultImg.onload = function() {
+            const containerWidth = imgContainer.offsetWidth;
+            const imgRatio = this.height / this.width;
+            imgContainer.style.height = `${containerWidth * imgRatio}px`;
+        };
+    };
+
     document.getElementById('postDetailAuthor').textContent = post.author;
     document.getElementById('postDetailDate').textContent = post.date;
     document.getElementById('postDetailCategory').textContent = post.category;
