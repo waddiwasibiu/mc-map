@@ -444,6 +444,17 @@ const defaultStructures = [
             { id: 16, x: 2411, y: 192, z: -1197, description: "地狱坐标" },
             { id: 17, x: 7599, y: 192, z: 5613, description: "地狱坐标" },
             { id: 18, x: -9399, y: 192, z: -9988, description: "地狱坐标" },
+            { id: 19, x: -8009, y: 192, z: 5190, description: "地狱坐标" },
+            { id: 20, x: 1614, y: 192, z: 4408, description: "地狱坐标" },
+            { id: 21, x: -3194, y: 192, z: -4003, description: "地狱坐标 铁锤边上" },
+            { id: 22, x: 799, y: 192, z: -2781, description: "地狱坐标" },
+            { id: 23, x: -4383, y: 192, z: 6004, description: "地狱坐标" },
+            { id: 24, x: 1205, y: 192, z: -3197, description: "地狱坐标" },
+            { id: 25, x: 4416, y: 192, z: 2008, description: "地狱坐标" },
+            { id: 26, x: -1189, y: 192, z: -1591, description: "地狱坐标 罗德岛边上"},
+            { id: 27, x: -3188, y: 192, z: -9190, description: "地狱坐标" },
+            { id: 28, x: -6784, y: 192, z: -9193, description: "地狱坐标" },
+            { id: 29, x: -6786, y: 192, z: -8793, description: "地狱坐标" }
             
 
         ],
