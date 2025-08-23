@@ -13,11 +13,11 @@ function renderStructureCard(structure, server) {
     
     return `
         <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-100 mb-6" 
-             data-structure="${structure.id}" data-server="${server}">
+            data-structure="${structure.id}" data-server="${server}">
             <!-- 结构图片展示区 -->
             <div class="relative">
                 <div class="structure-image w-full h-48 bg-cover bg-center transition-transform duration-500 hover:scale-105" 
-                     style="background-image: url('${imageUrl}')">
+                    style="background-image: url('${imageUrl}')">
                     <!-- 图片加载失败处理 -->
                     <img src="${imageUrl}" class="hidden" onError="this.parentElement.style.backgroundImage='url(images/structures/default-structure.png)'">
                 </div>
@@ -45,7 +45,7 @@ function renderStructureCard(structure, server) {
                 
                 <!-- 坐标分布图 -->
                 <div class="mt-6 mb-6 cursor-pointer chart-container border border-gray-200 rounded-lg p-1" 
-                     data-structure="${structure.id}" data-server="${server}">
+                    data-structure="${structure.id}" data-server="${server}">
                     <h4 class="font-medium text-gray-700 mb-3">坐标分布 (X-Z 平面)</h4>
                     <div class="relative h-48 w-full bg-white rounded-lg overflow-hidden shadow-sm">
                         ${coordinates.length > 0 ? `
@@ -60,16 +60,13 @@ function renderStructureCard(structure, server) {
                 
                 <!-- 坐标列表 -->
                 <div id="${server}-${structure.id}-coordinates" 
-                     class="space-y-3 mb-6 max-h-60 overflow-y-auto border border-gray-100 rounded-lg" 
-                     data-expanded="false">
+                    class="space-y-3 mb-6 max-h-60 overflow-y-auto border border-gray-100 rounded-lg" 
+                    data-expanded="false">
                     ${coordinates.length > 0 ? coordinates.map(coord => `
                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-${serverClass}/50 transition-colors">
                             <div class="flex justify-between items-start mb-2">
                                 <div class="font-medium">
                                     #${coord.id} ${coord.description || '无描述'}
-                                </div>
-                                <div class="text-xs text-gray-500">
-                                    <i class="fa fa-user mr-1"></i> 匿名
                                 </div>
                             </div>
                             <div class="flex flex-wrap gap-2 text-sm">
@@ -97,10 +94,6 @@ function renderStructureCard(structure, server) {
                         <span>展开全部</span>
                         <i class="fa fa-chevron-down ml-2"></i>
                     </button>
-                    <button class="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors flex items-center show-add-form-btn" 
-                            data-structure="${structure.id}" data-server="${server}">
-                        <i class="fa fa-plus mr-2"></i> 添加坐标
-                    </button>
                 </div>
             </div>
             
@@ -109,10 +102,6 @@ function renderStructureCard(structure, server) {
                 <span class="text-xs text-gray-500">
                     <i class="fa fa-clock-o mr-1"></i> ${new Date().toLocaleDateString('zh-CN')}
                 </span>
-                <button class="text-red-500 hover:text-red-700 text-sm delete-structure-btn transition-colors" 
-                        data-id="${structure.id}">
-                    <i class="fa fa-trash mr-1"></i> 删除结构
-                </button>
             </div>
         </div>
     `;

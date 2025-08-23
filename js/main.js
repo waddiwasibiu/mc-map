@@ -25,95 +25,12 @@ function bindEvents() {
         switchServer(this.value);
     });
 
-    // 添加结构表单提交
-    document.getElementById('addStructureForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const nameInput = document.getElementById('structureName');
-        const typeInput = document.getElementById('structureType');
-        const descInput = document.getElementById('structureDescription');
-        const imageInput = document.getElementById('structureImage');
-        const iconInput = document.getElementById('structureIcon');
-        
-        // 验证输入
-        if (!nameInput.value || !typeInput.value || !descInput.value || !imageInput.value || !iconInput.value) {
-            showNotification('请填写完整的结构信息', 'error');
-            return;
-        }
-        
-        // 创建新结构
-        const newStructure = {
-            name: nameInput.value,
-            type: typeInput.value,
-            description: descInput.value,
-            image: imageInput.value,
-            icon: iconInput.value
-        };
-        
-        // 添加结构
-        addStructure(newStructure);
-        
-        // 重置表单
-        this.reset();
-        
-        // 重新渲染结构
-        renderAllStructures();
-        
-        // 显示成功消息
-        showNotification('结构添加成功！', 'success');
-    });
-
     // 展开/收起坐标列表按钮
     document.querySelectorAll('.toggle-coordinates-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const server = this.getAttribute('data-server');
             const structureId = parseInt(this.getAttribute('data-structure'));
             toggleCoordinates(server, structureId);
-        });
-    });
-
-    // 显示添加坐标表单按钮
-    document.querySelectorAll('.show-add-form-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const server = this.getAttribute('data-server');
-            const structureId = parseInt(this.getAttribute('data-structure'));
-            showAddForm(server, structureId);
-        });
-    });
-
-    // 取消添加坐标按钮
-    document.querySelectorAll('.cancel-add-coordinate-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const form = this.closest('[id$="-add-form"]');
-            const [server, structureId] = form.id.split('-');
-            hideAddForm(server, structureId);
-        });
-    });
-
-    // 添加坐标按钮
-    document.querySelectorAll('.add-coordinate-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const server = this.getAttribute('data-server');
-            const structureId = parseInt(this.getAttribute('data-structure'));
-            addCoordinate(server, structureId);
-        });
-    });
-
-    // 删除坐标按钮
-    document.querySelectorAll('.delete-coordinate-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const server = this.getAttribute('data-server');
-            const structureId = parseInt(this.getAttribute('data-structure'));
-            const coordId = parseInt(this.getAttribute('data-id'));
-            deleteCoordinate(server, structureId, coordId);
-        });
-    });
-
-    // 删除结构按钮
-    document.querySelectorAll('.delete-structure-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const structureId = parseInt(this.getAttribute('data-id'));
-            deleteStructure(structureId);
         });
     });
 
@@ -274,6 +191,86 @@ function bindEvents() {
         });
     });
 }
+
+// 修改图片轮播功能，自动检测文件夹中的图片
+function initImageSliders() {
+    // 结构图片轮播初始化
+    initFolderSlider(
+        '.feature-card:nth-child(1) .feature-image img', 
+        'images/structures/', 
+        '结构图片'
+    );
+    
+    // 帖子图片轮播初始化
+    initFolderSlider(
+        '.feature-card:nth-child(2) .feature-image img', 
+        'images/posts/', 
+        '帖子图片'
+    );
+}
+
+// 通用文件夹图片轮播初始化函数
+function initFolderSlider(imgSelector, folderPath, altPrefix) {
+    const imgElement = document.querySelector(imgSelector);
+    if (!imgElement) return;
+    
+    let currentImageIndex = 1;
+    let validImageIndices = [];
+    let isDetecting = true;
+    
+    // 检测有效图片
+    function detectImages(index) {
+        const testImg = new Image();
+        testImg.src = `${folderPath}${index}.png`;
+        
+        testImg.onload = function() {
+            // 图片存在，添加到有效列表
+            validImageIndices.push(index);
+            // 继续检测下一张
+            detectImages(index + 1);
+        };
+        
+        testImg.onerror = function() {
+            // 图片不存在，停止检测
+            isDetecting = false;
+            // 如果没有检测到任何图片，使用默认图片
+            if (validImageIndices.length === 0) {
+                validImageIndices.push('default');
+            }
+        };
+    }
+    
+    // 开始检测图片
+    detectImages(1);
+    
+    // 轮播函数
+    function startSlideshow() {
+        if (validImageIndices.length === 0) {
+            // 等待检测完成
+            setTimeout(startSlideshow, 100);
+            return;
+        }
+        
+        // 切换到下一张图片
+        currentImageIndex = (currentImageIndex + 1) % validImageIndices.length;
+        const imageName = validImageIndices[currentImageIndex];
+        
+        // 更新图片
+        imgElement.src = `${folderPath}${imageName}.png`;
+        imgElement.alt = `${altPrefix} ${imageName}`;
+        
+        // 设置下一次切换
+        setTimeout(startSlideshow, 5000); // 5秒切换一次
+    }
+    
+    // 启动轮播
+    startSlideshow();
+}
+
+// 在页面加载完成后初始化轮播
+window.addEventListener('load', initImageSliders);
+
+
 
 // 初始化Gitalk
 document.addEventListener('DOMContentLoaded', function() {

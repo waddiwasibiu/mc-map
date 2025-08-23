@@ -8,7 +8,7 @@ const blogPosts = [
         author: "毛毛家族",
         date: "2025-08-21",
         category: "新闻记录",
-        image: 101,
+        image: 1,
     },
     {
         id: 2,
@@ -18,7 +18,7 @@ const blogPosts = [
         author: "逐空之域",
         date: "2025-07-27",
         category: "合影留念",
-        image: 102,
+        image: 2,
     },
     {
         id: 3,
@@ -28,7 +28,7 @@ const blogPosts = [
         author: "柚子社",
         date: "2025-03-29",
         category: "合影留念",
-        image: 103,
+        image: 3,
     },
     {
         id: 4,
@@ -38,7 +38,7 @@ const blogPosts = [
         author: "罗德岛",
         date: "2025-03-24",
         category: "合影留念",
-        image: 104,
+        image: 4,
     },
     {
         id: 5,
@@ -48,7 +48,7 @@ const blogPosts = [
         author: "逐空之域",
         date: "2025-04-03",
         category: "合影留念",
-        image: 105,
+        image: 5,
     },
     {
         id: 6,
@@ -63,7 +63,7 @@ const blogPosts = [
         author: "罗德岛",
         date: "2025-04-08",
         category: "合影留念",
-        image: 106,
+        image: 6,
     },
     {
         id: 7,
@@ -73,7 +73,7 @@ const blogPosts = [
         author: "逐空之域",
         date: "2025-06-01",
         category: "合影留念",
-        image: 107,
+        image: 7,
     },
     {
         id: 8,
@@ -83,7 +83,7 @@ const blogPosts = [
         author: "桃花源",
         date: "2025-07-27",
         category: "合影留念",
-        image: 108,
+        image: 8,
     },
     {
         id: 9,
@@ -100,9 +100,9 @@ const blogPosts = [
                         <p>7：体型不为1时上述说明仅做参考<p>
                         <p>补充说明，起飞具有的东方向性适用于大部分区域了。少数区域多次起飞失败需要尝试其他方向。例如主城地狱是无法起飞的<p>`,
         author: "菲亚梅塔",
-        date: "2025-08-81",
+        date: "2025-08-08",
         category: "技术攻略",
-        image: 109,
+        image: 9,
     },
     {
         id: 10,
@@ -112,6 +112,6 @@ const blogPosts = [
         author: "KKNM231",
         date: "2025-07-17",
         category: "新闻记录",
-        image: 110,
+        image: 10,
     },
 ];

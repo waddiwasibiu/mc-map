@@ -173,9 +173,7 @@
                             <a href="#structures" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center">
                                 <i class="fa fa-map-marker mr-2"></i> 浏览结构
                             </a>
-                            <a href="#add-structure" class="px-6 py-3 bg-white text-primary border border-primary rounded-lg hover:bg-primary/5 transition-colors flex items-center">
-                                <i class="fa fa-plus mr-2"></i> 添加新结构
-                            </a>
+                            
                         </div>
                     </div>
                     <div class="md:w-1/2 flex justify-center">
@@ -210,63 +208,58 @@
             </div>
         </section>
 
-        <!-- 添加结构部分 -->
-        <section id="add-structure" class="mb-12 bg-white rounded-xl shadow-md p-6">
-            <h2 class="text-2xl font-bold text-dark mb-6">添加新结构</h2>
-            <form id="addStructureForm">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">结构名称</label>
-                        <input type="text" id="structureName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="例如：海底神殿" required>
+        <!-- 功能展示部分 -->
+        <section id="features" class="mb-12 bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-2xl font-bold text-dark mb-6">功能展示</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 结构坐标功能 -->
+                <div class="feature-card bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                    <div class="feature-image h-48 relative overflow-hidden">
+                        <img src="images/structures/2.png" alt="结构坐标" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">结构坐标</h3>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">结构类型</label>
-                        <select id="structureType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" required>
-                            <option value="">选择类型</option>
-                            <option value="遗迹">遗迹</option>
-                            <option value="自然奇观">自然奇观</option>
-                            <option value="村庄">村庄</option>
-                            <option value="要塞">要塞</option>
-                            <option value="其他">其他</option>
-                        </select>
+                    <div class="p-4">
+                        <p class="text-gray-600 text-sm">探索并查看游戏中各种独特结构的精确坐标，包括遗迹、村庄和自然奇观等。</p>
+                        <a href="#structures" class="mt-4 inline-block text-primary hover:text-primary/80 text-sm font-medium">
+                            查看详情 <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
                     </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">结构描述</label>
-                        <textarea id="structureDescription" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="描述这个结构的特征和重要性..." required></textarea>
+                </div>
+
+                <!-- 帖子功能 -->
+                <div class="feature-card bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                    <div class="feature-image h-48 relative overflow-hidden">
+                        <img src="images/blogs/1.png" alt="玩家帖子" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">玩家帖子</h3>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">图片编号</label>
-                        <div class="flex items-center">
-                            <span class="px-4 py-3 bg-gray-100 rounded-l-lg border border-r-0 border-gray-300">img</span>
-                            <input type="number" id="structureImage" min="2" max="20" class="w-full px-4 py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-primary/50 focus:border-primary" placeholder="2-20" required>
-                            <span class="ml-2 text-gray-500">.png</span>
+                    <div class="p-4">
+                        <p class="text-gray-600 text-sm">浏览玩家分享的游戏心得、攻略和精彩瞬间，加入社区讨论。</p>
+                        <a href="#blog" class="mt-4 inline-block text-primary hover:text-primary/80 blog-nav-link font-medium">
+                            
+                            查看详情 <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 预留功能位置 -->
+                <div class="feature-card bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                    <div class="feature-image h-48 relative overflow-hidden bg-gray-200">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fa fa-puzzle-piece text-5xl text-gray-400"></i>
                         </div>
-                        <p class="text-xs text-gray-500 mt-2">输入2-20之间的数字，对应本地图片文件 (如输入"2"对应"2.png")</p>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">更多功能</h3>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">结构图标</label>
-                        <select id="structureIcon" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" required>
-                            <option value="">选择图标</option>
-                            <option value="fa-fort-awesome">堡垒</option>
-                            <option value="fa-tree">丛林</option>
-                            <option value="fa-sun-o">沙漠</option>
-                            <option value="fa-tornado">旋风</option>
-                            <option value="fa-cloud">云朵</option>
-                            <option value="fa-home">村庄</option>
-                            <option value="fa-diamond">宝藏</option>
-                            <option value="fa-ship">沉船</option>
-                        </select>
+                    <div class="p-4">
+                        <p class="text-gray-600 text-sm">更多精彩功能即将上线，敬请期待...</p>
+                        <span class="mt-4 inline-block text-gray-400 text-sm font-medium">
+                            开发中 <i class="fa fa-spinner fa-spin ml-1"></i>
+                        </span>
                     </div>
                 </div>
-                <div class="flex justify-end gap-4">
-                    <button type="reset" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
-                        重置表单
-                    </button>
-                    <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center">
-                        <i class="fa fa-plus mr-2"></i> 添加结构
-                    </button>
-                </div>
-            </form>
+            </div>
         </section>
 
         <!-- 结构列表 -->
