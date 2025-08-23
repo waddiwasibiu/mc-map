@@ -567,4 +567,14 @@ const defaultStructures = [
 
 ];
 
+// 保存结构数据到本地存储
+function saveStructures(structures) {
+    localStorage.setItem('mcStructures', JSON.stringify(structures));
+}
+
+// 加载结构数据
+function loadStructures() {
+    const storedStructures = localStorage.getItem('mcStructures');
+    return storedStructures ? JSON.parse(storedStructures) : defaultStructures;
+}
 
