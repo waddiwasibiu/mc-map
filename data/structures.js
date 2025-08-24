@@ -354,6 +354,7 @@ const defaultStructures = [
             { id: 10, x: 728, y: 192, z: -1090, description: "五级试炼 地狱坐标" },
             { id: 11, x: 3020, y: 192, z: -1053, description: "五级试炼 地狱坐标" },
             { id: 12, x: 3644, y: 192, z: -1090, description: "五级试炼 地狱坐标" },
+            { id: 13, x: 7008, y: 192, z: -7360, description: "五级试炼 地狱坐标 四个不详宝库" },
 
 
         ],
