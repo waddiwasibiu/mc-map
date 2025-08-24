@@ -1,48 +1,123 @@
+// 统一处理所有导航链接点击事件
+function setupNavigation() {
+    // 为所有导航链接添加点击事件
+    document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // 统一阻止默认行为
+            
+            const targetHash = this.getAttribute('href').substring(1); // 获取#后面的部分
+            
+            // 根据目标哈希切换到对应页面
+            if (targetHash === 'blog') {
+                switchToBlogPage();
+            } else {
+                switchToMainPage();
+            }
+            
+            // 更新URL哈希
+            window.location.hash = targetHash;
+        });
+    });
+}
+
+// 页面加载完成后初始化导航
+document.addEventListener('DOMContentLoaded', function() {
+    setupNavigation();
+    
+    // 检查初始URL哈希，决定显示哪个页面
+    if (window.location.hash === '#blog') {
+        switchToBlogPage();
+    } else {
+        switchToMainPage();
+    }
+});
+
 // 渲染博客帖子
+// 修改blog.js中的renderBlogPosts函数，实现带分类标题的分区展示
 function renderBlogPosts() {
     const container = document.getElementById('blog-posts-container');
     if (!container) return;
     
+    // 清空容器并修改为适合全宽分类展示的样式
     container.innerHTML = '';
+    container.className = 'space-y-12'; // 分类之间的间距
     
+    // 定义分类顺序及对应的样式类（与CSS中的bg-category-*对应）
+    const categories = [
+        { name: '技术攻略', class: 'bg-category-2' },
+        { name: '合影留念', class: 'bg-category-1' },
+        { name: '新闻记录', class: 'bg-category-3' }
+    ];
+    
+    // 按分类分组帖子
+    const postsByCategory = {};
     blogPosts.forEach(post => {
-        // 根据分类选择对应的样式类
-        let categoryClass = 'category-other'; // 默认样式
-        if (post.category === '合影留念') categoryClass = 'category-1';
-        else if (post.category === '技术攻略') categoryClass = 'category-2';
-        else if (post.category === '新闻记录') categoryClass = 'category-3';
-        // 可以继续添加更多分类的判断
+        if (!postsByCategory[post.category]) {
+            postsByCategory[post.category] = [];
+        }
+        postsByCategory[post.category].push(post);
+    });
+    
+    // 按指定顺序渲染每个分类
+    categories.forEach(category => {
+        const posts = postsByCategory[category.name] || [];
+        if (posts.length === 0) return;
         
-        const postCard = `
-            <div class="bg-white rounded-xl shadow-md overflow-hidden blog-post-card" data-post-id="${post.id}">
-                <div class="relative h-48">
-                    
-                <div class="structure-image w-full h-full bg-cover bg-center" 
-                    style="background-image: url('images/posts/${post.image}.png')">
-                    <img src="images/posts/${post.image}.png" class="hidden" onError="this.parentElement.style.backgroundImage='url(images/posts/default-post.png)'">
-                    
-                    <!-- 分类标签 -->
-                    <!-- 这里使用动态样式类 -->
-                    <div class="absolute top-3 left-3 ${categoryClass} text-xs px-2 py-1 rounded">
-                        ${post.category}
-                    </div>
-                    
-                    <!-- 标题显示在图片上 -->
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
-                        <h3 class="text-white font-bold text-sm md:text-base line-clamp-2">${post.title}</h3>
+        // 创建分类区域（全宽）
+        const categorySection = document.createElement('div');
+        categorySection.className = 'w-full'; // 宽度为网页宽度
+        
+        // 分类标题（使用对应背景色）
+        const categoryTitle = document.createElement('h2');
+        categoryTitle.className = `text-xl md:text-2xl font-bold text-white px-6 py-3 mb-6 ${category.class}`;
+        categoryTitle.textContent = category.name;
+        categorySection.appendChild(categoryTitle);
+        
+        // 帖子网格容器（保持原有样式）
+        const postsGrid = document.createElement('div');
+        postsGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8';
+        
+        // 添加该分类下的所有帖子（保持原有卡片样式）
+        posts.forEach(post => {
+            // 根据分类选择对应的标签样式
+            let tagClass = 'category-other';
+            if (post.category === '技术攻略') tagClass = 'category-2';
+            else if (post.category === '合影留念') tagClass = 'category-1';
+            else if (post.category === '新闻记录') tagClass = 'category-3';
+            
+            const postCard = `
+                <div class="bg-white rounded-xl shadow-md overflow-hidden blog-post-card" data-post-id="${post.id}">
+                    <div class="relative h-48">
+                        <div class="structure-image w-full h-full bg-cover bg-center" 
+                            style="background-image: url('images/posts/${post.image}.png')">
+                            <img src="images/posts/${post.image}.png" class="hidden" onError="this.parentElement.style.backgroundImage='url(images/posts/default-post.png)'">
+                            
+                            <!-- 分类标签 -->
+                            <div class="absolute top-3 left-3 ${tagClass} text-xs px-2 py-1 rounded">
+                                ${post.category}
+                            </div>
+                            
+                            <!-- 标题显示在图片上 -->
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                                <h3 class="text-white font-bold text-sm md:text-base line-clamp-2">${post.title}</h3>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-dark mb-2">${post.title}</h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">${post.content}</p>
+                            <div class="flex justify-between items-center text-xs text-gray-500">
+                                <span><i class="fa fa-user mr-1"></i> ${post.author}</span>
+                                <span><i class="fa fa-calendar mr-1"></i> ${post.date}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="p-5">
-                    <h3 class="text-xl font-bold text-dark mb-2">${post.title}</h3>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">${post.content}</p>
-                    <div class="flex justify-between items-center text-xs text-gray-500">
-                        <span><i class="fa fa-user mr-1"></i> ${post.author}</span>
-                        <span><i class="fa fa-calendar mr-1"></i> ${post.date}</span>
-                    </div>
-                </div>
-            </div>
-        `;
-        container.innerHTML += postCard;
+            `;
+            postsGrid.innerHTML += postCard;
+        });
+        
+        categorySection.appendChild(postsGrid);
+        container.appendChild(categorySection);
     });
     
     // 为帖子卡片添加点击事件
