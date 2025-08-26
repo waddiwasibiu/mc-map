@@ -310,12 +310,6 @@ async function fetchGaVisitCount() {
     }
 }
 
-// 在页面加载时调用
-document.addEventListener('DOMContentLoaded', function() {
-    // ... 其他初始化代码 ...
-    fetchGaVisitCount(); // 添加这行
-});
-
 
 
 
@@ -379,4 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
         originalDeleteStructure(structureId);
         initStructureFilter(); // 更新筛选器
     };
+
+    fetchGaVisitCount(); 
+
 });
