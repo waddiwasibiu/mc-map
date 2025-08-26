@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+
+        
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baka 村结构坐标库</title>
@@ -121,6 +125,19 @@
             }
         }
     </style>
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2MY9RSPX4Z"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-2MY9RSPX4Z');
+    </script>
+
+
 </head>
 <body class="bg-gray-50 font-inter">
     <!-- 导航栏 -->
@@ -447,6 +464,11 @@
 
     <footer class="bg-white shadow-md py-6">
         <div class="container mx-auto px-4 text-center text-gray-600">
+
+            <!-- 添加访问量显示 -->
+            <p>总访问量: <span id="gaVisitCount" class="font-bold text-primary">加载中...</span></p>
+            <p>总访问次数: <span id="visitCount" class="font-bold text-primary">0</span></p>
+            
             <p>&copy; 2025 Baka 村结构坐标库. 保留所有权利.</p>
         </div>
     </footer>

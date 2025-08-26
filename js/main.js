@@ -272,6 +272,55 @@ window.addEventListener('load', initImageSliders);
 
 
 
+// 获取并显示 Google Analytics 访问量
+async function fetchGaVisitCount() {
+    // 替换为你的 API 密钥和资源 ID
+    const API_KEY = 'ExoWZEAgTWOQ_WsVbTgTNg';
+    const PROPERTY_ID = 'properties/12078580032'; // 格式：properties/123456789
+
+    try {
+        // 调用 GA4 Data API 获取总访问数（30天内）
+        const response = await fetch(
+            `https://analyticsdata.googleapis.com/v1beta/${12078580032}:runReport?key=${ExoWZEAgTWOQ_WsVbTgTNg}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    dateRanges: [{ startDate: '2020-01-01', endDate: 'today' }],
+                    metrics: [{ name: 'sessions' }], 
+                    // 如需统计总用户数，可使用 metrics: [{ name: 'totalUsers' }]
+                }),
+            }
+        );
+
+        const data = await response.json();
+        
+        // 解析并显示数据
+        if (data.rows && data.rows.length > 0) {
+            const visitCount = data.rows[0].metricValues[0].value;
+            document.getElementById('gaVisitCount').textContent = visitCount;
+        } else {
+            document.getElementById('gaVisitCount').textContent = '暂无数据';
+        }
+    } catch (error) {
+        console.error('获取GA数据失败:', error);
+        document.getElementById('gaVisitCount').textContent = '获取失败';
+    }
+}
+
+// 在页面加载时调用
+document.addEventListener('DOMContentLoaded', function() {
+    // ... 其他初始化代码 ...
+    fetchGaVisitCount(); // 添加这行
+});
+
+
+
+
+
+
 // 初始化Gitalk
 document.addEventListener('DOMContentLoaded', function() {
     const gitalk = new Gitalk({
