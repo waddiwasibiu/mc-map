@@ -18,6 +18,45 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
+
+// 添加访问次数统计功能
+function initVisitCounter() {
+    // 从localStorage获取当前计数，默认为0
+    let count = localStorage.getItem('visitCount') || 0;
+    
+    // 每次访问递增计数
+    count = parseInt(count) + 1;
+    
+    // 保存更新后的计数
+    localStorage.setItem('visitCount', count);
+    
+    // 显示在页面上
+    const countElement = document.getElementById('visitCount');
+    if (countElement) {
+        countElement.textContent = count;
+    }
+}
+
+// 在现有代码的bindEvents函数前调用初始化函数
+// 修改main.js中的初始化部分，确保在页面加载时调用
+document.addEventListener('DOMContentLoaded', function() {
+    initVisitCounter(); // 添加这行
+    renderAllStructures();
+    init3DScene();
+    animate3D();
+    window.addEventListener('resize', onWindowResize);
+    initImageSliders();
+    setupNavigation();
+    bindEvents();
+    
+    // 检查URL哈希并导航
+    if (window.location.hash === '#blog') {
+        switchToBlogPage();
+    }
+});
+
+
+
 // 绑定事件
 function bindEvents() {
     // 服务器切换
