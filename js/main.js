@@ -40,7 +40,9 @@ function initVisitCounter() {
 // 在现有代码的bindEvents函数前调用初始化函数
 // 修改main.js中的初始化部分，确保在页面加载时调用
 document.addEventListener('DOMContentLoaded', function() {
-    initVisitCounter(); // 添加这行
+    initVisitCounter(); // 个人访问计数
+    fetchGaVisitCount(); // 总访问量计数
+
     renderAllStructures();
     init3DScene();
     animate3D();
