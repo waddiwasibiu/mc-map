@@ -95,13 +95,18 @@ function renderBlogPosts() {
                             <!-- 分类标签 -->
                             <div class="absolute top-3 left-3 ${tagClass} text-xs px-2 py-1 rounded">
                                 ${post.category}
-                                <br>
-                                <span class="font-normal opacity-90">${post.content.substring(0, 15)}${post.content.length > 15 ? '...' : ''}</span>
                             </div>
-                            
+                            <!-- 内容预览（右上角） -->
+                            <div class="absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded max-w-[50%] line-clamp-2">
+                                ${post.content}
+                            </div>
                             <!-- 标题显示在图片上 -->
                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
                                 <h3 class="text-white font-bold text-sm md:text-base line-clamp-2">${post.title}</h3>
+                            </div>
+                            <!-- 作者信息（右下角） -->
+                            <div class="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded">
+                                <i class="fa fa-user mr-1"></i>${post.author}
                             </div>
                         </div>
                         <div class="p-5">
