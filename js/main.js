@@ -281,7 +281,7 @@ async function fetchGaVisitCount() {
     try {
         // 调用 GA4 Data API 获取总访问数（30天内）
         const response = await fetch(
-            `https://analyticsdata.googleapis.com/v1beta/${12078580032}:runReport?key=${ExoWZEAgTWOQ_WsVbTgTNg}`,
+            `https://analyticsdata.googleapis.com/v1beta/${PROPERTY_ID}:runReport?key=${API_KEY}`,
             {
                 method: 'POST',
                 headers: {
