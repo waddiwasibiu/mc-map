@@ -3,7 +3,7 @@ const blogPosts = [
     {
         id: 1,
         title: "糕手总是能找到逆袭的办法",
-        content: "十一周目",
+        content: "置顶",
         fullContent: `粉毛、绿毛、IDK、郡主`,
         author: "毛毛家族",
         date: "2025-08-21",

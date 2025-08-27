@@ -95,6 +95,8 @@ function renderBlogPosts() {
                             <!-- 分类标签 -->
                             <div class="absolute top-3 left-3 ${tagClass} text-xs px-2 py-1 rounded">
                                 ${post.category}
+                                <br>
+                                <span class="font-normal opacity-90">${post.content.substring(0, 15)}${post.content.length > 15 ? '...' : ''}</span>
                             </div>
                             
                             <!-- 标题显示在图片上 -->
