@@ -75,6 +75,7 @@ const defaultStructures = [
             { id: 15, x: -5311, y: 192, z: -9696, description: "地狱坐标" },
             { id: 16, x: -5329, y: 192, z: -4435, description: "地狱坐标" },
             { id: 17, x: -4865, y: 192, z: 6369, description: "地狱坐标" },
+            { id: 18, x: -5561, y: 192, z: -6558, description: "地狱坐标" },
         ]
     }
 },
@@ -101,6 +102,9 @@ const defaultStructures = [
             { id: 3, x: 985, y: 98, z: -4090, description: "地狱坐标" },
             { id: 4, x: 3530, y: 98, z: 3123, description: "地狱坐标" },
             { id: 5, x: -777, y: 98, z: 9222, description: "地狱坐标" },
+            { id: 6, x: -5372, y: 98, z: -5357, description: "地狱坐标 旁边100m就是第7个" },
+            { id: 7, x: -5400, y: 98, z: -5266, description: "地狱坐标" },
+            { id: 8, x: -5498, y: 98, z: -3990, description: "地狱坐标" },
             
             
 
@@ -230,6 +234,9 @@ const defaultStructures = [
             { id: 5, x: 4563, y: 192, z: 1447, description: "2靶场2女巫" },
             { id: 6, x: -5164, y: 192, z: -9715, description: "2靶场2女巫" },
             { id: 7, x: -4858, y: 192, z: 8534, description: "5靶场-女巫" },
+            { id: 8, x: -5374, y: 192, z: -4101, description: "3靶场1女巫" },
+            { id: 9, x: -5301, y: 192, z: -4083, description: "1靶场0女巫" },
+            { id: 10, x: -5231, y: 192, z: -4096, description: "2靶场-女巫" },
         ]
     }
 },
@@ -248,6 +255,7 @@ const defaultStructures = [
         ],
         server2: [
             { id: 1, x: -2574, y: 192, z: -6600, description: "地狱坐标" },
+            { id: 2, x: -5312, y: 192, z: -106, description: "地狱坐标" },
         ]
     }
 },
@@ -438,6 +446,10 @@ const defaultStructures = [
         ],
         server2: [
             { id: 1, x: -5819, y: 192, z: 1737, description: "地狱坐标" },
+            { id: 2, x: -5390, y: 192, z: -3452, description: "地狱坐标" },
+            { id: 3, x: -5604, y: 192, z: -783, description: "地狱坐标" },
+            { id: 4, x: -5894, y: 192, z: -3018, description: "地狱坐标" },
+            { id: 5, x: -6112, y: 192, z: -9645, description: "地狱坐标" },
         
         ]
     }
@@ -509,6 +521,10 @@ const defaultStructures = [
             { id: 22, x: -5184, y: 192, z: -3586, description: "地狱坐标" },
             { id: 23, x: -5197, y: 192, z: -6790, description: "地狱坐标 地狱离第24个400m" },
             { id: 24, x: -5184, y: 192, z: -7184, description: "地狱坐标" },
+            { id: 25, x: -5585, y: 192, z: -1981, description: "地狱坐标" },
+            { id: 26, x: -5582, y: 192, z: -3994, description: "地狱坐标" },
+            { id: 27, x: -5580, y: 192, z: -4397, description: "地狱坐标" },
+            { id: 28, x: -5985, y: 192, z: -9993, description: "地狱坐标" },
             
         
         ]
@@ -563,6 +579,10 @@ const defaultStructures = [
             { id: 2, x: 9425, y: 192, z: 8594, description: "地狱坐标" },
             { id: 3, x: 8891, y: 192, z: 9624, description: "地狱坐标" },
             { id: 4, x: 69, y: 192, z: 2137, description: "地狱坐标" },
+            { id: 5, x: -5403, y: 192, z: -8721, description: "地狱坐标" },
+            { id: 6, x: -5473, y: 192, z: -8663, description: "地狱坐标" },
+            { id: 7, x: -5477, y: 192, z: -8615, description: "地狱坐标" },
+            { id: 8, x: -5301, y: 192, z: -162, description: "地狱坐标" },
         
         ]
     }
