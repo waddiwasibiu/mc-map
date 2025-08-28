@@ -376,6 +376,23 @@ const defaultStructures = [
             { id: 9, x: -5100, y: 192, z: -5777, description: "五级试炼 地狱坐标" },
             { id: 10, x: -4957, y: 192, z: -5770, description: "五级试炼 地狱坐标" },
             { id: 11, x: -4756, y: 192, z: 6322, description: "五级试炼 地狱坐标" },
+            { id: 11, x: -4756, y: 192, z: 6322, description: "五级试炼 地狱坐标" },
+            { id: 12, x: -5382, y: 192, z: -10082, description: "五级试炼 地狱坐标" },
+            { id: 13, x: -5384, y: 192, z: -9769, description: "五级试炼 地狱坐标" },
+            { id: 14, x: -5367, y: 192, z: -7699, description: "五级试炼 地狱坐标" },
+            { id: 15, x: -5385, y: 192, z: -5659, description: "五级试炼 地狱坐标" },
+            { id: 16, x: -5378, y: 192, z: -4161, description: "五级试炼 地狱坐标" },
+            { id: 17, x: -5375, y: 192, z: -3679, description: "五级试炼 地狱坐标" },
+            { id: 18, x: -5575, y: 192, z: -1059, description: "五级试炼 地狱坐标" },
+            { id: 19, x: -5599, y: 192, z: -956, description: "五级试炼 地狱坐标" },
+            { id: 20, x: -5554, y: 192, z: -6662, description: "五级试炼 地狱坐标" },
+            { id: 21, x: -5569, y: 192, z: -9972, description: "五级试炼 地狱坐标" },
+            { id: 22, x: -5761, y: 192, z: -6394, description: "五级试炼 地狱坐标 大面积彩绘山脉" },
+            { id: 23, x: -6074, y: 192, z: -3387, description: "五级试炼 地狱坐标" },
+            { id: 24, x: -5995, y: 192, z: -3099, description: "五级试炼 地狱坐标" },
+            { id: 25, x: -5963, y: 192, z: -4761, description: "五级试炼 地狱坐标" },
+            { id: 26, x: -5997, y: 192, z: -9690, description: "五级试炼 地狱坐标" },
+            { id: 27, x: -6275, y: 192, z: -9794, description: "五级试炼 地狱坐标" },
         
         ]
     }
