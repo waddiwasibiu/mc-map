@@ -376,7 +376,6 @@ const defaultStructures = [
             { id: 9, x: -5100, y: 192, z: -5777, description: "五级试炼 地狱坐标" },
             { id: 10, x: -4957, y: 192, z: -5770, description: "五级试炼 地狱坐标" },
             { id: 11, x: -4756, y: 192, z: 6322, description: "五级试炼 地狱坐标" },
-            { id: 11, x: -4756, y: 192, z: 6322, description: "五级试炼 地狱坐标" },
             { id: 12, x: -5382, y: 192, z: -10082, description: "五级试炼 地狱坐标" },
             { id: 13, x: -5384, y: 192, z: -9769, description: "五级试炼 地狱坐标" },
             { id: 14, x: -5367, y: 192, z: -7699, description: "五级试炼 地狱坐标" },
