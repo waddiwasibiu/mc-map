@@ -510,6 +510,8 @@ const defaultStructures = [
     coordinates: {
         server1: [
             { id: 1, x: 2014, y: 192, z: -1086, description: "地狱坐标" },
+            { id: 2, x: -5042, y: 192, z: 2441, description: "地狱坐标" },
+            { id: 3, x: -430, y: 192, z: 2336, description: "地狱坐标" },
 
         ],
         server2: [
