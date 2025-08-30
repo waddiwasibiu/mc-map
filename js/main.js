@@ -37,28 +37,6 @@ function initVisitCounter() {
     }
 }
 
-// 在现有代码的bindEvents函数前调用初始化函数
-// 修改main.js中的初始化部分，确保在页面加载时调用
-document.addEventListener('DOMContentLoaded', function() {
-    initVisitCounter(); // 个人访问计数
-    fetchGaVisitCount(); // 总访问量计数
-
-    renderAllStructures();
-    init3DScene();
-    animate3D();
-    window.addEventListener('resize', onWindowResize);
-    initImageSliders();
-    setupNavigation();
-    bindEvents();
-    
-    // 检查URL哈希并导航
-    if (window.location.hash === '#blog') {
-        switchToBlogPage();
-    }
-});
-
-
-
 // 绑定事件
 function bindEvents() {
     // 服务器切换
@@ -388,6 +366,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    initVisitCounter(); // 个人访问计数
+    fetchGaVisitCount(); // 总访问量计数
+
     // 初始化3D场景
     init3DScene();
     
@@ -415,6 +396,6 @@ document.addEventListener('DOMContentLoaded', function() {
         initStructureFilter(); // 更新筛选器
     };
 
-    fetchGaVisitCount(); 
-
+    fetchGaVisitCount();
+    
 });
