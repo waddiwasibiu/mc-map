@@ -134,4 +134,14 @@ const blogPosts = [
         category: "新闻记录",
         image: 12,
     },
+    {
+        id: 13,
+        title: "被堵门了，但两个半身像",
+        content: "十一周目",
+        fullContent: `waddiwasibiu、julyhere、kai_w`,
+        author: "waddiwasibiu",
+        date: "2025-08-28",
+        category: "新闻记录",
+        image: 13,
+    },
 ];
