@@ -395,7 +395,5 @@ document.addEventListener('DOMContentLoaded', function() {
         originalDeleteStructure(structureId);
         initStructureFilter(); // 更新筛选器
     };
-
-    fetchGaVisitCount();
     
 });
