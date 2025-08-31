@@ -137,25 +137,21 @@ function loadComponentsWithXHR() {
         const container = document.getElementById(containerId);
         
         if (!container) return;
-        
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 container.innerHTML = xhr.responseText;
                 
-                // 初始化事件
+                // 确保元素加载后再初始化事件
                 if (typeof setupNavigation === 'function') {
                     setupNavigation();
                 }
-                
                 if (typeof bindEvents === 'function') {
-                    bindEvents();
+                    bindEvents(); // 现在bindEvents内部使用waitForElement确保元素存在
                 }
                 
-                // 确保在DOM更新后执行
                 if (containerId === 'footer-container' && typeof initVisitCounter === 'function') {
-                    // 等待DOM更新完成后再执行（微任务队列）
-                    setTimeout(initVisitCounter, 0);
+                    initVisitCounter();
                 }
             }
         };

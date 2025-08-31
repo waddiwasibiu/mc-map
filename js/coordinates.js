@@ -447,28 +447,31 @@ function showLargeChart(server, structureId) {
 
 // 隐藏放大的坐标分布图
 function hideLargeChart() {
-    document.getElementById('chartModal').classList.add('hidden');
-    document.getElementById('chartModal').classList.remove('flex');
-    document.body.style.overflow = ''; // 恢复背景滚动
+    waitForElement('#chartModal', (modal) => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+    });
 }
 
 
 // 切换服务器内容
 function switchServer(server) {
-    const server1Content = document.getElementById('server1Content');
-    const server2Content = document.getElementById('server2Content');
+    waitForElement('#server1Content', (server1Content) => {
+        waitForElement('#server2Content', (server2Content) => {
+            if (server === 'server1') {
+                server1Content.classList.remove('hidden');
+                server2Content.classList.add('hidden');
+            } else {
+                server1Content.classList.add('hidden');
+                server2Content.classList.remove('hidden');
+            }
 
-    if (server === 'server1') {
-        server1Content.classList.remove('hidden');
-        server2Content.classList.add('hidden');
-    } else {
-        server1Content.classList.add('hidden');
-        server2Content.classList.remove('hidden');
-    }
-    
-    // 更新服务器选择器状态
-    const serverSelector = document.getElementById('serverSelector');
-    serverSelector.value = server;
+            waitForElement('#serverSelector', (serverSelector) => {
+                serverSelector.value = server;
+            });
+        });
+    });
 }
 
 // 切换坐标列表展开/收起状态

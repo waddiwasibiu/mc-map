@@ -1,3 +1,33 @@
+/**
+ * 重试获取元素直到存在
+ * @param {string} selector - 元素选择器（支持id、class等）
+ * @param {Function} callback - 元素找到后的回调函数
+ * @param {number} maxRetries - 最大重试次数（默认20次）
+ * @param {number} interval - 重试间隔（默认300ms）
+ */
+function waitForElement(selector, callback, maxRetries = 20, interval = 300) {
+    let retries = 0;
+    
+    const check = () => {
+        const element = document.querySelector(selector);
+        if (element) {
+            callback(element);
+            return;
+        }
+        
+        if (retries < maxRetries) {
+            retries++;
+            console.log(`等待元素 ${selector}...（${retries}/${maxRetries}）`);
+            setTimeout(check, interval);
+        } else {
+            console.error(`达到最大重试次数，未找到元素：${selector}`);
+        }
+    };
+    
+    check();
+}
+
+
 // 显示通知
 function showNotification(message, type = 'info') {
     // 创建通知元素
@@ -21,183 +51,151 @@ function showNotification(message, type = 'info') {
 
 // 添加访问次数统计功能
 function initVisitCounter() {
-    try {
-        const storedCount = localStorage.getItem('visitCount');
-        console.log('存储的visitCount值:', storedCount, '类型:', typeof storedCount);
-        
-        let count = storedCount ? parseInt(storedCount, 10) : 0;
-        count += 1;
-        localStorage.setItem('visitCount', count.toString());
-        
-        // 重试逻辑：最多尝试20次，每次间隔200ms
-        const maxRetries = 20;
-        const retryInterval = 200;
-        let retries = 0;
-        
-        const updateElement = () => {
-            const countElement = document.getElementById('visitCount');
-            if (countElement) {
-                countElement.textContent = count;
-                console.log('已更新显示，当前计数:', count);
-            } else if (retries < maxRetries) {
-                retries++;
-                console.log(`重试查找visitCount元素（${retries}/${maxRetries}）`);
-                setTimeout(updateElement, retryInterval);
-            } else {
-                console.error('达到最大重试次数，仍未找到visitCount元素');
-            }
-        };
-        
-        updateElement(); // 立即执行第一次查找
-    } catch (error) {
-        console.error('访问计数初始化失败:', error);
-    }
+    const storedCount = localStorage.getItem('visitCount');
+    let count = storedCount ? parseInt(storedCount) : 0;
+    count += 1;
+    localStorage.setItem('visitCount', count.toString());
+    
+    waitForElement('#visitCount', (countElement) => {
+        countElement.textContent = count;
+    });
 }
 
 // 绑定事件
-// 在bindEvents函数中移除博客页面切换相关代码，保留必要的事件绑定
 function bindEvents() {
     // 服务器切换
-    document.getElementById('serverSelector')?.addEventListener('change', function() {
-        switchServer(this.value);
-    });
-
-    // 展开/收起坐标列表按钮
-    document.querySelectorAll('.toggle-coordinates-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const server = this.getAttribute('data-server');
-            const structureId = parseInt(this.getAttribute('data-structure'));
-            toggleCoordinates(server, structureId);
+    waitForElement('#serverSelector', (serverSelector) => {
+        serverSelector.addEventListener('change', function() {
+            switchServer(this.value);
         });
     });
 
-    // 移动端菜单切换
-    document.getElementById ('mobileMenuBtn')?.addEventListener ('click', function () {
-        const mobileMenu = document.getElementById ('mobileMenu');
-        mobileMenu.classList.toggle ('hidden');
+    // 移动端菜单切换（解决main.js:138错误）
+    waitForElement('#mobileMenuBtn', (mobileMenuBtn) => {
+        mobileMenuBtn.addEventListener('click', () => {
+            waitForElement('#mobileMenu', (mobileMenu) => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
     });
 
     // 坐标分布图点击事件（放大）
-    document.querySelectorAll ('.chart-container').forEach (container => {
-        container.addEventListener ('click', function () {
-            const server = this.getAttribute ('data-server');
-            const structureId = parseInt (this.getAttribute ('data-structure'));
-            showLargeChart (server, structureId);
+    waitForElement('.chart-container', () => {
+        document.querySelectorAll('.chart-container').forEach(container => {
+            container.addEventListener('click', function() {
+                const server = this.getAttribute('data-server');
+                const structureId = parseInt(this.getAttribute('data-structure'));
+                showLargeChart(server, structureId);
+            });
         });
-    });
+    }, 30, 200);
 
     // 关闭模态框按钮
-    document.getElementById ('closeChartModal')?.addEventListener ('click', hideLargeChart);
-
-    // 点击模态框背景关闭
-    document.getElementById ('chartModal')?.addEventListener ('click', function (e) {
-        if (e.target === this) {
-            hideLargeChart ();
-        }
+    waitForElement('#closeChartModal', (closeBtn) => {
+        closeBtn.addEventListener('click', hideLargeChart);
     });
 
-    // ESC 键关闭模态框
-    document.addEventListener ('keydown', function (e) {
-        if (e.key === 'Escape') {
-            if (!document.getElementById ('chartModal')?.classList.contains ('hidden')) {
-                hideLargeChart ();
+    // 点击模态框背景关闭
+    waitForElement('#chartModal', (modal) => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideLargeChart();
             }
-            if (!document.getElementById ('postDetailModal')?.classList.contains ('hidden')) {
-                closePostDetail ();
-            }
-        }
+        });
     });
 
     // 搜索功能
-    document.getElementById('searchInput')?.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-        const structures = document.querySelectorAll('.card-hover');
-        
-        structures.forEach(structure => {
-            const name = structure.querySelector('h3').textContent.toLowerCase();
-            const type = structure.querySelector('.rounded-full').textContent.toLowerCase();
-            const description = structure.querySelector('p').textContent.toLowerCase();
-            
-            if (name.includes(searchTerm) || type.includes(searchTerm) || description.includes(searchTerm)) {
-                structure.classList.remove('hidden');
-            } else {
-                structure.classList.add('hidden');
-            }
+    waitForElement('#searchInput', (searchInput) => {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            document.querySelectorAll('.card-hover').forEach(structure => {
+                const name = structure.querySelector('h3').textContent.toLowerCase();
+                const type = structure.querySelector('.rounded-full').textContent.toLowerCase();
+                const description = structure.querySelector('p').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || type.includes(searchTerm) || description.includes(searchTerm)) {
+                    structure.classList.remove('hidden');
+                } else {
+                    structure.classList.add('hidden');
+                }
+            });
         });
     });
 
-    // 滚动时导航栏样式变化
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) {
-            header.classList.add('bg-white/95', 'backdrop-blur-sm', 'py-2');
-            header.classList.remove('py-4');
-        } else {
-            header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'py-2');
-            header.classList.add('py-4');
-        }
-    });
-
     // 排序功能
-    document.getElementById ('sortSelect')?.addEventListener ('change', function () {
-        const sortType = this.value;
-        const structures = loadStructures ();
-        let sortedStructures = [...structures];
+    waitForElement('#sortSelect', (sortSelect) => {
+        sortSelect.addEventListener('change', function() {
+            const sortType = this.value;
+            const structures = loadStructures();
+            let sortedStructures = [...structures];
 
-        switch (sortType) {
-            case 'nameAsc':
-                sortedStructures.sort ((a, b) => a.name.localeCompare (b.name));
-                break;
-            case 'nameDesc':
-                sortedStructures.sort ((a, b) => b.name.localeCompare (a.name));
-                break;
-            case 'type':
-                sortedStructures.sort ((a, b) => a.type.localeCompare (b.type));
-                break;
-            case 'coordinateCount':
-                const currentServer = document.getElementById ('serverSelector').value;
-                sortedStructures.sort ((a, b) => {
-                    const aCount = (a.coordinates [currentServer] || []).length;
-                    const bCount = (b.coordinates [currentServer] || []).length;
-                    return bCount - aCount; // 降序排列
-                });
-                break;
-        }
+            switch (sortType) {
+                case 'nameAsc':
+                    sortedStructures.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'nameDesc':
+                    sortedStructures.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'type':
+                    sortedStructures.sort((a, b) => a.type.localeCompare(b.type));
+                    break;
+                case 'coordinateCount':
+                    waitForElement('#serverSelector', (serverSelector) => {
+                        const currentServer = serverSelector.value;
+                        sortedStructures.sort((a, b) => {
+                            const aCount = (a.coordinates[currentServer] || []).length;
+                            const bCount = (b.coordinates[currentServer] || []).length;
+                            return bCount - aCount;
+                        });
+                    });
+                    break;
+            }
 
-        // 保存排序后的结构
-        saveStructures (sortedStructures);
-        // 重新渲染
-        renderAllStructures ();
+            saveStructures(sortedStructures);
+            renderAllStructures();
+        });
     });
 
     // 3D坐标图控制按钮
-    document.getElementById('reset-view')?.addEventListener('click', () => {
-        camera.position.set(0, 10000, 20000);
-        camera.lookAt(0, 0, 0);
-        controls.reset();
+    waitForElement('#reset-view', (resetBtn) => {
+        resetBtn.addEventListener('click', () => {
+            camera.position.set(0, 10000, 20000);
+            camera.lookAt(0, 0, 0);
+            controls.reset();
+        });
     });
 
-    document.getElementById('show-axes')?.addEventListener('click', () => {
-        showAxes = !showAxes;
-        axesHelper.visible = showAxes;
+    waitForElement('#show-axes', (axesBtn) => {
+        axesBtn.addEventListener('click', () => {
+            showAxes = !showAxes;
+            axesHelper.visible = showAxes;
+        });
     });
 
-    document.getElementById('show-labels')?.addEventListener('click', () => {
-        showLabels = !showLabels;
-        labels.forEach(label => {
-            label.element.style.opacity = showLabels ? '1' : '0';
+    waitForElement('#show-labels', (labelsBtn) => {
+        labelsBtn.addEventListener('click', () => {
+            showLabels = !showLabels;
+            labels.forEach(label => {
+                label.element.style.opacity = showLabels ? '1' : '0';
+            });
         });
     });
 
     // 帖子详情模态框事件
-    document.getElementById('closePostDetailModal')?.addEventListener('click', closePostDetail);
-    
-    document.getElementById('postDetailModal')?.addEventListener('click', function(e) {
-        if (e.target === this) {
-            closePostDetail();
-        }
+    waitForElement('#closePostDetailModal', (closeBtn) => {
+        closeBtn.addEventListener('click', closePostDetail);
+    });
+
+    waitForElement('#postDetailModal', (modal) => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePostDetail();
+            }
+        });
     });
 }
+
+
 // 修改图片轮播功能，自动检测文件夹中的图片
 function initImageSliders() {
     // 结构图片轮播初始化
@@ -280,39 +278,36 @@ window.addEventListener('load', initImageSliders);
 
 // 获取并显示 Google Analytics 访问量
 async function fetchGaVisitCount() {
-    // 替换为你的 API 密钥和资源 ID
     const API_KEY = 'ExoWZEAgTWOQ_WsVbTgTNg';
-    const PROPERTY_ID = 'properties/12078580032'; // 格式：properties/123456789
+    const PROPERTY_ID = 'properties/12078580032';
 
     try {
-        // 调用 GA4 Data API 获取总访问数（30天内）
         const response = await fetch(
             `https://analyticsdata.googleapis.com/v1beta/${PROPERTY_ID}:runReport?key=${API_KEY}`,
             {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    dateRanges: [{ startDate: '2020-01-01', endDate: 'today' }],
-                    metrics: [{ name: 'sessions' }], 
-                    // 如需统计总用户数，可使用 metrics: [{ name: 'totalUsers' }]
+                    dateRanges: [{ startDate: '2025-01-01', endDate: 'today' }],
+                    metrics: [{ name: 'sessions' }],
                 }),
             }
         );
 
         const data = await response.json();
         
-        // 解析并显示数据
-        if (data.rows && data.rows.length > 0) {
-            const visitCount = data.rows[0].metricValues[0].value;
-            document.getElementById('gaVisitCount').textContent = visitCount;
-        } else {
-            document.getElementById('gaVisitCount').textContent = '暂无数据';
-        }
+        waitForElement('#gaVisitCount', (countElement) => {
+            if (data.rows && data.rows.length > 0) {
+                countElement.textContent = data.rows[0].metricValues[0].value;
+            } else {
+                countElement.textContent = '暂无数据';
+            }
+        });
     } catch (error) {
         console.error('获取GA数据失败:', error);
-        document.getElementById('gaVisitCount').textContent = '获取失败';
+        waitForElement('#gaVisitCount', (countElement) => {
+            countElement.textContent = '获取失败';
+        });
     }
 }
 

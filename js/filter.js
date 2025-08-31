@@ -1,44 +1,36 @@
 // 结构筛选功能实现（按名称筛选）
 function setupStructureFilter() {
-    const filterSelect = document.getElementById('structure-filter');
-    if (!filterSelect) return;
-    
-    // 初始化筛选选项（按名称）
-    populateFilterOptions();
-    
-    // 为筛选下拉框添加事件监听
-    filterSelect.addEventListener('change', function() {
-        const selectedName = this.value;
-        filterStructuresByName(selectedName);
+    waitForElement('#structure-filter', (filterSelect) => {
+        populateFilterOptions();
+        filterSelect.addEventListener('change', function() {
+            const selectedName = this.value;
+            filterStructuresByName(selectedName);
+        });
     });
 }
 
 // 填充筛选选项（从结构数据中提取所有唯一名称）
 function populateFilterOptions() {
-    const filterSelect = document.getElementById('structure-filter');
-    if (!filterSelect) return;
-    
-    // 获取所有结构名称
-    const structures = loadStructures();
-    const structureNames = new Set();
-    
-    structures.forEach(structure => {
-        structureNames.add(structure.name);
-    });
-    
-    // 清空现有选项（保留"所有结构"选项）
-    const allOption = filterSelect.querySelector('option[value="all"]') || document.createElement('option');
-    allOption.value = 'all';
-    allOption.textContent = '所有结构';
-    filterSelect.innerHTML = '';
-    filterSelect.appendChild(allOption);
-    
-    // 添加所有结构名称作为选项，并按字母顺序排序
-    Array.from(structureNames).sort().forEach(name => {
-        const option = document.createElement('option');
-        option.value = name;
-        option.textContent = name;
-        filterSelect.appendChild(option);
+    waitForElement('#structure-filter', (filterSelect) => {
+        const structures = loadStructures();
+        const structureNames = new Set();
+        
+        structures.forEach(structure => {
+            structureNames.add(structure.name);
+        });
+        
+        const allOption = filterSelect.querySelector('option[value="all"]') || document.createElement('option');
+        allOption.value = 'all';
+        allOption.textContent = '所有结构';
+        filterSelect.innerHTML = '';
+        filterSelect.appendChild(allOption);
+        
+        Array.from(structureNames).sort().forEach(name => {
+            const option = document.createElement('option');
+            option.value = name;
+            option.textContent = name;
+            filterSelect.appendChild(option);
+        });
     });
 }
 
