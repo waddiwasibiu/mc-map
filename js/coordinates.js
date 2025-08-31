@@ -9,7 +9,7 @@ function renderStructureCard(structure, server) {
     // 确保图片路径安全处理
     const imageUrl = structure.image 
     ? `images/structures/${structure.image}.png` 
-    : 'images/structures/2.png';
+    : 'images/structures/1.png';
     
     return `
         <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-100 mb-6" 
@@ -19,7 +19,7 @@ function renderStructureCard(structure, server) {
                 <div class="structure-image w-full h-48 bg-cover bg-center transition-transform duration-500 hover:scale-105" 
                     style="background-image: url('${imageUrl}')">
                     <!-- 图片加载失败处理 -->
-                    <img src="${imageUrl}" class="hidden" onError="this.parentElement.style.backgroundImage='url(images/structures/2.png)'">
+                    <img src="${imageUrl}" class="hidden" onError="this.parentElement.style.backgroundImage='url(images/structures/1.png)'">
                 </div>
                 <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
                     <i class="fa fa-map-marker mr-1 text-${serverClass}"></i> 
