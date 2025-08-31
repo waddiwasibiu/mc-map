@@ -3,19 +3,15 @@ function setupNavigation() {
     // 为所有导航链接添加点击事件
     document.querySelectorAll('nav a[href^="#"]').forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault(); // 统一阻止默认行为
-            
-            const targetHash = this.getAttribute('href').substring(1); // 获取#后面的部分
-            
-            // 根据目标哈希切换到对应页面
-            if (targetHash === 'blog') {
-                switchToBlogPage();
-            } else {
-                switchToMainPage();
+            // 只处理内部锚点导航
+            const targetHash = this.getAttribute('href');
+            if (targetHash.startsWith('#')) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetHash);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
             }
-            
-            // 更新URL哈希
-            window.location.hash = targetHash;
         });
     });
 }
@@ -24,12 +20,6 @@ function setupNavigation() {
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
     
-    // 检查初始URL哈希，决定显示哪个页面
-    if (window.location.hash === '#blog') {
-        switchToBlogPage();
-    } else {
-        switchToMainPage();
-    }
 });
 
 // 渲染博客帖子
@@ -188,28 +178,5 @@ function closePostDetail() {
     document.body.style.overflow = ''; // 恢复背景滚动
 }
 
-// 切换到博客页面
-function switchToBlogPage() {
-    document.getElementById('main-content').classList.add('hidden');
-    document.getElementById('about').classList.add('hidden');
-    document.getElementById('comments').classList.add('hidden');
-    document.getElementById('blog-page').classList.remove('hidden');
-    document.getElementById('blog-page').classList.add('container', 'mx-auto', 'px-4', 'pt-24', 'pb-16');
-    
-    // 渲染博客帖子
-    renderBlogPosts();
-    
-    // 滚动到顶部
-    window.scrollTo(0, 0);
-}
 
-// 切换到主页面
-function switchToMainPage() {
-    document.getElementById('blog-page').classList.add('hidden');
-    document.getElementById('main-content').classList.remove('hidden');
-    document.getElementById('about').classList.remove('hidden');
-    document.getElementById('comments').classList.remove('hidden');
-    
-    // 滚动到顶部
-    window.scrollTo(0, 0);
-}
+

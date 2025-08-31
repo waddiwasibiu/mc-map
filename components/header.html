@@ -1,0 +1,36 @@
+<header class="bg-white shadow-md fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-4">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-map-o text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-dark">Baka村 <span class="text-primary">结构坐标</span></h1>
+            </div>
+            
+            <nav class="hidden md:flex space-x-6">
+                <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">结构坐标库</a>
+                <a href="posts.html" class="text-gray-700 hover:text-primary transition-colors">帖子库</a>
+                <a href="#comments" class="text-gray-700 hover:text-primary transition-colors">评论区</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="搜索结构或坐标..." class="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
+                    <i class="fa fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                
+                <button class="md:hidden text-gray-700 focus:outline-none" id="mobileMenuBtn">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
+            <a href="index.html" class="block py-2 text-gray-700 hover:text-primary transition-colors">结构坐标库</a>
+            <a href="posts.html" class="block py-2 text-gray-700 hover:text-primary transition-colors">帖子库</a>
+            <a href="#comments" class="block py-2 text-gray-700 hover:text-primary transition-colors">评论区</a>
+        </div>
+    </div>
+</header>
+    

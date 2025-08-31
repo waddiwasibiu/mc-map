@@ -21,26 +21,44 @@ function showNotification(message, type = 'info') {
 
 // 添加访问次数统计功能
 function initVisitCounter() {
-    // 从localStorage获取当前计数，默认为0
-    let count = localStorage.getItem('visitCount') || 0;
-    
-    // 每次访问递增计数
-    count = parseInt(count) + 1;
-    
-    // 保存更新后的计数
-    localStorage.setItem('visitCount', count);
-    
-    // 显示在页面上
-    const countElement = document.getElementById('visitCount');
-    if (countElement) {
-        countElement.textContent = count;
+    try {
+        const storedCount = localStorage.getItem('visitCount');
+        console.log('存储的visitCount值:', storedCount, '类型:', typeof storedCount);
+        
+        let count = storedCount ? parseInt(storedCount, 10) : 0;
+        count += 1;
+        localStorage.setItem('visitCount', count.toString());
+        
+        // 重试逻辑：最多尝试20次，每次间隔200ms
+        const maxRetries = 20;
+        const retryInterval = 200;
+        let retries = 0;
+        
+        const updateElement = () => {
+            const countElement = document.getElementById('visitCount');
+            if (countElement) {
+                countElement.textContent = count;
+                console.log('已更新显示，当前计数:', count);
+            } else if (retries < maxRetries) {
+                retries++;
+                console.log(`重试查找visitCount元素（${retries}/${maxRetries}）`);
+                setTimeout(updateElement, retryInterval);
+            } else {
+                console.error('达到最大重试次数，仍未找到visitCount元素');
+            }
+        };
+        
+        updateElement(); // 立即执行第一次查找
+    } catch (error) {
+        console.error('访问计数初始化失败:', error);
     }
 }
 
 // 绑定事件
+// 在bindEvents函数中移除博客页面切换相关代码，保留必要的事件绑定
 function bindEvents() {
     // 服务器切换
-    document.getElementById('serverSelector').addEventListener('change', function() {
+    document.getElementById('serverSelector')?.addEventListener('change', function() {
         switchServer(this.value);
     });
 
@@ -54,7 +72,7 @@ function bindEvents() {
     });
 
     // 移动端菜单切换
-    document.getElementById ('mobileMenuBtn').addEventListener ('click', function () {
+    document.getElementById ('mobileMenuBtn')?.addEventListener ('click', function () {
         const mobileMenu = document.getElementById ('mobileMenu');
         mobileMenu.classList.toggle ('hidden');
     });
@@ -69,10 +87,10 @@ function bindEvents() {
     });
 
     // 关闭模态框按钮
-    document.getElementById ('closeChartModal').addEventListener ('click', hideLargeChart);
+    document.getElementById ('closeChartModal')?.addEventListener ('click', hideLargeChart);
 
     // 点击模态框背景关闭
-    document.getElementById ('chartModal').addEventListener ('click', function (e) {
+    document.getElementById ('chartModal')?.addEventListener ('click', function (e) {
         if (e.target === this) {
             hideLargeChart ();
         }
@@ -81,17 +99,17 @@ function bindEvents() {
     // ESC 键关闭模态框
     document.addEventListener ('keydown', function (e) {
         if (e.key === 'Escape') {
-            if (!document.getElementById ('chartModal').classList.contains ('hidden')) {
+            if (!document.getElementById ('chartModal')?.classList.contains ('hidden')) {
                 hideLargeChart ();
             }
-            if (!document.getElementById ('postDetailModal').classList.contains ('hidden')) {
+            if (!document.getElementById ('postDetailModal')?.classList.contains ('hidden')) {
                 closePostDetail ();
             }
         }
     });
 
     // 搜索功能
-    document.getElementById('searchInput').addEventListener('input', function() {
+    document.getElementById('searchInput')?.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
         const structures = document.querySelectorAll('.card-hover');
         
@@ -121,7 +139,7 @@ function bindEvents() {
     });
 
     // 排序功能
-    document.getElementById ('sortSelect').addEventListener ('change', function () {
+    document.getElementById ('sortSelect')?.addEventListener ('change', function () {
         const sortType = this.value;
         const structures = loadStructures ();
         let sortedStructures = [...structures];
@@ -153,64 +171,33 @@ function bindEvents() {
     });
 
     // 3D坐标图控制按钮
-    document.getElementById('reset-view').addEventListener('click', () => {
+    document.getElementById('reset-view')?.addEventListener('click', () => {
         camera.position.set(0, 10000, 20000);
         camera.lookAt(0, 0, 0);
         controls.reset();
     });
 
-    document.getElementById('show-axes').addEventListener('click', () => {
+    document.getElementById('show-axes')?.addEventListener('click', () => {
         showAxes = !showAxes;
         axesHelper.visible = showAxes;
     });
 
-    document.getElementById('show-labels').addEventListener('click', () => {
+    document.getElementById('show-labels')?.addEventListener('click', () => {
         showLabels = !showLabels;
         labels.forEach(label => {
             label.element.style.opacity = showLabels ? '1' : '0';
         });
     });
 
-    // 博客页面相关事件
-    document.querySelectorAll('.blog-nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            switchToBlogPage();
-        });
-    });
-
     // 帖子详情模态框事件
-    document.getElementById('closePostDetailModal').addEventListener('click', closePostDetail);
+    document.getElementById('closePostDetailModal')?.addEventListener('click', closePostDetail);
     
-    document.getElementById('postDetailModal').addEventListener('click', function(e) {
+    document.getElementById('postDetailModal')?.addEventListener('click', function(e) {
         if (e.target === this) {
             closePostDetail();
         }
     });
-
-    // 主页面导航链接事件
-    document.querySelectorAll('.main-nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            // 如果当前在博客页面，则先切换到主页面
-            if (!document.getElementById('blog-page').classList.contains('hidden')) {
-                e.preventDefault();
-                switchToMainPage();
-                
-                // 延迟执行原链接行为，确保页面已切换
-                setTimeout(() => {
-                    const targetId = this.getAttribute('href');
-                    if (targetId && targetId !== '#') {
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            targetElement.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }
-                }, 100);
-            }
-        });
-    });
 }
-
 // 修改图片轮播功能，自动检测文件夹中的图片
 function initImageSliders() {
     // 结构图片轮播初始化
@@ -332,22 +319,61 @@ async function fetchGaVisitCount() {
 
 
 
+// 初始化Gitalk，使用当前页面路径作为唯一标识
+// 修改 main.js 中的 initGitalk 函数
+function initGitalk() {
+    // 最大重试次数和间隔时间
+    const maxRetries = 20;
+    const retryInterval = 300;
+    let retries = 0;
+
+    // 重试逻辑函数
+    const tryInit = () => {
+        // 检查 Gitalk 库是否加载完成
+        if (!window.Gitalk) {
+            if (retries < maxRetries) {
+                retries++;
+                console.log(`Gitalk 库未加载，重试中（${retries}/${maxRetries}）`);
+                setTimeout(tryInit, retryInterval);
+            } else {
+                console.error('达到最大重试次数，Gitalk 库仍未加载');
+            }
+            return;
+        }
+
+        // 检查评论容器是否存在（页脚中的 gitalk-container）
+        const container = document.getElementById('gitalk-container');
+        if (!container) {
+            if (retries < maxRetries) {
+                retries++;
+                console.log(`未找到 gitalk-container 元素，重试中（${retries}/${maxRetries}）`);
+                setTimeout(tryInit, retryInterval);
+            } else {
+                console.error('达到最大重试次数，仍未找到 gitalk-container 元素');
+            }
+            return;
+        }
+
+        // 所有条件满足，初始化 Gitalk
+        const gitalk = new Gitalk({
+            clientID: 'Ov23lir8R3Vh9Zzynyvy',
+            clientSecret: 'b7b652dc0032f772142895a06b45e0fe66d197c2',
+            repo: 'mc-map',
+            owner: 'waddiwasibiu',
+            admin: ['waddiwasibiu'],
+            id: location.pathname, // 使用当前路径作为评论区分辨标识
+            distractionFreeMode: false
+        });
+
+        gitalk.render(container);
+        console.log('Gitalk 评论组件初始化成功');
+    };
+
+    // 开始第一次尝试
+    tryInit();
+}
 
 
-// 初始化Gitalk
-document.addEventListener('DOMContentLoaded', function() {
-    const gitalk = new Gitalk({
-        clientID: 'Ov23lir8R3Vh9Zzynyvy',
-        clientSecret: 'b7b652dc0032f772142895a06b45e0fe66d197c2',
-        repo: 'mc-map',
-        owner: 'waddiwasibiu',
-        admin: ['waddiwasibiu'],
-        id: location.pathname,
-        distractionFreeMode: false
-    });
-
-    gitalk.render('gitalk-container');
-});
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
@@ -366,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    initVisitCounter(); // 个人访问计数
+    initVisitCounter();
     fetchGaVisitCount(); // 总访问量计数
 
     // 初始化3D场景
@@ -380,20 +406,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 初始化结构筛选器
     initStructureFilter();
-    
-    // 当结构数据变化时（如添加/删除结构），更新筛选器选项
-    // 可以在添加/删除结构的函数中调用此方法
-    const originalAddStructure = addStructure;
-    addStructure = function(structure) {
-        const result = originalAddStructure(structure);
-        initStructureFilter(); // 更新筛选器
-        return result;
-    };
-    
-    const originalDeleteStructure = deleteStructure;
-    deleteStructure = function(structureId) {
-        originalDeleteStructure(structureId);
-        initStructureFilter(); // 更新筛选器
-    };
-    
+
+    initGitalk();
+
+
 });

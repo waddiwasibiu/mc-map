@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-
-        
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baka 村结构坐标库</title>
@@ -136,51 +132,10 @@
 
     gtag('config', 'G-2MY9RSPX4Z');
     </script>
-
-
 </head>
 <body class="bg-gray-50 font-inter">
-    <!-- 导航栏 -->
-    <header class="bg-white shadow-md fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-4">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-2">
-                    <i class="fa fa-map-o text-primary text-2xl"></i>
-                    <h1 class="text-xl font-bold text-dark">Baka 村 <span class="text-primary">结构坐标</span></h1>
-                </div>
-                
-                <nav class="hidden md:flex space-x-6">
-                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors main-nav-link">首页</a>
-                    <a href="#structures" class="text-gray-700 hover:text-primary transition-colors main-nav-link">结构列表</a>
-                    <a href="#3d-coordinates" class="text-gray-700 hover:text-primary transition-colors main-nav-link">坐标立体图</a>
-                    <a href="#about" class="text-gray-700 hover:text-primary transition-colors main-nav-link">关于我们</a>
-                    <a href="#comments" class="text-gray-700 hover:text-primary transition-colors main-nav-link">评论区</a>
-                    <a href="#blog" class="text-gray-700 hover:text-primary transition-colors blog-nav-link">帖子</a>
-                </nav>
-                
-                <div class="flex items-center space-x-4">
-                    <div class="relative">
-                        <input type="text" id="searchInput" placeholder="搜索结构或坐标..." class="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
-                        <i class="fa fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                    </div>
-                    
-                    <button class="md:hidden text-gray-700 focus:outline-none" id="mobileMenuBtn">
-                        <i class="fa fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- 移动端菜单 -->
-            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
-                <a href="#home" class="block py-2 text-gray-700 hover:text-primary transition-colors main-nav-link">首页</a>
-                <a href="#structures" class="block py-2 text-gray-700 hover:text-primary transition-colors main-nav-link">结构列表</a>
-                <a href="#3d-coordinates" class="block py-2 text-gray-700 hover:text-primary transition-colors main-nav-link">坐标立体图</a>
-                <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition-colors main-nav-link">关于我们</a>
-                <a href="#comments" class="block py-2 text-gray-700 hover:text-primary transition-colors main-nav-link">评论区</a>
-                <a href="#blog" class="block py-2 text-gray-700 hover:text-primary transition-colors blog-nav-link">帖子</a>
-            </div>
-        </div>
-    </header>
+    <!-- 导航栏组件 -->
+    <div id="header-container"></div>
 
     <!-- 主内容区 -->
     <main id="main-content" class="container mx-auto px-4 pt-24 pb-16">
@@ -195,7 +150,6 @@
                             <a href="#structures" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center">
                                 <i class="fa fa-map-marker mr-2"></i> 浏览结构
                             </a>
-                            
                         </div>
                     </div>
                     <div class="md:w-1/2 flex justify-center">
@@ -204,8 +158,6 @@
                 </div>
             </div>
         </section>
-
-        
 
         <!-- 功能展示部分 -->
         <section id="features" class="mb-12 bg-white rounded-xl shadow-md p-6">
@@ -219,7 +171,7 @@
                         <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">结构坐标</h3>
                     </div>
                     <div class="p-4">
-                        <p class="text-gray-600 text-sm">探索并查看游戏中各种独特结构的精确坐标，包括遗迹、村庄和自然奇观等。</p>
+                        <p class="text-gray-600 text-sm">探索并查看游戏中各种独特结构的精确坐标，包括数据包结构和自然奇观等。</p>
                         <a href="#structures" class="mt-4 inline-block text-primary hover:text-primary/80 text-sm font-medium">
                             查看详情 <i class="fa fa-arrow-right ml-1"></i>
                         </a>
@@ -235,8 +187,7 @@
                     </div>
                     <div class="p-4">
                         <p class="text-gray-600 text-sm">浏览玩家分享的游戏心得、攻略和精彩瞬间，加入社区讨论。</p>
-                        <a href="#blog" class="mt-4 inline-block text-primary hover:text-primary/80 blog-nav-link font-medium">
-                            
+                        <a href="posts.html" class="mt-4 inline-block text-primary hover:text-primary/80 font-medium">
                             查看详情 <i class="fa fa-arrow-right ml-1"></i>
                         </a>
                     </div>
@@ -252,35 +203,7 @@
                         <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">更多功能</h3>
                     </div>
                     <div class="p-4">
-                        <p class="text-gray-600 text-sm">更多精彩功能即将上线，敬请期待...</p>
-                        <span class="mt-4 inline-block text-gray-400 text-sm font-medium">
-                            开发中 <i class="fa fa-spinner fa-spin ml-1"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 服务器选择和筛选 -->
-        <section class="mb-8">
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <div class="flex items-center gap-4">
-                        <label for="serverSelector" class="font-medium text-gray-700">服务器:</label>
-                        <select id="serverSelector" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
-                            <option value="server1">一区</option>
-                            <option value="server2">二区</option>
-                        </select>
-                    </div>
-                    
-                    <div class="flex items-center gap-4">
-                        <label for="sortSelect" class="font-medium text-gray-700">排序方式:</label>
-                        <select id="sortSelect" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
-                            <option value="nameAsc">名称 (升序)</option>
-                            <option value="nameDesc">名称 (降序)</option>
-                            <option value="type">结构类型</option>
-                            <option value="coordinateCount">坐标数量</option>
-                        </select>
+                        <p class="text-gray-600 text-sm">更多精彩功能正在开发中，敬请期待...</p>
                     </div>
                 </div>
             </div>
@@ -288,6 +211,55 @@
 
         <!-- 结构列表 -->
         <section id="structures" class="space-y-6">
+            <!-- 服务器切换和页面内部导航 -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+                    <h2 class="text-2xl font-bold text-dark">结构坐标库</h2>
+                    <div class="flex items-center">
+                        <span class="text-gray-600 mr-2">服务器:</span>
+                        <select id="serverSelector" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
+                            <option value="server1">服务器 1</option>
+                            <option value="server2">服务器 2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- 新增页面内部导航框 -->
+                <div class="flex flex-wrap gap-4 border-t border-gray-100 pt-4">
+                    <a href="#structures" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                        <i class="fa fa-map-marker mr-1"></i> 结构坐标
+                    </a>
+                    <a href="#3d-coordinates" class="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-colors">
+                        <i class="fa fa-cube mr-1"></i> 坐标立体图
+                    </a>
+                    <a href="#about" class="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-colors">
+                        <i class="fa fa-info-circle mr-1"></i> 关于我们
+                    </a>
+                </div>
+            </div>
+
+            <!-- 排序和筛选 -->
+            <div class="bg-white rounded-xl shadow-md p-4 flex flex-wrap justify-between items-center">
+                <div class="relative">
+                    <select id="structure-filter" class="appearance-none px-4 py-2 pr-8 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="all">所有结构</option>
+                        <!-- 结构选项将通过JavaScript动态添加 -->
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                        <i class="fa fa-chevron-down text-xs"></i>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <select id="sortSelect" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
+                        <option value="nameAsc">名称 (升序)</option>
+                        <option value="nameDesc">名称 (降序)</option>
+                        <option value="type">结构类型</option>
+                        <option value="coordinateCount">坐标数量</option>
+                    </select>
+                </div>
+            </div>
+
             <!-- 一区内容 -->
             <div id="server1Content">
                 <!-- 结构卡片将通过JavaScript动态生成 -->
@@ -324,18 +296,6 @@
                 
                 <!-- Controls -->
                 <div class="mt-6 flex flex-wrap gap-4 justify-center">
-
-                    <!-- 新增结构筛选下拉框 -->
-                    <div class="relative">
-                        <select id="structure-filter" class="appearance-none px-4 py-2 pr-8 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all focus:outline-none focus:ring-2 focus:ring-primary">
-                            <option value="all">所有结构</option>
-                            <!-- 结构选项将通过JavaScript动态添加 -->
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
-                            <i class="fa fa-chevron-down text-xs"></i>
-                        </div>
-                    </div>
-
                     <button id="reset-view" class="flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all">
                         <i class="fa fa-refresh mr-2"></i> 重置视图
                     </button>
@@ -346,50 +306,9 @@
                         <i class="fa fa-tag mr-2"></i> 显示/隐藏标签
                     </button>
                 </div>
-                
             </div>
         </section>
     </main>
-
-    <!-- 博客页面 -->
-    <section id="blog-page" class="hidden container mx-auto px-4 pt-24 pb-16">
-        <div class="mb-12 text-center">
-            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">Baka 村帖子</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">这里是玩家们分享的各种帖子，包括游戏心得、攻略和合影。</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blog-posts-container">
-            <!-- 帖子内容将通过JavaScript动态生成 -->
-        </div>
-    </section>
-
-    <!-- 帖子详情模态框 -->
-    <div id="postDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center chart-modal-backdrop p-4">
-        <div class="bg-white rounded-xl shadow-2xl p-6 chart-modal-content max-w-4xl w-95 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-dark" id="postDetailTitle">帖子详情</h3>
-                <button id="closePostDetailModal" class="text-gray-500 hover:text-gray-700">
-                    <i class="fa fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="relative">
-                <!-- 帖子图片 - 自适应高度并显示完整图片 -->
-                <div id="postDetailImage" class="w-full mb-6 rounded-lg structure-image bg-contain bg-no-repeat bg-center" style="min-height: 200px;"></div>
-                
-                <!-- 帖子元数据 -->
-                <div class="flex flex-wrap justify-between items-center mb-6 text-sm text-gray-500">
-                    <div class="flex items-center gap-4">
-                        <span><i class="fa fa-user mr-1"></i> <span id="postDetailAuthor"></span></span>
-                        <span><i class="fa fa-calendar mr-1"></i> <span id="postDetailDate"></span></span>
-                    </div>
-                    <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs" id="postDetailCategory"></span>
-                </div>
-                
-                <!-- 帖子内容 -->
-                <div id="postDetailContent" class="post-detail-content text-gray-700"></div>
-            </div>
-        </div>
-    </div>
 
     <!-- 关于我们 -->
     <section id="about" class="bg-white py-12">
@@ -457,28 +376,19 @@
         </div>
     </div>
 
-    <!-- 评论容器 -->
-    <div id="comments" class="container mx-auto px-4 mb-12">
-        <div id="gitalk-container" class="bg-white rounded-xl shadow-md p-6"></div>
-    </div>
-
-    <footer class="bg-white shadow-md py-6">
-        <div class="container mx-auto px-4 text-center text-gray-600">
-
-            <!-- 添加访问量显示 -->
-            <p>总访问量: <span id="gaVisitCount" class="font-bold text-primary">加载中...</span></p>
-            <p>个人总访问次数: <span id="visitCount" class="font-bold text-primary">0</span></p>
-            
-            <p>&copy; 2025 Baka 村结构坐标库. 保留所有权利.</p>
-        </div>
-    </footer>
+    <!-- 页尾组件 -->
+    <div id="footer-container"></div>
 
     <!-- 引入外部 JavaScript 文件 -->
     <script src="data/structures.js"></script>
     <script src="data/blog-posts.js"></script>
     <script src="js/coordinates.js"></script>
+    <script src="js/components.js"></script>
     <script src="js/blog.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/filter.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    
+    
 </body>
 </html>
