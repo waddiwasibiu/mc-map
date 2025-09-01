@@ -405,6 +405,8 @@ const defaultStructures = [
             { id: 25, x: -5963, y: 192, z: -4761, description: "五级试炼 地狱坐标" },
             { id: 26, x: -5997, y: 192, z: -9690, description: "五级试炼 地狱坐标" },
             { id: 27, x: -6275, y: 192, z: -9794, description: "五级试炼 地狱坐标" },
+            { id: 28, x: 1804, y: 192, z: 4337, description: "地狱坐标 逐空空置域边上" },
+            { id: 29, x: 1715, y: 192, z: 4503, description: "地狱坐标 逐空空置域边上" },
         
         ]
     }
@@ -426,6 +428,7 @@ const defaultStructures = [
         server2: [
             { id: 1, x: -1685, y: 192, z: 4417, description: "地狱坐标" },
             { id: 2, x: 2591, y: 192, z: -9867, description: "地狱坐标" },
+            { id: 3, x: 1544, y: 192, z: 4313, description: "地狱坐标 逐空空置域边上" },
         
         ]
     }
