@@ -79,6 +79,17 @@ function bindEvents() {
         });
     });
 
+    // 处理坐标列表展开/收起按钮事件
+    waitForElement('.toggle-coordinates-btn', () => {
+        document.querySelectorAll('.toggle-coordinates-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const server = this.getAttribute('data-server');
+                const structureId = this.getAttribute('data-structure');
+                toggleCoordinates(server, structureId);
+            });
+        });
+    }, 30, 200);
+
     // 坐标分布图点击事件（放大）
     waitForElement('.chart-container', () => {
         document.querySelectorAll('.chart-container').forEach(container => {
