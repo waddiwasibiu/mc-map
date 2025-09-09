@@ -100,6 +100,7 @@ const defaultStructures = [
             { id: 5, x: -9889, y: 98, z: -1408, description: "地狱坐标" },
             { id: 6, x: -4578, y: 98, z: -4767, description: "地狱坐标 铁锤边上" },
             { id: 7, x: -2239, y: 98, z: -6688, description: "地狱坐标" },
+            { id: 8, x: 7480, y: 98, z: -5670, description: "地狱坐标" },
         ],
         server2: [
             { id: 1, x: -2048, y: 63, z: -3277, description: "地狱坐标" },
@@ -295,6 +296,7 @@ const defaultStructures = [
             { id: 15, x: 3623, y: 192, z: 5, description: "地狱坐标" },
             { id: 16, x: -3152, y: 192, z: -5528, description: "地狱坐标" },
             { id: 17, x: 9611, y: 192, z: -1530, description: "地狱坐标" },
+            { id: 18, x: 8045, y: 192, z: -1548, description: "地狱坐标" },
 
 
         ],
