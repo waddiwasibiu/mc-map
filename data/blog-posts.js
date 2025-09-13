@@ -144,4 +144,14 @@ const blogPosts = [
         category: "新闻记录",
         image: 13,
     },
+    {
+        id: 14,
+        title: "笨蛋电竞的第一颗心",
+        content: "十一周目",
+        fullContent: `waddiwasibiu、julyhere、clear_wind`,
+        author: "julyhere",
+        date: "2025-09-13",
+        category: "新闻记录",
+        image: 14,
+    },
 ];
