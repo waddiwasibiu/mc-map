@@ -230,6 +230,7 @@ const defaultStructures = [
             { id: 6, x: -8717, y: 192, z: 462, description: "-靶场-女巫" },
             { id: 7, x: 9015, y: 192, z: 8560, description: "2靶场0女巫" },
             { id: 8, x: -8651, y: 192, z: 8758, description: "4靶场1女巫" },
+            { id: 9, x: -12500, y: 192, z: -11848, description: "-靶场-女巫 十万边界外" },
 
 
         ],
@@ -391,6 +392,9 @@ const defaultStructures = [
             { id: 11, x: 3020, y: 192, z: -1053, description: "五级试炼 地狱坐标" },
             { id: 12, x: 3644, y: 192, z: -1090, description: "五级试炼 地狱坐标" },
             { id: 13, x: 7008, y: 192, z: -7360, description: "五级试炼 地狱坐标 四个不详宝库" },
+            { id: 14, x: -11985, y: 192, z: -11962, description: "五级试炼 地狱坐标" },
+            { id: 15, x: 5413, y: 192, z: 7737, description: "五级试炼 地狱坐标" },
+            { id: 16, x: 5417, y: 192, z: 8111, description: "五级试炼 地狱坐标" },
 
 
         ],
@@ -441,12 +445,14 @@ const defaultStructures = [
             { id: 1, x: 3319, y: 192, z: -996, description: "地狱坐标" },
             { id: 2, x: 942, y: 192, z: -3880, description: "地狱坐标" },
             { id: 3, x: -11380, y: 192, z: 10699, description: "地狱坐标" },
+            { id: 4, x: -9600, y: 192, z: -11664, description: "地狱坐标" },
 
         ],
         server2: [
             { id: 1, x: -1685, y: 192, z: 4417, description: "地狱坐标" },
             { id: 2, x: 2591, y: 192, z: -9867, description: "地狱坐标" },
             { id: 3, x: 1544, y: 192, z: 4313, description: "地狱坐标 逐空空置域边上" },
+            { id: 4, x: 9813, y: 192, z: -8161, description: "地狱坐标" },
         
         ]
     }
@@ -627,6 +633,7 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
+            { id: 1, x: -11919, y: 192, z: -11932, description: "地狱坐标" },
 
 
         ],
