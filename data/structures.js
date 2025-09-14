@@ -649,6 +649,62 @@ const defaultStructures = [
 },
 
 
+{
+    id: 17,
+    name: "猪灵堡垒",
+    type: "遗迹",
+    description: "猪灵堡垒",
+    image: 18,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: -23016, y: 192, z: 25066, description: "地狱坐标" },
+
+
+        ],
+        server2: [
+            { id: 1, x: -3742, y: 192, z: 5757, description: "地狱坐标" },
+            { id: 2, x: 7270, y: 192, z: 2794, description: "地狱坐标" },
+
+        
+        ]
+    }
+},
+
+
+{
+    id: 18,
+    name: "下界主楼",
+    type: "遗迹",
+    description: "下界主楼",
+    image: 19,
+    icon: "fa-fort-awesome",
+    coordinates: {
+        server1: [
+            { id: 1, x: 4145, y: 192, z: 1321, description: "地狱坐标" },
+            { id: 2, x: 1592, y: 192, z: 4623, description: "地狱坐标" },
+            { id: 3, x: 16560, y: 192, z: -6224, description: "地狱坐标" },
+            { id: 4, x: -7977, y: 192, z: -18652, description: "地狱坐标" },
+
+
+        ],
+        server2: [
+            { id: 1, x: -5419, y: 192, z: 4421, description: "地狱坐标" },
+            { id: 2, x: 5486, y: 192, z: 2950, description: "地狱坐标" },
+            { id: 3, x: 7245, y: 192, z: -1329, description: "地狱坐标" },
+            { id: 4, x: 7198, y: 192, z: -2478, description: "地狱坐标" },
+            { id: 5, x: 8797, y: 192, z: -3789, description: "地狱坐标" },
+            { id: 6, x: -29799, y: 192, z: 18040, description: "地狱坐标" },
+            { id: 7, x: 31283, y: 192, z: 19618, description: "地狱坐标" },
+            { id: 8, x: 314, y: 192, z: -7640, description: "地狱坐标" },
+
+        
+        ]
+    }
+},
+
+
+
 
 ];
 
