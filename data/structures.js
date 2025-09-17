@@ -651,22 +651,22 @@ const defaultStructures = [
 
 {
     id: 17,
-    name: "猪灵堡垒",
+    name: "猪灵城楼",
     type: "遗迹",
-    description: "猪灵堡垒",
+    description: "猪灵城楼",
     image: 18,
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 4267, y: 192, z: 1879, description: "地狱坐标" },
-            { id: 2, x: -23016, y: 192, z: 25066, description: "地狱坐标" },
+            { id: 1, x: 4267, y: 192, z: 1879, description: "真假未知 如验证可私聊粉毛" },
+            { id: 2, x: -23016, y: 192, z: 25066, description: "真假未知 如验证可私聊粉毛" },
 
 
         ],
         server2: [
-            { id: 1, x: -3742, y: 192, z: 5757, description: "地狱坐标" },
-            { id: 2, x: 7270, y: 192, z: 2794, description: "地狱坐标" },
-
+            { id: 1, x: -3742, y: 192, z: 5757, description: "真假未知 如验证可私聊粉毛" },
+            { id: 2, x: 7270, y: 192, z: 2794, description: "真假未知 如验证可私聊粉毛" },
+            { id: 3, x: -44840, y: 192, z: 3300, description: "天才粉毛甄选真坐标" },
         
         ]
     }
