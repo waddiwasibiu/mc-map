@@ -689,7 +689,7 @@ const defaultStructures = [
 
         ],
         server2: [
-            { id: 1, x: -5419, y: 192, z: 4421, description: "真假未知 如验证可私聊粉毛" },
+            { id: 1, x: -5419, y: 192, z: 4421, description: "天才粉毛甄选真坐标" },
             { id: 2, x: 5486, y: 192, z: 2950, description: "真假未知 如验证可私聊粉毛" },
             { id: 3, x: 7245, y: 192, z: -1329, description: "真假未知 如验证可私聊粉毛" },
             { id: 4, x: 7198, y: 192, z: -2478, description: "真假未知 如验证可私聊粉毛" },
@@ -701,6 +701,7 @@ const defaultStructures = [
             { id: 10, x: -39380, y: 192, z: 2920, description: "天才粉毛甄选真坐标" },
             { id: 11, x: -41800, y: 192, z: 3000, description: "天才粉毛甄选真坐标" },
             { id: 12, x: -45850, y: 192, z: 4130, description: "天才粉毛甄选真坐标" },
+            { id: 12, x: -48750, y: 192, z: 8600, description: "天才粉毛甄选真坐标" },
         ]
     }
 },
