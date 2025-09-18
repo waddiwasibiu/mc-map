@@ -65,6 +65,22 @@ function scrollToCommentsIfNeeded() {
     }
 }
 
+
+
+
+// 移动端菜单切换逻辑
+function setupMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            // 切换菜单显示状态
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const componentsToLoad = [
         {containerId: 'header-container', path: 'components/header.html'},
@@ -148,6 +164,11 @@ function loadComponentsWithXHR() {
                 }
                 if (typeof bindEvents === 'function') {
                     bindEvents(); // 现在bindEvents内部使用waitForElement确保元素存在
+                }
+                
+                // 组件加载完成后调用移动端菜单设置函数
+                if (typeof setupMobileMenu === 'function') {
+                    setupMobileMenu();
                 }
                 
                 if (containerId === 'footer-container' && typeof initVisitCounter === 'function') {
