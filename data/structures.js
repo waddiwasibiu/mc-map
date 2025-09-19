@@ -658,10 +658,11 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 4267, y: 192, z: 1879, description: "真假未知 如验证可私聊粉毛" },
-            { id: 2, x: -23016, y: 192, z: 25066, description: "真假未知 如验证可私聊粉毛" },
-
-
+            { id: 1, x: 3280, y: 192, z: -3840, description: "天才粉毛甄选真坐标" },
+            { id: 2, x: 4300, y: 192, z: 1850, description: "天才粉毛甄选真坐标" },
+            { id: 3, x: 7150, y: 192, z: 6850, description: "天才粉毛甄选真坐标" },
+            { id: 4, x: 10150, y: 192, z: 7000, description: "天才粉毛甄选真坐标" },
+            { id: 5, x: -23016, y: 192, z: 25066, description: "真假未知 如验证可私聊粉毛" },
         ],
         server2: [
             { id: 1, x: -3742, y: 192, z: 5757, description: "真假未知 如验证可私聊粉毛" },
