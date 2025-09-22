@@ -154,4 +154,14 @@ const blogPosts = [
         category: "新闻记录",
         image: 14,
     },
+    {
+        id: 15,
+        title: "天才粉毛和天才KK的生日",
+        content: "十一周目",
+        fullContent: `fancyi二十一、KKNM231二十二、幸运蛋糕`,
+        author: "KKNM231",
+        date: "2025-09-21",
+        category: "新闻记录",
+        image: 15,
+    },
 ];
