@@ -104,6 +104,9 @@ const defaultStructures = [
             { id: 6, x: -4578, y: 98, z: -4767, description: "地狱坐标 铁锤边上" },
             { id: 7, x: -2239, y: 98, z: -6688, description: "地狱坐标" },
             { id: 8, x: 7480, y: 98, z: -5670, description: "地狱坐标" },
+            { id: 9, x: -3790, y: 192, z: -10010, description: "地狱坐标 米夏跑图发现" },
+            { id: 10, x: -3870, y: 192, z: -9980, description: "地狱坐标 米夏跑图发现" },
+            { id: 11, x: -9870, y: 192, z: -8770, description: "地狱坐标 米夏跑图发现" },
         ],
         server2: [
             { id: 1, x: -2048, y: 63, z: -3277, description: "地狱坐标" },
@@ -198,7 +201,7 @@ const defaultStructures = [
             { id: 19, x: 3939, y: 192, z: -3110, description: "地狱坐标" },
             { id: 20, x: -3228, y: 192, z: -4407, description: "地狱坐标 铁锤边上" },
             { id: 21, x: -2866, y: 192, z: -4785, description: "地狱坐标 铁锤边上" },
-            
+            { id: 22, x: -5800, y: 192, z: -9470, description: "地狱坐标 米夏跑图发现" },
             
 
             ],
@@ -402,6 +405,9 @@ const defaultStructures = [
             { id: 14, x: -11985, y: 192, z: -11962, description: "五级试炼 地狱坐标" },
             { id: 15, x: 5413, y: 192, z: 7737, description: "五级试炼 地狱坐标" },
             { id: 16, x: 5417, y: 192, z: 8111, description: "五级试炼 地狱坐标" },
+            { id: 17, x: -1890, y: 192, z-9870 , description: "五级试炼 地狱坐标 米夏跑图发现" },
+            { id: 18, x: -2980, y: 192, z: -9970, description: "五级试炼 地狱坐标 米夏跑图发现" },
+            { id: 19, x: -5780, y: 192, z: -9460, description: "五级试炼 地狱坐标 米夏跑图发现" },
 
 
         ],
@@ -533,7 +539,7 @@ const defaultStructures = [
             { id: 28, x: -6784, y: 192, z: -9193, description: "地狱坐标" },
             { id: 29, x: -6786, y: 192, z: -8793, description: "地狱坐标" },
             { id: 30, x: -3193, y: 192, z: -5578, description: "地狱坐标 铁锤边上" },
-            
+            { id: 31, x: -3570, y: 192, z: -9990, description: "地狱坐标 米夏跑图发现" },
 
         ],
         server2: [
