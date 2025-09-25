@@ -670,8 +670,7 @@ const defaultStructures = [
             { id: 5, x: -23016, y: 192, z: 25066, description: "真假未知 如验证可私聊粉毛" },
         ],
         server2: [
-            { id: 1, x: 7270, y: 192, z: 2794, description: "真假未知 如验证可私聊粉毛" },
-            { id: 2, x: -44840, y: 192, z: 3300, description: "天才粉毛甄选真坐标" },
+            { id: 1, x: -44840, y: 192, z: 3300, description: "天才粉毛甄选真坐标" },
         
         ]
     }
