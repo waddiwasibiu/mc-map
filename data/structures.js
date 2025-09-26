@@ -404,7 +404,7 @@ const defaultStructures = [
             { id: 14, x: -11985, y: 192, z: -11962, description: "五级试炼 地狱坐标" },
             { id: 15, x: 5413, y: 192, z: 7737, description: "五级试炼 地狱坐标" },
             { id: 16, x: 5417, y: 192, z: 8111, description: "五级试炼 地狱坐标" },
-            { id: 17, x: -1890, y: 192, z: -9870 , description: "五级试炼 地狱坐标 米夏跑图发现" },
+            { id: 17, x: -1890, y: 192, z:-9870 , description: "五级试炼 地狱坐标 米夏跑图发现" },
             { id: 18, x: -2980, y: 192, z: -9970, description: "五级试炼 地狱坐标 米夏跑图发现" },
             { id: 19, x: -5780, y: 192, z: -9460, description: "五级试炼 地狱坐标 米夏跑图发现" },
 

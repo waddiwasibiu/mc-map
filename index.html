@@ -388,6 +388,42 @@
     <script src="js/main.js"></script>
     <script src="js/filter.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+    
+    
+    <script src="https://l2dwidget.js.org/lib/L2Dwidget.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        L2Dwidget.init({
+            "model": {
+                jsonPath: "https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json", //萌娘
+                "scale": 1
+            },
+            "display": {
+                "position": "right", //位置
+                "width": 300, //宽度
+                "height": 500, //高度
+                "hOffset": 0, //X距离
+                "vOffset": 0, //Y距离
+            },
+            "mobile": {
+                "show": true,
+                "scale": 1.3
+            },
+            "react": {
+                "opacityDefault": 0.8,
+                "opacityOnHover": 1
+            },
+            dialog: {
+                enable: true,
+                script: {
+                    'tap body': '你要把毛毛电竞一锅端了吗？',
+                    'tap face': '你知道吗？小乙烯又在和女室友游龙',
+                }
+            },
+        });
+    </script>
     
     
 </body>
