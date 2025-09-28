@@ -290,7 +290,7 @@ window.addEventListener('load', initImageSliders);
 // 获取并显示 Google Analytics 访问量
 async function fetchGaVisitCount() {
     const API_KEY = 'ExoWZEAgTWOQ_WsVbTgTNg';
-    const PROPERTY_ID = 'properties/12078580032';
+    const PROPERTY_ID = 'properties/G-2MY9RSPX4Z';
 
     try {
         const response = await fetch(
