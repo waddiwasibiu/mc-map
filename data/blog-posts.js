@@ -180,7 +180,7 @@ const blogPosts = [
         content: "十一周目",
         fullContent: `IDK_Whats_My_Name、KISSSHOTA`,
         author: "IDK_Whats_My_Name",
-        date: "2025-10-15",
+        date: "2025-10-22",
         category: "新闻记录",
         image: 17,
     },
