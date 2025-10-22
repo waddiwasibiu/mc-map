@@ -164,4 +164,25 @@ const blogPosts = [
         category: "新闻记录",
         image: 15,
     },
+    {
+        id: 16,
+        title: "略猫区fancyii",
+        content: "十一周目",
+        fullContent: `fancyi、KKNM231、KISSSHOTA、Nightgouwns49`,
+        author: "fancyi",
+        date: "2025-10-15",
+        category: "新闻记录",
+        image: 16,
+    },
+    {
+        id: 17,
+        title: "绿猪和善魂绿猪",
+        content: "十一周目",
+        fullContent: `IDK_Whats_My_Name、KISSSHOTA`,
+        author: "IDK_Whats_My_Name",
+        date: "2025-10-15",
+        category: "新闻记录",
+        image: 17,
+    },
+
 ];
