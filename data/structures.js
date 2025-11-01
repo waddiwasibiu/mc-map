@@ -48,6 +48,7 @@ const defaultStructures = [
             { id: 16, x: -8070, y: 192, z: -10888, description: "地狱坐标" },
             { id: 17, x: -10937, y: 192, z: 4285, description: "地狱坐标" },
             { id: 18, x: 5806, y: 192, z: -3884, description: "地狱坐标" },
+            { id: 19, x: -5316, y: 192, z: 10691, description: "地狱坐标" },
         ]
     }
 },
