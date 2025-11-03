@@ -712,6 +712,8 @@ const defaultStructures = [
             { id: 6, x: -31200, y: 192, z: -67777, description: "天才粉毛甄选真坐标" },
             { id: 7, x: 4222, y: 192, z: 555, description: "天才粉毛甄选真坐标" },
             { id: 8, x: -1200, y: 192, z: 4320, description: "天才粉毛甄选真坐标" },
+            { id: 9, x: -9329, y: 192, z: -20081, description: "菲亚甄选真坐标" },
+            { id: 10, x: -21615, y: 192, z: -36573, description: "菲亚甄选真坐标" },
         ],
         server2: [
             { id: 1, x: -5419, y: 192, z: 4421, description: "天才粉毛甄选真坐标" },
