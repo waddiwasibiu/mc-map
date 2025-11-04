@@ -723,7 +723,7 @@ const defaultStructures = [
             { id: 4, x: 7198, y: 192, z: -2478, description: "真假未知 如验证可私聊粉毛" },
             { id: 5, x: 8797, y: 192, z: -3789, description: "真假未知 如验证可私聊粉毛" },
             { id: 6, x: -29799, y: 192, z: 18040, description: "真假未知 如验证可私聊粉毛" },
-            { id: 7, x: 31283, y: 192, z: 19618, description: "真假未知 如验证可私聊粉毛" },
+            { id: 7, x: 0, y: 192, z: 0, description: "删掉的假坐标 后续新增补上" },
             { id: 8, x: 314, y: 192, z: -7640, description: "真假未知 如验证可私聊粉毛" },
             { id: 9, x: -27180, y: 192, z: 2050, description: "天才粉毛甄选真坐标" },
             { id: 10, x: -39380, y: 192, z: 2920, description: "天才粉毛甄选真坐标" },
