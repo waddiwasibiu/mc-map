@@ -692,6 +692,7 @@ const defaultStructures = [
             { id: 2, x: -6122, y: 192, z: 666, description: "天才粉毛甄选真坐标" },
             { id: 3, x: -21419, y: 192, z: 8166, description: "天才粉毛甄选真坐标" },
             { id: 4, x: 16666, y: 192, z: 8400, description: "天才粉毛甄选真坐标" },
+            { id: 5, x: -2390, y: 192, z: 26385, description: "天才粉毛甄选真坐标" },
         ]
     }
 },
