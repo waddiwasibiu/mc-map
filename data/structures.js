@@ -366,28 +366,11 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 17540, y: 192, z: 2208, description: "" },
-            { id: 2, x: 11727, y: 192, z: 850, description: "" },
-            { id: 3, x: -13871, y: 192, z: 14938, description: "8船" },
+            { id: 1, x: 0, y: 192, z: 0, description: "" },
 
         ],
         server2: [
-            { id: 1, x: -807, y: 192, z: 1409, description: "" },
-            { id: 2, x: 5500, y: 192, z: -1727, description: "" },
-            { id: 3, x: -3892, y: 192, z: -3557, description: "" },
-            { id: 4, x: -1182, y: 192, z: -2028, description: "" },
-            { id: 5, x: -3450, y: 192, z: -7906, description: "" },
-            { id: 6, x: 4269, y: 192, z: -17271, description: "" },
-            { id: 7, x: 1856, y: 192, z: 18, description: "" },
-            { id: 8, x: -6077, y: 192, z: 5374, description: "" },
-            { id: 9, x: 1062, y: 192, z: -4919, description: "" },
-            { id: 10, x: 8400, y: 192, z: -12096, description: "" },
-            { id: 11, x: 3864, y: 192, z: 3521, description: "" },
-            { id: 12, x: -4672, y: 192, z: 1502, description: "" },
-            { id: 13, x: -6546, y: 192, z: -3847, description: "" },
-            { id: 14, x: -8500, y: 192, z: 833, description: "" },
-            
-        
+            { id: 1, x: 0, y: 192, z: 0, description: "" },
         ]
     }
 },
