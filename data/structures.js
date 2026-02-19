@@ -58,10 +58,25 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
-        { id: 1, x: 9628, y: 192, z: 8814, description: "爱酱" },
-        { id: 2, x: 9634, y: 192, z: 7762, description: "爱酱" },
-        { id: 3, x: -3784, y: 192, z: -3774, description: "爱酱" },
-        { id: 4, x: 9634, y: 192, z: -4756, description: "爱酱" },
+        { id: 1, x: 9628, y: 192, z: 8814, description: "" },
+        { id: 2, x: 9634, y: 192, z: 7762, description: "" },
+        { id: 3, x: -3784, y: 192, z: -3774, description: "已改造" },
+        { id: 4, x: 9634, y: 192, z: -4756, description: "" },
+        { id: 5, x: 14444, y: 192, z: -4757, description: "" },
+        { id: 6, x: 1138, y: 192, z: -1819, description: "" },
+        { id: 7, x: 8774, y: 192, z: -12328, description: "已改造" },
+        { id: 8, x: -7575, y: 192, z: -4772, description: "" },
+        { id: 9, x: -6619, y: 192, z: 2977, description: "" },
+        { id: 10, x: 2945, y: 192, z: -4635, description: "" },
+        { id: 11, x: 7737, y: 192, z: -6610, description: "已改造" },
+        { id: 12, x: 4815, y: 192, z: 50, description: "" },
+        { id: 13, x: 8765, y: 192, z: 9716, description: "" },
+        { id: 14, x: 14545, y: 192, z: 4819, description: "" },
+        { id: 15, x: -1786, y: 192, z: 5904, description: "" },
+        { id: 16, x: 8786, y: 192, z: 8692, description: "" },
+        { id: 17, x: 8680, y: 192, z: 2977, description: "" },
+        { id: 18, x: -13338, y: 192, z: -12414, description: "" },
+
         
 
         ],
