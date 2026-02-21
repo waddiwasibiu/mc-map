@@ -37,9 +37,11 @@ const defaultStructures = [
     icon: "fa-tree",
     coordinates: {
         server1: [
-        { id: 1, x: -2871, y: 192, z: 3141, description: "柚子社" },
-        { id: 2, x: 4540, y: 192, z: 208, description: "DDDH66" },
-        { id: 3, x: 1539, y: 192, z: -7281, description: "小江" },
+        { id: 1, x: -2871, y: 192, z: 3141, description: "" },
+        { id: 2, x: 4540, y: 192, z: 208, description: "" },
+        { id: 3, x: 1539, y: 192, z: -7281, description: "" },
+        { id: 4, x: 14162, y: 192, z: -1364, description: "" },
+        { id: 5, x: 3250, y: 192, z: 722, description: "" },
         
 
         ],
@@ -114,6 +116,11 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
+            { id: 1, x: 6577, y: 192, z: 5375, description: "" },
+            { id: 2, x: 6461, y: 192, z: 3686, description: "" },
+            { id: 3, x: 8912, y: 192, z: 10005, description: "" },
+            { id: 4, x: -405, y: 192, z: 8378, description: "" },
+            { id: 5, x: 6831, y: 192, z: -742, description: "" },
 
 
 
@@ -272,6 +279,15 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
+            { id: 1, x: 4018, y: 192, z: 1615, description: "" },
+            { id: 2, x: -11216, y: 192, z: -9999, description: "" },
+            { id: 3, x: 4424, y: 192, z: 1607, description: "" },
+            { id: 4, x: -4777, y: 192, z: 5606, description: "" },
+            { id: 5, x: 6005, y: 192, z: 2810, description: "" },
+            { id: 6, x: 8805, y: 192, z: 9599, description: "" },
+            { id: 7, x: -1181, y: 192, z: 404, description: "" },
+            { id: 8, x: -5183, y: 192, z: 4412, description: "" },
+            { id: 9, x: 13213, y: 192, z: -1365, description: "" },
 
 
         ],
@@ -345,13 +361,15 @@ const defaultStructures = [
 
 {
     id: 17,
-    name: "猪灵城楼",
+    name: "禁锢主楼",
     type: "遗迹",
-    description: "猪灵城楼",
+    description: "恶魂boss",
     image: 18,
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
+            { id: 1, x: 492, y: 192, z: 5082, description: "" },
+            { id: 2, x: -4221, y: 192, z: 15137, description: "" },
 
         ],
         server2: [
@@ -370,6 +388,12 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
+            { id: 1, x: 9059, y: 192, z: -28758, description: "" },
+            { id: 2, x: -35497, y: 192, z: -20170, description: "" },
+            { id: 3, x: -5220, y: 192, z: 3367, description: "" },
+            { id: 4, x: 6153, y: 192, z: 8978, description: "" },
+            { id: 5, x: 6070, y: 192, z: 8000, description: "" },
+            { id: 6, x: 4507, y: 192, z: 10826, description: "" },
 
         ],
         server2: [
