@@ -147,6 +147,7 @@ const defaultStructures = [
     icon: "fa-tornado",
     coordinates: {
         server1: [
+            { id: 1, x: 8200, y: 192, z: -4091, description: "" },
 
             
 
@@ -267,6 +268,7 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
+            { id: 1, x: 8000, y: 192, z: -4240, description: "" },
 
 
         ],
