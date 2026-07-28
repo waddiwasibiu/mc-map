@@ -413,7 +413,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化结构筛选器
     initStructureFilter();
 
+    // 初始化3D专属筛选器
+    if (typeof init3DFilters === 'function') init3DFilters();
+
     initGitalk();
 
-
+    // 返回顶部按钮
+    var backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 400) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 });

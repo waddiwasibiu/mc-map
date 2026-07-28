@@ -12,46 +12,62 @@ function renderStructureCard(structure, server) {
     : 'images/structures/1.png';
     
     return `
-        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-100 mb-6" 
+        <div class="bg-white rounded-2xl shadow-soft overflow-hidden card-hover border border-gray-100 mb-6" 
             data-structure="${structure.id}" data-server="${server}">
             <!-- 结构图片展示区 -->
             <div class="relative">
                 <div class="structure-image w-full h-48 bg-cover bg-center transition-transform duration-500 hover:scale-105" 
                     style="background-image: url('${imageUrl}')">
-                    <!-- 图片加载失败处理 -->
                     <img src="${imageUrl}" class="hidden" onError="this.parentElement.style.backgroundImage='url(images/structures/1.png)'">
                 </div>
-                <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
+                <div class="absolute top-4 left-4">
+                    <span class="inline-block px-2.5 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-xs font-semibold text-dark shadow-sm">${structure.type}</span>
+                </div>
+                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-bold shadow-sm">
                     <i class="fa fa-map-marker mr-1 text-${serverClass}"></i> 
                     ${totalCoordinates}个坐标
                 </div>
+                <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/50 to-transparent"></div>
             </div>
             
             <!-- 结构信息区 -->
             <div class="p-6">
-                <div class="flex justify-between items-start mb-4">
+                <div class="flex justify-between items-start mb-3">
                     <div>
                         <h3 class="text-xl font-bold text-dark">${structure.name}</h3>
-                        <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm mt-2">${structure.type}</span>
                     </div>
-                    <div class="text-${serverClass} text-2xl">
+                    <div class="text-${serverClass} text-2xl opacity-60">
                         <i class="fa ${structure.icon || 'fa-question-circle'}"></i>
                     </div>
                 </div>
                 
-                <div class="mb-6 text-gray-600">
+                <div class="mb-6 text-gray-500 text-sm leading-relaxed">
                     <p>${structure.description || '暂无描述信息'}</p>
                 </div>
                 
+                <!-- 路径标注说明 -->
+                ${coordinates.length > 1 ? `
+                <div class="mb-4 flex items-center gap-4 text-xs text-gray-400">
+                    <span class="flex items-center gap-1"><span class="path-badge path-badge-start">1</span> 起点最近</span>
+                    <span class="flex items-center gap-1"><span class="path-badge path-badge-node">N</span> 路径顺序</span>
+                    <span class="flex items-center gap-1"><span class="path-badge path-badge-end">${coordinates.length}</span> 终点</span>
+                    <span class="text-gray-300">|</span>
+                    <span><i class="fa fa-asterisk text-primary/40 mr-1"></i>从(0,0)出发最短路径排序</span>
+                </div>
+                ` : ''}
+                
                 <!-- 坐标分布图 -->
-                <div class="mt-6 mb-6 cursor-pointer chart-container border border-gray-200 rounded-lg p-1" 
+                <div class="mt-4 mb-6 cursor-pointer chart-container" 
                     data-structure="${structure.id}" data-server="${server}">
-                    <h4 class="font-medium text-gray-700 mb-3">坐标分布 (X-Z 平面)</h4>
-                    <div class="relative h-48 w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                    <h4 class="font-medium text-sm text-gray-600 mb-2 flex items-center">
+                        <i class="fa fa-line-chart mr-1.5 text-primary/50"></i>坐标分布 (X-Z 平面)
+                        <span class="text-xs text-gray-400 ml-auto">点击放大</span>
+                    </h4>
+                    <div class="relative mx-auto bg-white rounded-lg overflow-hidden border border-gray-100" style="width:60%;aspect-ratio:1;">
                         ${coordinates.length > 0 ? `
-                            <canvas id="${server}-${structure.id}-chart" class="w-full h-full"></canvas>
+                            <canvas id="${server}-${structure.id}-chart"></canvas>
                         ` : `
-                            <div class="absolute inset-0 flex items-center justify-center text-gray-500">
+                            <div class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm">
                                 <p>暂无坐标数据</p>
                             </div>
                         `}
@@ -60,48 +76,45 @@ function renderStructureCard(structure, server) {
                 
                 <!-- 坐标列表 -->
                 <div id="${server}-${structure.id}-coordinates" 
-                    class="space-y-3 mb-6 max-h-60 overflow-y-auto border border-gray-100 rounded-lg" 
+                    class="space-y-2 mb-6 max-h-60 overflow-y-auto border border-gray-100 rounded-xl p-1" 
                     data-expanded="false">
-                    ${coordinates.length > 0 ? coordinates.map(coord => `
-                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-${serverClass}/50 transition-colors">
-                            <div class="flex justify-between items-start mb-2">
-                                <div class="font-medium">
-                                    #${coord.id} ${coord.description || '无描述'}
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap gap-2 text-sm">
-                                <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
-                                    <i class="fa fa-arrow-right text-gray-500 mr-2"></i>
-                                    <span class="font-mono">X: ${coord.x}</span>
-                                </div>
-                                <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
-                                    <i class="fa fa-arrow-up text-gray-500 mr-2"></i>
-                                    <span class="font-mono">Y: ${coord.y}</span>
-                                </div>
-                                <div class="bg-gray-100 px-3 py-1 rounded flex items-center">
-                                    <i class="fa fa-arrow-left text-gray-500 mr-2"></i>
-                                    <span class="font-mono">Z: ${coord.z}</span>
+                    ${coordinates.length > 0 ? coordinates.map(function(coord, idx) {
+                        var badgeClass = idx === 0 ? 'path-badge-start' : (idx === coordinates.length - 1 ? 'path-badge-end' : 'path-badge-node');
+                        return `
+                        <div class="bg-gray-50 hover:bg-white p-3.5 rounded-lg border border-gray-100 hover:border-${serverClass}/30 hover:shadow-sm transition-all">
+                            <div class="flex items-start gap-3">
+                                <span class="path-badge ${badgeClass} mt-0.5">${coord.id}</span>
+                                <div class="flex-1 min-w-0">
+                                    <div class="font-medium text-sm text-dark truncate">${coord.description || '无描述'}</div>
+                                    <div class="flex flex-wrap gap-1.5 mt-1.5">
+                                        <span class="inline-flex items-center px-1.5 py-0.5 bg-white rounded text-xs font-mono text-gray-600 border border-gray-200">
+                                            <span class="text-red-400 font-semibold mr-0.5">X</span>${coord.x}
+                                        </span>
+                                        <span class="inline-flex items-center px-1.5 py-0.5 bg-white rounded text-xs font-mono text-gray-600 border border-gray-200">
+                                            <span class="text-green-400 font-semibold mr-0.5">Y</span>${coord.y}
+                                        </span>
+                                        <span class="inline-flex items-center px-1.5 py-0.5 bg-white rounded text-xs font-mono text-gray-600 border border-gray-200">
+                                            <span class="text-blue-400 font-semibold mr-0.5">Z</span>${coord.z}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    `).join('') : '<p class="text-center text-gray-500 py-4">暂无坐标数据</p>'}
+                        `;
+                    }).join('') : '<p class="text-center text-gray-400 text-sm py-6">暂无坐标数据</p>'}
                 </div>
                 
                 <!-- 操作按钮区 -->
                 <div class="flex flex-wrap justify-between items-center gap-3">
-                    <button class="px-4 py-2 border border-${serverClass} text-${serverClass} rounded-md hover:bg-${serverClass}/10 transition-colors flex items-center toggle-coordinates-btn" 
+                    <button class="px-4 py-2 border border-gray-200 text-gray-600 rounded-xl hover:bg-gray-50 hover:border-${serverClass} hover:text-${serverClass} transition-all flex items-center text-sm toggle-coordinates-btn" 
                             data-structure="${structure.id}" data-server="${server}">
                         <span>展开全部</span>
-                        <i class="fa fa-chevron-down ml-2"></i>
+                        <i class="fa fa-chevron-down ml-2 text-xs"></i>
                     </button>
+                    <span class="text-xs text-gray-400">
+                        <i class="fa fa-clock-o mr-1"></i> ${new Date().toLocaleDateString('zh-CN')}
+                    </span>
                 </div>
-            </div>
-            
-            <!-- 底部信息栏 -->
-            <div class="bg-gray-50 p-4 flex justify-between items-center border-t border-gray-100">
-                <span class="text-xs text-gray-500">
-                    <i class="fa fa-clock-o mr-1"></i> ${new Date().toLocaleDateString('zh-CN')}
-                </span>
             </div>
         </div>
     `;
@@ -151,7 +164,7 @@ function renderAllStructures() {
                 if (expandedStates[key]) {
                     container.setAttribute('data-expanded', 'true');
                     container.classList.remove('max-h-60');
-                    btn.innerHTML = '<span>收起</span><i class="fa fa-chevron-up ml-2"></i>';
+                    btn.innerHTML = '<span>收起</span><i class="fa fa-chevron-up ml-2 text-xs"></i>';
                     expandedStates[`${server}-${structureId}`] = false;
                 }
             }
@@ -215,6 +228,11 @@ function drawAllCharts() {
                 description: coord.description
             }));
             
+            // 路径连线数据（按顺序连接各点）
+            var lineData = data.map(function(d) { return { x: d.x, y: d.y }; });
+            // 添加(0,0)起点
+            lineData.unshift({ x: 0, y: 0 });
+            
             // 创建小图表
             const chart = new Chart(ctx, {
                 type: 'scatter',
@@ -227,11 +245,22 @@ function drawAllCharts() {
                         borderWidth: 1,
                         pointRadius: 4,
                         pointHoverRadius: 6
+                    }, {
+                        label: '最优路径',
+                        data: lineData,
+                        type: 'line',
+                        borderColor: server === 'server1' ? 'rgba(59,130,246,0.35)' : 'rgba(16,185,129,0.35)',
+                        borderWidth: 1.5,
+                        borderDash: [4, 4],
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
+                    aspectRatio: 1,
                     plugins: {
                         legend: {
                             display: false
@@ -337,6 +366,10 @@ function showLargeChart(server, structureId) {
         description: coord.description
     }));
 
+    // 路径连线数据
+    var lineData = data.map(function(d) { return { x: d.x, y: d.y }; });
+    lineData.unshift({ x: 0, y: 0 });
+
     // 创建放大的图表
     const ctx = document.getElementById('modalChart').getContext('2d');
     window.modalChartInstance = new Chart(ctx, {
@@ -352,6 +385,17 @@ function showLargeChart(server, structureId) {
                 pointHoverRadius: 9,
                 pointHoverBackgroundColor: '#ffffff',
                 pointHoverBorderWidth: 2
+            }, {
+                label: '最优路径',
+                data: lineData,
+                type: 'line',
+                borderColor: server === 'server1' ? 'rgba(59,130,246,0.4)' : 'rgba(16,185,129,0.4)',
+                borderWidth: 2,
+                borderDash: [6, 4],
+                pointRadius: 0,
+                pointHitRadius: 0,
+                fill: false,
+                tension: 0
             }]
         },
         options: {
@@ -412,15 +456,17 @@ function showLargeChart(server, structureId) {
                 },
                 tooltip: {
                     callbacks: {
+                        title: function(contexts) {
+                            var ctx = contexts[0];
+                            if (!ctx.raw || ctx.raw.id === undefined) return '';
+                            var desc = ctx.raw.description || '';
+                            return '#' + ctx.raw.id + (desc ? ' ' + desc : '');
+                        },
                         label: function(context) {
-                            const point = context.raw;
-                            const coord = coordinates.find(c => c.id === point.id);
+                            if (!context.raw || context.raw.id === undefined) return '';
                             return [
-                                `ID: ${point.id}`,
-                                `X: ${coord.x}`,
-                                `Y: ${coord.y}`,
-                                `Z: ${coord.z}`,
-                                `描述: ${point.description}`
+                                'X: ' + context.raw.x,
+                                'Z: ' + context.raw.y,
                             ];
                         }
                     }
@@ -429,13 +475,14 @@ function showLargeChart(server, structureId) {
             interaction: {
                 mode: 'nearest',
                 axis: 'xy',
-                intersect: false
+                intersect: true
             },
             animation: {
                 duration: 500,
                 easing: 'easeOutQuart'
             },
-            maintainAspectRatio: true // 保持宽高比以确保比例尺一致
+            maintainAspectRatio: true,
+            aspectRatio: 1 // 保持XY轴1:1比例
         }
     });
 
@@ -485,13 +532,13 @@ function toggleCoordinates(server, structureId) {
     
     if (isExpanded) {
         container.setAttribute('data-expanded', 'false');
-        container.classList.add('max-h-60', 'overflow-y-hidden');
-        btn.innerHTML = '<span>展开全部</span><i class="fa fa-chevron-down ml-2"></i>';
+        container.classList.add('max-h-60');
+        btn.innerHTML = '<span>展开全部</span><i class="fa fa-chevron-down ml-2 text-xs"></i>';
         expandedStates[`${server}-${structureId}`] = false;
     } else {
         container.setAttribute('data-expanded', 'true');
-        container.classList.remove('max-h-60', 'overflow-y-hidden');
-        btn.innerHTML = '<span>收起</span><i class="fa fa-chevron-up ml-2"></i>';
+        container.classList.remove('max-h-60');
+        btn.innerHTML = '<span>收起</span><i class="fa fa-chevron-up ml-2 text-xs"></i>';
         expandedStates[`${server}-${structureId}`] = true;
     }
 }
@@ -536,7 +583,7 @@ let pointIdCounter = 1;
 function init3DScene() {
     // 创建场景
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf8fafc);
+    scene.background = new THREE.Color(0xf1f5f9);
 
     // 创建相机
     const container = document.getElementById('canvas-container');
@@ -568,6 +615,10 @@ function init3DScene() {
 
 // 全局变量存储当前筛选条件
 let currentFilter = 'all';
+
+// 3D 视图筛选变量
+let current3DFilter = 'all';
+let current3DServerFilter = 'all';
 
 // 初始化结构筛选器
 function initStructureFilter() {
@@ -601,6 +652,42 @@ function initStructureFilter() {
     });
 }
 
+// 初始化3D视图专属筛选器
+function init3DFilters() {
+    var structureFilter3D = document.getElementById('structure-filter-3d');
+    var serverFilter3D = document.getElementById('server-filter-3d');
+    
+    if (!structureFilter3D || !serverFilter3D) return;
+    
+    var structures = loadStructures();
+    var structureNames = [];
+    var seen = {};
+    structures.forEach(function(s) {
+        if (!seen[s.name]) { seen[s.name] = true; structureNames.push(s.name); }
+    });
+    
+    while (structureFilter3D.options.length > 1) {
+        structureFilter3D.remove(1);
+    }
+    structureNames.sort();
+    structureNames.forEach(function(name) {
+        var option = document.createElement('option');
+        option.value = name;
+        option.textContent = name;
+        structureFilter3D.appendChild(option);
+    });
+    
+    structureFilter3D.addEventListener('change', function() {
+        current3DFilter = this.value;
+        update3DCoordinates();
+    });
+    
+    serverFilter3D.addEventListener('change', function() {
+        current3DServerFilter = this.value;
+        update3DCoordinates();
+    });
+}
+
 // 修改update3DCoordinates函数以支持筛选
 function update3DCoordinates() {
     // 清除现有点和标签
@@ -629,29 +716,40 @@ function update3DCoordinates() {
     const allPoints = [];
     
     structures.forEach(structure => {
-        // 应用筛选条件：如果不是"所有结构"，只添加匹配的结构
-        if (currentFilter !== 'all' && structure.name !== currentFilter) {
+        // 应用筛选条件：卡片筛选 或 3D专属筛选（3D优先）
+        var structureFilter = current3DFilter !== 'all' ? current3DFilter : currentFilter;
+        if (structureFilter !== 'all' && structure.name !== structureFilter) {
             return;
         }
         
-        (structure.coordinates.server1 || []).forEach(coord => {
-            allPoints.push({
-                ...coord,
-                structureName: structure.name,
-                server: 'server1',
-                serverName: '一区'
+        if (current3DServerFilter === 'all' || current3DServerFilter === 'server1') {
+            (structure.coordinates.server1 || []).forEach(coord => {
+                allPoints.push({
+                    ...coord,
+                    structureName: structure.name,
+                    server: 'server1',
+                    serverName: '一区'
+                });
             });
-        });
+        }
         
-        (structure.coordinates.server2 || []).forEach(coord => {
-            allPoints.push({
-                ...coord,
-                structureName: structure.name,
-                server: 'server2',
-                serverName: '二区'
+        if (current3DServerFilter === 'all' || current3DServerFilter === 'server2') {
+            (structure.coordinates.server2 || []).forEach(coord => {
+                allPoints.push({
+                    ...coord,
+                    structureName: structure.name,
+                    server: 'server2',
+                    serverName: '二区'
+                });
             });
-        });
+        }
     });
+
+    // 更新筛选计数显示
+    var countEl = document.getElementById('filter-count-3d');
+    if (countEl) {
+        countEl.textContent = '共 ' + allPoints.length + ' 个坐标点';
+    }
 
     // 创建点列表UI
     const pointsListEl = document.getElementById('points-list');
@@ -660,10 +758,10 @@ function update3DCoordinates() {
     // 如果没有匹配的点，显示提示信息
     if (allPoints.length === 0) {
         pointsListEl.innerHTML = `
-            <div class="text-center py-6 text-gray-500">
-                <i class="fa fa-search fa-2x mb-2"></i>
-                <p>没有找到匹配的坐标点</p>
-                <button id="reset-filter" class="mt-2 text-sm text-primary hover:underline">
+            <div class="text-center py-8 text-gray-400">
+                <i class="fa fa-search fa-2x mb-3 opacity-40"></i>
+                <p class="text-sm">没有找到匹配的坐标点</p>
+                <button id="reset-filter" class="mt-3 px-4 py-1.5 text-xs text-primary bg-primary/5 rounded-full hover:bg-primary/10 transition-colors">
                     重置筛选条件
                 </button>
             </div>
@@ -672,7 +770,14 @@ function update3DCoordinates() {
         // 添加重置筛选条件的事件
         document.getElementById('reset-filter').addEventListener('click', function() {
             currentFilter = 'all';
-            document.getElementById('structure-filter').value = 'all';
+            current3DFilter = 'all';
+            current3DServerFilter = 'all';
+            var f1 = document.getElementById('structure-filter');
+            var f2 = document.getElementById('structure-filter-3d');
+            var f3 = document.getElementById('server-filter-3d');
+            if (f1) f1.value = 'all';
+            if (f2) f2.value = 'all';
+            if (f3) f3.value = 'all';
             update3DCoordinates();
         });
         
@@ -745,17 +850,17 @@ function update3DCoordinates() {
 
         // 创建列表项
         const pointEl = document.createElement('div');
-        pointEl.className = `p-3 border border-slate-200 rounded-lg hover:border-${point.server} transition-colors`;
+        pointEl.className = `p-3 border border-gray-100 rounded-xl hover:border-${point.server} hover:bg-gray-50 transition-all cursor-pointer`;
         pointEl.innerHTML = `
-            <div class="font-medium flex justify-between items-center">
-                <span>${point.structureName} (${point.serverName})</span>
-                <span class="text-xs px-2 py-1 bg-${point.server}/10 text-${point.server} rounded-full">ID: ${pointId}</span>
+            <div class="font-medium text-sm flex justify-between items-center">
+                <span class="truncate mr-2">${point.structureName}</span>
+                <span class="text-xs px-2 py-0.5 bg-${point.server}/10 text-${point.server} rounded-full font-bold whitespace-nowrap">#${pointId}</span>
             </div>
-            <div class="text-xs text-gray-500 mt-1">${point.description || '无描述'}</div>
-            <div class="grid grid-cols-3 gap-1 mt-2 text-sm text-slate-600">
-                <div class="flex items-center"><span class="text-red-500 mr-1">X:</span> ${point.x}</div>
-                <div class="flex items-center"><span class="text-green-500 mr-1">Y:</span> ${point.y}</div>
-                <div class="flex items-center"><span class="text-blue-500 mr-1">Z:</span> ${point.z}</div>
+            <div class="text-xs text-gray-400 mt-1 truncate">${point.description || point.serverName}</div>
+            <div class="grid grid-cols-3 gap-1 mt-1.5 text-xs text-gray-500">
+                <span class="flex items-center"><span class="text-red-400 font-semibold mr-0.5">X</span>${point.x}</span>
+                <span class="flex items-center"><span class="text-green-400 font-semibold mr-0.5">Y</span>${point.y}</span>
+                <span class="flex items-center"><span class="text-blue-400 font-semibold mr-0.5">Z</span>${point.z}</span>
             </div>
         `;
         pointsListEl.appendChild(pointEl);

@@ -65,8 +65,8 @@ function filterStructuresByName(name) {
             if (serverContent) {
                 noResultsElement = document.createElement('div');
                 noResultsElement.id = 'no-structures-message';
-                noResultsElement.className = 'text-center py-12 text-gray-500';
-                noResultsElement.innerHTML = `<i class="fa fa-search fa-2x mb-2"></i><p>没有找到匹配的结构</p>`;
+                noResultsElement.className = 'text-center py-16 text-gray-400 bg-white rounded-2xl shadow-soft border border-gray-100';
+                noResultsElement.innerHTML = `<i class="fa fa-search fa-3x mb-3 opacity-30"></i><p class="text-sm">没有找到匹配的结构</p>`;
                 serverContent.appendChild(noResultsElement);
             }
         } else {

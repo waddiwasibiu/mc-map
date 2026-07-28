@@ -35,55 +35,32 @@
         .bg-category-2 { background-color: rgba(249, 115, 22, 0.9); }
         .bg-category-3 { background-color: rgba(107, 114, 128, 0.9); }
 
-        .category-other {
-            background-color: rgba(59, 130, 246, 0.9);
-            color: #ffffff;
-        }
-        .category-1 {
-            background-color: rgba(16, 185, 129, 0.9);
-            color: #ffffff;
-        }
-        .category-2 {
-            background-color: rgba(249, 115, 22, 0.9);
-            color: #ffffff;
-        }
-        .category-3 {
-            background-color: rgba(107, 114, 128, 0.9);
-            color: #ffffff;
-        }
+        .category-other { background-color: rgba(59, 130, 246, 0.9); color: #ffffff; }
+        .category-1 { background-color: rgba(16, 185, 129, 0.9); color: #ffffff; }
+        .category-2 { background-color: rgba(249, 115, 22, 0.9); color: #ffffff; }
+        .category-3 { background-color: rgba(107, 114, 128, 0.9); color: #ffffff; }
         
         @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .structure-image {
-                background-color: #f0f0f0;
-                background-size: cover;
-                background-position: center;
-            }
-            .chart-modal-backdrop {
-                background-color: rgba(0, 0, 0, 0.7);
-                backdrop-filter: blur(4px);
-            }
-            .chart-modal-content {
-                max-height: 90vh;
-                width: 90vw;
-                max-width: 1000px;
-            }
-            .blog-post-card {
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                cursor: pointer;
-            }
-            .blog-post-card:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            }
-            .post-detail-content {
-                line-height: 1.8;
-            }
-            .post-detail-content p {
-                margin-bottom: 1rem;
-            }
+            .content-auto { content-visibility: auto; }
+            .structure-image { background-color: #f0f0f0; background-size: cover; background-position: center; }
+            .chart-modal-backdrop { background-color: rgba(0,0,0,0.7); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+            .chart-modal-content { max-height: 90vh; width: 90vw; max-width: 1000px; }
+            .blog-post-card { transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease; cursor: pointer; }
+            .blog-post-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.15); }
+            .post-detail-content { line-height: 1.8; }
+            .post-detail-content p { margin-bottom: 1rem; }
+            .shadow-soft { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+
+            .text-gradient { background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+            .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5); }
+
+            .back-to-top { position: fixed; bottom: 2rem; right: 2rem; z-index: 50; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0; transform: translateY(20px); pointer-events: none; }
+            .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+            ::-webkit-scrollbar { width: 6px; }
+            ::-webkit-scrollbar-track { background: transparent; }
+            ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+            ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         }
     </style>
 
@@ -105,8 +82,13 @@
     <!-- 帖子页面内容 -->
     <section id="blog-page" class="container mx-auto px-4 pt-24 pb-16">
         <div class="mb-12 text-center">
-            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">Baka 村帖子</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">这里是玩家们分享的各种帖子，包括游戏心得、攻略和合影。</p>
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4">
+                <i class="fa fa-newspaper-o mr-1.5"></i> 玩家社区
+            </div>
+            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-extrabold text-dark mb-3">
+                <span class="text-gradient">Baka 村</span> 帖子
+            </h2>
+            <p class="text-gray-500 max-w-2xl mx-auto text-lg">玩家们分享的游戏心得、攻略和精彩瞬间</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blog-posts-container">
@@ -116,31 +98,33 @@
 
     <!-- 帖子详情模态框 -->
     <div id="postDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center chart-modal-backdrop p-4">
-        <div class="bg-white rounded-xl shadow-2xl p-6 chart-modal-content max-w-4xl w-95 max-h-[90vh] overflow-y-auto">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 chart-modal-content max-w-4xl w-95 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold text-dark" id="postDetailTitle">帖子详情</h3>
-                <button id="closePostDetailModal" class="text-gray-500 hover:text-gray-700">
-                    <i class="fa fa-times text-xl"></i>
+                <button id="closePostDetailModal" class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors">
+                    <i class="fa fa-times text-lg"></i>
                 </button>
             </div>
             <div class="relative">
-                <!-- 帖子图片 -->
-                <div id="postDetailImage" class="w-full mb-6 rounded-lg structure-image bg-contain bg-no-repeat bg-center" style="min-height: 200px;"></div>
+                <div id="postDetailImage" class="w-full mb-6 rounded-xl structure-image bg-contain bg-no-repeat bg-center" style="min-height: 200px;"></div>
                 
-                <!-- 帖子元数据 -->
                 <div class="flex flex-wrap justify-between items-center mb-6 text-sm text-gray-500">
                     <div class="flex items-center gap-4">
                         <span><i class="fa fa-user mr-1"></i> <span id="postDetailAuthor"></span></span>
                         <span><i class="fa fa-calendar mr-1"></i> <span id="postDetailDate"></span></span>
                     </div>
-                    <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs" id="postDetailCategory"></span>
+                    <span class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-xs font-medium" id="postDetailCategory"></span>
                 </div>
                 
-                <!-- 帖子内容 -->
                 <div id="postDetailContent" class="post-detail-content text-gray-700"></div>
             </div>
         </div>
     </div>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="back-to-top bg-gradient-to-br from-primary to-secondary text-white shadow-lg shadow-primary/20" title="回到顶部">
+        <i class="fa fa-chevron-up"></i>
+    </button>
 
     <!-- 页尾组件 -->
     <div id="footer-container"></div>

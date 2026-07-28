@@ -40,85 +40,74 @@
         .bg-category-2 { background-color: rgba(249, 115, 22, 0.9); }
         .bg-category-3 { background-color: rgba(107, 114, 128, 0.9); }
 
+        .category-other { background-color: rgba(59, 130, 246, 0.9); color: #ffffff; }
+        .category-1 { background-color: rgba(16, 185, 129, 0.9); color: #ffffff; }
+        .category-2 { background-color: rgba(249, 115, 22, 0.9); color: #ffffff; }
+        .category-3 { background-color: rgba(107, 114, 128, 0.9); color: #ffffff; }
 
-        .category-other {
-            background-color: rgba(59, 130, 246, 0.9); /* 蓝色背景 */
-            color: #ffffff; /* 白色文字 */
-        }
-        .category-1 {
-            background-color: rgba(16, 185, 129, 0.9); /* 绿色背景 */
-            color: #ffffff; /* 白色文字 */
-        }
-        .category-2 {
-            background-color: rgba(249, 115, 22, 0.9); /* 橙色背景 */
-            color: #ffffff; /* 白色文字 */
-        }
-        .category-3 {
-            background-color: rgba(107, 114, 128, 0.9); /* 灰色背景 */
-            color: #ffffff; /* 白色文字 */
-        }
-        
         @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .card-hover {
-                transition: all 0.3s ease;
-            }
-            .card-hover:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            }
-            .structure-image {
-                background-color: #f0f0f0;
-                background-size: cover;
-                background-position: center;
-            }
-            .chart-container {
-                transition: all 0.2s ease;
-            }
-            .chart-container:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            }
-            .chart-modal-backdrop {
-                background-color: rgba(0, 0, 0, 0.7);
-                backdrop-filter: blur(4px);
-            }
-            .chart-modal-content {
-                max-height: 80vh;
-                width: 90vw;
-                max-width: 800px;
-            }
-            #gitalk-container {
-                font-family: 'Inter', sans-serif;
-                color: #1E293B; /* 使用 dark 颜色 */
-            }
-            #gitalk-container .gt-comment-content {
-                border-radius: 0.375rem; /* 与其他卡片的圆角一致 */
-            }
-            .shadow-soft {
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-            }
-            .blog-post-card {
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                cursor: pointer;
-            }
-            .blog-post-card:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            }
-            .post-detail-content {
-                line-height: 1.8;
-            }
-            .post-detail-content p {
-                margin-bottom: 1rem;
-            }
-            .post-detail-content h3 {
-                font-size: 1.25rem;
-                font-weight: 600;
-                margin: 1.5rem 0 1rem;
-            }
+            .content-auto { content-visibility: auto; }
+            .card-hover { transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+            .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.15), 0 4px 16px -4px rgba(0,0,0,0.08); }
+            .structure-image { background-color: #f0f0f0; background-size: cover; background-position: center; }
+            .chart-container { transition: all 0.3s ease; cursor: pointer; }
+            .chart-container:hover { transform: translateY(-3px); box-shadow: 0 8px 25px -5px rgba(59,130,246,0.15); }
+            .chart-modal-backdrop { background-color: rgba(0,0,0,0.7); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+            .chart-modal-content { max-height: 80vh; width: 90vw; max-width: 850px; }
+            #gitalk-container { font-family: 'Inter', sans-serif; color: #1E293B; }
+            #gitalk-container .gt-comment-content { border-radius: 0.5rem; }
+            .shadow-soft { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+            .blog-post-card { transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
+            .blog-post-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0,0,0,0.12); }
+            .post-detail-content { line-height: 1.8; }
+            .post-detail-content p { margin-bottom: 1rem; }
+            .post-detail-content h3 { font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 1rem; }
+
+            /* 玻璃拟态效果 */
+            .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5); }
+            .glass-dark { background: rgba(30,41,59,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+
+            /* 渐变文字 */
+            .text-gradient { background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+            /* 浮动动画 */
+            .animate-float { animation: float 4s ease-in-out infinite; }
+            @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+            /* 脉冲呼吸 */
+            .animate-pulse-soft { animation: pulseSoft 2.5s ease-in-out infinite; }
+            @keyframes pulseSoft { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+            /* 淡入上移 */
+            .animate-fade-up { animation: fadeUp 0.6s ease-out; }
+            @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+            /* 旋转光晕 */
+            .hero-glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; pointer-events: none; }
+            .hero-glow-1 { width: 400px; height: 400px; background: #3B82F6; top: -100px; left: -50px; animation: float 6s ease-in-out infinite; }
+            .hero-glow-2 { width: 300px; height: 300px; background: #10B981; bottom: -80px; right: -40px; animation: float 5s ease-in-out infinite 1s; }
+            .hero-glow-3 { width: 250px; height: 250px; background: #F59E0B; top: 50%; right: 20%; animation: float 7s ease-in-out infinite 2s; }
+
+            /* 骨架屏加载 */
+            .skeleton { background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton 1.5s ease-in-out infinite; border-radius: 0.5rem; }
+            @keyframes skeleton { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+            /* 返回顶部按钮 */
+            .back-to-top { position: fixed; bottom: 2rem; right: 2rem; z-index: 50; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0; transform: translateY(20px); pointer-events: none; }
+            .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+            .back-to-top:hover { transform: translateY(-3px); }
+
+            /* 自定义滚动条 */
+            ::-webkit-scrollbar { width: 6px; }
+            ::-webkit-scrollbar-track { background: transparent; }
+            ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+            ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+            /* 路径编号徽标 */
+            .path-badge { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0; }
+            .path-badge-start { background: linear-gradient(135deg, #F59E0B, #EF4444); }
+            .path-badge-node { background: linear-gradient(135deg, #3B82F6, #6366F1); }
+            .path-badge-end { background: linear-gradient(135deg, #10B981, #059669); }
         }
     </style>
 
@@ -140,70 +129,93 @@
     <!-- 主内容区 -->
     <main id="main-content" class="container mx-auto px-4 pt-24 pb-16">
         <!-- 欢迎部分 -->
-        <section id="home" class="mb-12">
-            <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 shadow-lg">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-6 md:mb-0">
-                        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-dark mb-4">欢迎来到 Baka 村结构坐标库</h2>
-                        <p class="text-gray-600 mb-6 text-lg">探索并分享《我的世界》中各种独特结构的坐标，让冒险更加便捷！</p>
-                        <div class="flex flex-wrap gap-4">
-                            <a href="#structures" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center">
-                                <i class="fa fa-map-marker mr-2"></i> 浏览结构
-                            </a>
+        <section id="home" class="mb-12 relative">
+            <div class="relative bg-white rounded-3xl shadow-soft overflow-hidden border border-gray-100">
+                <!-- 背景光晕 -->
+                <div class="hero-glow hero-glow-1"></div>
+                <div class="hero-glow hero-glow-2"></div>
+                <div class="hero-glow hero-glow-3"></div>
+                <div class="relative z-10 p-8 md:p-12">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mb-8 md:mb-0">
+                            <div class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4">
+                                <span class="w-2 h-2 rounded-full bg-primary animate-pulse-soft mr-2"></span> 坐标数据实时更新
+                            </div>
+                            <h2 class="text-[clamp(1.8rem,4vw,2.8rem)] font-extrabold text-dark mb-4 leading-tight">
+                                欢迎来到 <span class="text-gradient">Baka 村</span><br>结构坐标库
+                            </h2>
+                            <p class="text-gray-500 mb-8 text-lg leading-relaxed max-w-md">探索并分享《我的世界》中各种独特结构的坐标，让冒险更加便捷！</p>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="#structures" class="group px-6 py-3 bg-gradient-to-r from-primary to-primary/90 text-white rounded-xl hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 flex items-center font-medium">
+                                    <i class="fa fa-map-marker mr-2 group-hover:scale-110 transition-transform"></i> 浏览结构
+                                </a>
+                                <a href="#3d-coordinates" class="px-6 py-3 border-2 border-gray-200 text-gray-600 rounded-xl hover:border-primary hover:text-primary transition-all duration-300 flex items-center font-medium">
+                                    <i class="fa fa-cube mr-2"></i> 3D 视图
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="md:w-1/2 flex justify-center">
-                        <div class="structure-image w-full h-64 rounded-xl" style="background-image: url('images/structures/1.png')"></div>
+                        <div class="md:w-1/2 flex justify-center">
+                            <div class="relative">
+                                <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl blur-xl animate-float"></div>
+                                <div class="structure-image w-72 h-56 md:w-80 md:h-64 rounded-2xl shadow-lg relative z-10" style="background-image: url('images/structures/1.png')"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- 功能展示部分 -->
-        <section id="features" class="mb-12 bg-white rounded-xl shadow-md p-6">
-            <h2 class="text-2xl font-bold text-dark mb-6">功能展示</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <section id="features" class="mb-12">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-dark mb-2">功能展示</h2>
+                <p class="text-gray-500 text-sm">探索我们提供的各种功能</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- 结构坐标功能 -->
-                <div class="feature-card bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                <div class="group bg-white rounded-2xl overflow-hidden shadow-soft card-hover border border-gray-100">
                     <div class="feature-image h-48 relative overflow-hidden">
-                        <img src="images/structures/2.png" alt="结构坐标" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <img src="images/structures/2.png" alt="结构坐标" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                         <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">结构坐标</h3>
                     </div>
-                    <div class="p-4">
-                        <p class="text-gray-600 text-sm">探索并查看游戏中各种独特结构的精确坐标，包括数据包结构和自然奇观等。</p>
-                        <a href="#structures" class="mt-4 inline-block text-primary hover:text-primary/80 text-sm font-medium">
-                            查看详情 <i class="fa fa-arrow-right ml-1"></i>
+                    <div class="p-5">
+                        <p class="text-gray-500 text-sm leading-relaxed">探索并查看游戏中各种独特结构的精确坐标，包括数据包结构和自然奇观等。</p>
+                        <a href="#structures" class="mt-4 inline-flex items-center text-primary hover:text-primary/70 text-sm font-semibold transition-colors">
+                            查看详情 <i class="fa fa-arrow-right ml-1.5 group-hover:translate-x-1 transition-transform inline-block"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- 帖子功能 -->
-                <div class="feature-card bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                <div class="group bg-white rounded-2xl overflow-hidden shadow-soft card-hover border border-gray-100">
                     <div class="feature-image h-48 relative overflow-hidden">
-                        <img src="images/posts/1.png" alt="玩家帖子" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <img src="images/posts/1.png" alt="玩家帖子" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                         <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">玩家帖子</h3>
                     </div>
-                    <div class="p-4">
-                        <p class="text-gray-600 text-sm">浏览玩家分享的游戏心得、攻略和精彩瞬间，加入社区讨论。</p>
-                        <a href="posts.html" class="mt-4 inline-block text-primary hover:text-primary/80 font-medium">
-                            查看详情 <i class="fa fa-arrow-right ml-1"></i>
+                    <div class="p-5">
+                        <p class="text-gray-500 text-sm leading-relaxed">浏览玩家分享的游戏心得、攻略和精彩瞬间，加入社区讨论。</p>
+                        <a href="posts.html" class="mt-4 inline-flex items-center text-primary hover:text-primary/70 text-sm font-semibold transition-colors">
+                            查看详情 <i class="fa fa-arrow-right ml-1.5 group-hover:translate-x-1 transition-transform inline-block"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- 预留功能位置 -->
-                <div class="feature-card bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                    <div class="feature-image h-48 relative overflow-hidden bg-gray-200">
+                <!-- 3D坐标图功能 -->
+                <div class="group bg-white rounded-2xl overflow-hidden shadow-soft card-hover border border-gray-100">
+                    <div class="feature-image h-48 relative overflow-hidden bg-gradient-to-br from-slate-700 to-slate-900">
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <i class="fa fa-puzzle-piece text-5xl text-gray-400"></i>
+                            <i class="fa fa-cube text-6xl text-white/20 group-hover:scale-110 transition-transform duration-700"></i>
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">更多功能</h3>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-4 text-white text-xl font-bold">3D 坐标图</h3>
                     </div>
-                    <div class="p-4">
-                        <p class="text-gray-600 text-sm">更多精彩功能正在开发中，敬请期待...</p>
+                    <div class="p-5">
+                        <p class="text-gray-500 text-sm leading-relaxed">使用三维可视化方式查看所有坐标点的空间分布，支持旋转缩放。</p>
+                        <a href="#3d-coordinates" class="mt-4 inline-flex items-center text-primary hover:text-primary/70 text-sm font-semibold transition-colors">
+                            查看详情 <i class="fa fa-arrow-right ml-1.5 group-hover:translate-x-1 transition-transform inline-block"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -212,12 +224,14 @@
         <!-- 结构列表 -->
         <section id="structures" class="space-y-6">
             <!-- 服务器切换和页面内部导航 -->
-            <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+            <div class="bg-white rounded-2xl shadow-soft p-6 mb-6 border border-gray-100">
                 <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
-                    <h2 class="text-2xl font-bold text-dark">结构坐标库</h2>
-                    <div class="flex items-center">
-                        <span class="text-gray-600 mr-2">服务器:</span>
-                        <select id="serverSelector" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
+                    <h2 class="text-2xl font-bold text-dark flex items-center">
+                        <i class="fa fa-map-marker text-primary mr-2"></i> 结构坐标库
+                    </h2>
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm text-gray-500">服务器:</span>
+                        <select id="serverSelector" class="px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary bg-gray-50 text-sm font-medium transition-all">
                             <option value="server1">服务器 1</option>
                             <option value="server2">服务器 2</option>
                         </select>
@@ -225,38 +239,40 @@
                 </div>
                 
                 <!-- 新增页面内部导航框 -->
-                <div class="flex flex-wrap gap-4 border-t border-gray-100 pt-4">
-                    <a href="#structures" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
-                        <i class="fa fa-map-marker mr-1"></i> 结构坐标
+                <div class="flex flex-wrap gap-3 border-t border-gray-100 pt-4">
+                    <a href="#structures" class="px-5 py-2.5 bg-gradient-to-r from-primary to-primary/90 text-white rounded-xl hover:shadow-lg hover:shadow-primary/20 transition-all text-sm font-medium">
+                        <i class="fa fa-map-marker mr-1.5"></i> 结构坐标
                     </a>
-                    <a href="#3d-coordinates" class="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-colors">
-                        <i class="fa fa-cube mr-1"></i> 坐标立体图
+                    <a href="#3d-coordinates" class="px-5 py-2.5 bg-slate-700 text-white rounded-xl hover:bg-slate-600 hover:shadow-lg transition-all text-sm font-medium">
+                        <i class="fa fa-cube mr-1.5"></i> 坐标立体图
                     </a>
-                    <a href="#about" class="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-colors">
-                        <i class="fa fa-info-circle mr-1"></i> 关于我们
+                    <a href="#about" class="px-5 py-2.5 bg-slate-700 text-white rounded-xl hover:bg-slate-600 hover:shadow-lg transition-all text-sm font-medium">
+                        <i class="fa fa-info-circle mr-1.5"></i> 关于我们
                     </a>
                 </div>
             </div>
 
             <!-- 排序和筛选 -->
-            <div class="bg-white rounded-xl shadow-md p-4 flex flex-wrap justify-between items-center">
+            <div class="bg-white rounded-2xl shadow-soft p-4 flex flex-wrap justify-between items-center gap-3 border border-gray-100">
                 <div class="relative">
-                    <select id="structure-filter" class="appearance-none px-4 py-2 pr-8 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all focus:outline-none focus:ring-2 focus:ring-primary">
+                    <select id="structure-filter" class="appearance-none pl-4 pr-10 py-2.5 bg-slate-700 text-white rounded-xl hover:bg-slate-600 transition-all focus:outline-none focus:ring-2 focus:ring-primary text-sm font-medium">
                         <option value="all">所有结构</option>
-                        <!-- 结构选项将通过JavaScript动态添加 -->
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-white/70">
                         <i class="fa fa-chevron-down text-xs"></i>
                     </div>
                 </div>
 
                 <div class="relative">
-                    <select id="sortSelect" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
+                    <select id="sortSelect" class="appearance-none pl-4 pr-10 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary bg-gray-50 text-sm font-medium transition-all">
                         <option value="nameAsc">名称 (升序)</option>
                         <option value="nameDesc">名称 (降序)</option>
                         <option value="type">结构类型</option>
                         <option value="coordinateCount">坐标数量</option>
                     </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
+                        <i class="fa fa-chevron-down text-xs"></i>
+                    </div>
                 </div>
             </div>
 
@@ -273,36 +289,56 @@
 
         <!-- 新增坐标立体图部分 -->
         <section id="3d-coordinates" class="mt-16 mb-16">
-            <div class="bg-white rounded-xl shadow-soft p-6">
-                <h2 class="text-2xl font-bold text-dark mb-6">坐标立体图</h2>
-                <p class="text-gray-600 mb-6">3D可视化展示所有服务器的坐标点，可使用鼠标旋转、缩放和平移视图。</p>
+            <div class="bg-white rounded-2xl shadow-soft p-6 md:p-8 border border-gray-100">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center">
+                        <i class="fa fa-cube text-white"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-dark">坐标立体图</h2>
+                        <p class="text-gray-500 text-sm">3D可视化展示所有服务器的坐标点分布</p>
+                    </div>
+                </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- 3D 筛选 -->
+                <div class="flex flex-wrap items-center gap-3 mt-4 mb-4 p-3 bg-gray-50 rounded-xl border border-gray-100">
+                    <span class="text-sm font-medium text-gray-500"><i class="fa fa-filter mr-1"></i>筛选:</span>
+                    <select id="structure-filter-3d" class="px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary bg-white text-sm transition-all">
+                        <option value="all">所有结构</option>
+                    </select>
+                    <select id="server-filter-3d" class="px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary bg-white text-sm transition-all">
+                        <option value="all">所有服务器</option>
+                        <option value="server1">服务器 1 (蓝色)</option>
+                        <option value="server2">服务器 2 (绿色)</option>
+                    </select>
+                    <span id="filter-count-3d" class="text-xs text-gray-400 ml-auto"></span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-6">
                     <!-- 3D Visualization Area -->
-                    <div class="lg:col-span-3 bg-white rounded-xl shadow-soft p-4 h-[600px]">
-                        <div id="canvas-container" class="w-full h-full rounded-lg overflow-hidden border border-slate-200"></div>
+                    <div class="lg:col-span-3 bg-gray-50 rounded-2xl p-4 h-[600px] border border-gray-100">
+                        <div id="canvas-container" class="w-full h-full rounded-xl overflow-hidden"></div>
                     </div>
                     
                     <!-- Points List -->
-                    <div class="lg:col-span-1 bg-white rounded-xl shadow-soft p-4 h-[600px] overflow-y-auto">
-                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                    <div class="lg:col-span-1 bg-gray-50 rounded-2xl p-4 h-[600px] overflow-y-auto border border-gray-100">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center text-dark">
                             <i class="fa fa-list-ul text-primary mr-2"></i> 坐标点列表
                         </h3>
-                        <div id="points-list" class="space-y-3">
-                            <!-- 坐标点将通过JavaScript动态生成 -->
+                        <div id="points-list" class="space-y-2">
                         </div>
                     </div>
                 </div>
                 
                 <!-- Controls -->
-                <div class="mt-6 flex flex-wrap gap-4 justify-center">
-                    <button id="reset-view" class="flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all">
+                <div class="mt-6 flex flex-wrap gap-3 justify-center">
+                    <button id="reset-view" class="flex items-center px-5 py-2.5 bg-gradient-to-r from-primary to-primary/90 text-white rounded-xl hover:shadow-lg hover:shadow-primary/20 transition-all text-sm font-medium">
                         <i class="fa fa-refresh mr-2"></i> 重置视图
                     </button>
-                    <button id="show-axes" class="flex items-center px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all">
+                    <button id="show-axes" class="flex items-center px-5 py-2.5 bg-slate-700 text-white rounded-xl hover:bg-slate-600 hover:shadow-lg transition-all text-sm font-medium">
                         <i class="fa fa-arrows mr-2"></i> 显示/隐藏坐标轴
                     </button>
-                    <button id="show-labels" class="flex items-center px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all">
+                    <button id="show-labels" class="flex items-center px-5 py-2.5 bg-slate-700 text-white rounded-xl hover:bg-slate-600 hover:shadow-lg transition-all text-sm font-medium">
                         <i class="fa fa-tag mr-2"></i> 显示/隐藏标签
                     </button>
                 </div>
@@ -311,49 +347,49 @@
     </main>
 
     <!-- 关于我们 -->
-    <section id="about" class="bg-white py-12">
+    <section id="about" class="bg-gray-50 py-16">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-10">
+            <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-dark mb-4">关于 Baka 村</h2>
-                <p class="text-gray-600 max-w-3xl mx-auto">我们是一群热爱《我的世界》的玩家，致力于收集和分享游戏中各种独特结构的坐标，让大家的游戏体验更加丰富多彩。</p>
+                <p class="text-gray-500 max-w-3xl mx-auto text-lg">我们是一群热爱《我的世界》的玩家，致力于收集和分享游戏中各种独特结构的坐标，让大家的游戏体验更加丰富多彩。</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
-                    <div class="text-primary text-3xl mb-4">
-                        <i class="fa fa-map-signs"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white rounded-2xl p-6 shadow-soft border border-gray-100 card-hover text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-map-signs text-2xl text-primary"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-dark mb-3">结构坐标库</h3>
-                    <p class="text-gray-600">我们收集了各种稀有和独特的结构坐标，包括遗迹、自然奇观和特殊地点，让你无需探索即可轻松找到它们。</p>
+                    <h3 class="text-lg font-bold text-dark mb-3">结构坐标库</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">收集各种稀有和独特的结构坐标，包括遗迹、自然奇观和特殊地点。</p>
                 </div>
                 
-                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
-                    <div class="text-primary text-3xl mb-4">
-                        <i class="fa fa-users"></i>
+                <div class="bg-white rounded-2xl p-6 shadow-soft border border-gray-100 card-hover text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary/20 to-secondary/10 flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-users text-2xl text-secondary"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-dark mb-3">社区共享</h3>
-                    <p class="text-gray-600">Baka 村是一个开放的社区，所有玩家都可以贡献自己发现的坐标，与其他玩家分享游戏中的精彩发现。</p>
+                    <h3 class="text-lg font-bold text-dark mb-3">社区共享</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">开放社区，所有玩家都可以贡献自己发现的坐标，分享游戏中的精彩发现。</p>
                 </div>
                 
-                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
-                    <div class="text-primary text-3xl mb-4">
-                        <i class="fa fa-gamepad"></i>
+                <div class="bg-white rounded-2xl p-6 shadow-soft border border-gray-100 card-hover text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-gamepad text-2xl text-accent"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-dark mb-3">游戏指南</h3>
-                    <p class="text-gray-600">除了坐标库，我们还提供各种游戏攻略和指南，帮助你更好地探索《我的世界》的奇妙世界。</p>
+                    <h3 class="text-lg font-bold text-dark mb-3">游戏指南</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">除了坐标库，还提供各种游戏攻略和指南，帮助更好地探索《我的世界》。</p>
                 </div>
             </div>
             
             <div class="mt-12 text-center">
                 <h3 class="text-2xl font-bold text-dark mb-6">加入我们</h3>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#" class="px-6 py-3 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors shadow-lg shadow-pink-200 flex items-center">
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="#" class="px-6 py-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-xl hover:shadow-lg hover:shadow-pink-200 transition-all flex items-center text-sm font-medium">
                         <i class="fa fa-youtube-play mr-2"></i> 哔哩哔哩
                     </a>
-                    <a href="#" class="px-6 py-3 bg-white text-primary border border-primary rounded-lg hover:bg-primary/5 transition-colors flex items-center">
+                    <a href="#" class="px-6 py-3 bg-white text-primary border-2 border-primary rounded-xl hover:bg-primary hover:text-white transition-all flex items-center text-sm font-medium">
                         <i class="fa fa-qq mr-2"></i> QQ 群
                     </a>
-                    <a href="#" class="px-6 py-3 bg-dark text-white rounded-lg hover:bg-dark/90 transition-colors flex items-center">
+                    <a href="#" class="px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white rounded-xl hover:shadow-lg transition-all flex items-center text-sm font-medium">
                         <i class="fa fa-github mr-2"></i> GitHub
                     </a>
                 </div>
@@ -363,11 +399,14 @@
 
     <!-- 坐标分布大图模态框 -->
     <div id="chartModal" class="fixed inset-0 z-50 hidden items-center justify-center chart-modal-backdrop">
-        <div class="bg-white rounded-xl shadow-2xl p-6 chart-modal-content">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 chart-modal-content animate-fade-up">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-dark" id="modalChartTitle">坐标分布详情</h3>
-                <button id="closeChartModal" class="text-gray-500 hover:text-gray-700">
-                    <i class="fa fa-times text-xl"></i>
+                <div>
+                    <h3 class="text-xl font-bold text-dark" id="modalChartTitle">坐标分布详情</h3>
+                    <p class="text-xs text-gray-400 mt-0.5">虚线表示从(0,0)出发的最短路径顺序</p>
+                </div>
+                <button id="closeChartModal" class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors">
+                    <i class="fa fa-times text-lg"></i>
                 </button>
             </div>
             <div class="relative h-[calc(80vh-80px)]">
@@ -375,6 +414,11 @@
             </div>
         </div>
     </div>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="back-to-top bg-gradient-to-br from-primary to-secondary text-white shadow-lg shadow-primary/20" title="回到顶部">
+        <i class="fa fa-chevron-up"></i>
+    </button>
 
     <!-- 页尾组件 -->
     <div id="footer-container"></div>

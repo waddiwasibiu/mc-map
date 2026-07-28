@@ -737,6 +737,37 @@ const defaultStructures = [
 
 ];
 
+// 以(0,0)为起点，使用最近邻贪心算法重新排序坐标点，使路径长度最短
+function reorderByShortestPath(coords) {
+    if (!coords || coords.length <= 1) return coords;
+    var remaining = coords.slice();
+    var result = [];
+    var cx = 0, cz = 0;
+    while (remaining.length) {
+        var best = 0, bestDist = Infinity;
+        for (var i = 0; i < remaining.length; i++) {
+            var dx = remaining[i].x - cx, dz = remaining[i].z - cz;
+            var dist = dx * dx + dz * dz;
+            if (dist < bestDist) { bestDist = dist; best = i; }
+        }
+        var next = remaining.splice(best, 1)[0];
+        result.push(next);
+        cx = next.x; cz = next.z;
+    }
+    result.forEach(function(c, i) { c.id = i + 1; });
+    return result;
+}
+
+function applyRenumbering(structures) {
+    structures.forEach(function(s) {
+        var s1 = s.coordinates.server1;
+        var s2 = s.coordinates.server2;
+        if (s1 && s1.length > 1) s.coordinates.server1 = reorderByShortestPath(s1);
+        if (s2 && s2.length > 1) s.coordinates.server2 = reorderByShortestPath(s2);
+    });
+    return structures;
+}
+
 // 保存结构数据到本地存储
 function saveStructures(structures) {
     localStorage.setItem('mcStructures', JSON.stringify(structures));
@@ -744,7 +775,8 @@ function saveStructures(structures) {
 
 // 加载结构数据
 function loadStructures() {
-    const storedStructures = localStorage.getItem('mcStructures');
-    return storedStructures ? JSON.parse(storedStructures) : defaultStructures;
+    var storedStructures = localStorage.getItem('mcStructures');
+    var structures = storedStructures ? JSON.parse(storedStructures) : defaultStructures;
+    return applyRenumbering(structures);
 }
 

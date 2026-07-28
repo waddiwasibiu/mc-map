@@ -76,35 +76,25 @@ function renderBlogPosts() {
             else if (post.category === '新闻记录') tagClass = 'category-3';
             
             const postCard = `
-                <div class="bg-white rounded-xl shadow-md overflow-hidden blog-post-card" data-post-id="${post.id}">
-                    <div class="relative h-48">
+                <div class="bg-white rounded-2xl shadow-soft overflow-hidden blog-post-card border border-gray-100" data-post-id="${post.id}">
+                    <div class="relative h-52">
                         <div class="structure-image w-full h-full bg-cover bg-center" 
                             style="background-image: url('images/posts/${post.image}.png')">
                             <img src="images/posts/${post.image}.png" class="hidden" onError="this.parentElement.style.backgroundImage='url(images/posts/default-post.png)'">
                             
-                            <!-- 分类标签 -->
-                            <div class="absolute top-3 left-3 ${tagClass} text-xs px-2 py-1 rounded">
+                            <div class="absolute top-3 left-3 ${tagClass} text-xs px-2.5 py-1 rounded-full font-medium">
                                 ${post.category}
                             </div>
-                            <!-- 内容预览（右上角） -->
-                            <div class="absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded max-w-[50%] line-clamp-2">
+                            <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-full max-w-[45%] truncate">
                                 ${post.content}
                             </div>
-                            <!-- 标题显示在图片上 -->
-                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                                 <h3 class="text-white font-bold text-sm md:text-base line-clamp-2">${post.title}</h3>
-                            </div>
-                            <!-- 作者信息（右下角） -->
-                            <div class="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded">
-                                <i class="fa fa-user mr-1"></i>${post.author}
-                            </div>
-                        </div>
-                        <div class="p-5">
-                            <h3 class="text-xl font-bold text-dark mb-2">${post.title}</h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">${post.content}</p>
-                            <div class="flex justify-between items-center text-xs text-gray-500">
-                                <span><i class="fa fa-user mr-1"></i> ${post.author}</span>
-                                <span><i class="fa fa-calendar mr-1"></i> ${post.date}</span>
+                                <div class="flex items-center text-white/70 text-xs mt-1">
+                                    <i class="fa fa-user mr-1"></i>${post.author}
+                                    <span class="mx-2">·</span>
+                                    <i class="fa fa-calendar mr-1"></i>${post.date}
+                                </div>
                             </div>
                         </div>
                     </div>
