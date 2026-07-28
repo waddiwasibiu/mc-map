@@ -17,10 +17,24 @@ const defaultStructures = [
             { id: 3, x: 6999, y: 192, z: 12799, description: "爱酱" },
             { id: 4, x: 8015, y: 192, z: 12909, description: "爱酱" },
             { id: 5, x: 7288, y: 192, z: 8255, description: "DaiMao" },
-            { id: 6, x: -4098, y: 192, z: 4297, description: "粉毛" },
+            { id: 6, x: -4084, y: 192, z: 4297, description: "粉毛" },
             { id: 7, x: -8458, y: 192, z: -995, description: "大毛" },
             { id: 8, x: -3985, y: 192, z: -6349, description: "暗月" },
             { id: 9, x: 423, y: 192, z: -4277, description: "不知了虫" },
+            { id: 10, x: -957, y: 192, z: 1957, description: "" },
+            { id: 11, x: 5523, y: 192, z: 9694, description: "" },
+            { id: 12, x: 5523, y: 192, z: 603, description: "" },
+            { id: 13, x: 8053, y: 192, z: -7988, description: "" },
+            { id: 14, x: -2898, y: 192, z: 6474, description: "" },
+            { id: 15, x: -3673, y: 192, z: 12635, description: "" },
+            { id: 16, x: -2984, y: 192, z: 7671, description: "" },
+            { id: 17, x: -2565, y: 192, z: 6645, description: "" },
+            { id: 18, x: -2695, y: 192, z: 6513, description: "" },
+            { id: 19, x: -13055, y: 192, z: 4757, description: "" },
+            { id: 20, x: 10949, y: 192, z: -1730, description: "" },
+            { id: 21, x: 9170, y: 192, z: 5290, description: "" },
+            { id: 22, x: -7513, y: 192, z: 3142, description: "" },
+            { id: 23, x: -7383, y: 192, z: 3062, description: "" },
 
         ],
         server2: [
@@ -210,7 +224,7 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-            { id: 1, x: 0, y: 192, z: 0, description: "" },
+            { id: 1, x: 1260, y: 192, z: -14000, description: "" },
 
         ],
         server2: [
