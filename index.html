@@ -108,6 +108,23 @@
             .path-badge-start { background: linear-gradient(135deg, #F59E0B, #EF4444); }
             .path-badge-node { background: linear-gradient(135deg, #3B82F6, #6366F1); }
             .path-badge-end { background: linear-gradient(135deg, #10B981, #059669); }
+
+            /* 侧边栏 */
+            @media (min-width: 768px) {
+                #sidebar { transform: translateX(0) !important; }
+                #page-structures, #page-caves { margin-left: 13rem; }
+                #sidebarToggle { display: none !important; }
+                #footer-container { margin-left: 13rem; }
+            }
+            #sidebar.show { transform: translateX(0) !important; }
+            .sidebar-category.active .sidebar-cat-header { background: rgba(59,130,246,0.08); border-radius: 0.5rem; }
+            .sidebar-category.active .sidebar-cat-header span { color: #3B82F6; }
+            .sidebar-category .cat-arrow { transition: transform 0.2s; }
+            .sidebar-category.active .cat-arrow { transform: rotate(180deg); }
+            .sidebar-mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 25; }
+            @media (max-width: 767px) {
+                .sidebar-mobile-overlay.show { display: block; }
+            }
         }
     </style>
 
@@ -123,8 +140,37 @@
 
 </head>
 <body class="bg-gray-50 font-inter">
+    <!-- 侧边导航栏 -->
+    <button id="sidebarToggle" class="fixed top-20 left-3 z-40 w-9 h-9 rounded-lg bg-white shadow-md border border-gray-200 flex items-center justify-center md:hidden transition-all" title="展开大纲">
+        <i class="fa fa-bars text-gray-600 text-sm"></i>
+    </button>
+    <aside id="sidebar" class="fixed left-0 top-16 bottom-0 w-52 bg-white/95 backdrop-blur-md border-r border-gray-200 z-30 overflow-y-auto transition-transform duration-300 shadow-sm" style="transform:translateX(-100%);">
+        <div class="p-3 pt-4">
+            <div class="sidebar-category active" data-page="structures">
+                <div class="sidebar-cat-header px-2 py-2 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
+                    <span class="font-semibold text-sm text-dark">
+                        <i class="fa fa-map-marker text-primary mr-2"></i>结构坐标
+                    </span>
+                </div>
+                <div class="sidebar-items ml-2 space-y-0.5 mt-1" id="sidebar-structures"></div>
+            </div>
+            <div class="my-3 border-t border-gray-100"></div>
+            <div class="sidebar-category" data-page="caves">
+                <div class="sidebar-cat-header px-2 py-2 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
+                    <span class="font-semibold text-sm text-dark">
+                        <i class="fa fa-train text-amber-500 mr-2"></i>洞穴矿车
+                    </span>
+                </div>
+                <div class="sidebar-items ml-2 space-y-0.5 mt-1" id="sidebar-caves"></div>
+            </div>
+        </div>
+    </aside>
+
     <!-- 导航栏组件 -->
     <div id="header-container"></div>
+
+    <!-- 结构坐标页面 -->
+    <div id="page-structures">
 
     <!-- 主内容区 -->
     <main id="main-content" class="container mx-auto px-4 pt-24 pb-16">
@@ -420,13 +466,65 @@
         <i class="fa fa-chevron-up"></i>
     </button>
 
+    </div>
+    <!-- /page-structures -->
+
+    <!-- 洞穴矿车页面 -->
+    <div id="page-caves" class="hidden pt-20 pb-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="bg-white rounded-2xl shadow-soft p-6 border border-gray-100 mb-6">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
+                            <i class="fa fa-train text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-dark">洞穴矿车</h2>
+                            <p id="cave-info" class="text-sm text-gray-500 mt-0.5">请从左侧大纲选择一个洞穴</p>
+                        </div>
+                    </div>
+                    <select id="cave-select" class="px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-400/30 focus:border-amber-400 bg-white">
+                        <option value="">-- 选择洞穴 --</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 bg-gray-50 rounded-2xl h-[500px] border border-gray-100 relative overflow-hidden">
+                        <div id="caves-canvas-container" class="w-full h-full rounded-xl overflow-hidden"></div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl p-4 h-[500px] overflow-y-auto border border-gray-100">
+                        <h3 class="text-sm font-semibold text-dark mb-3 flex items-center">
+                            <i class="fa fa-list-ul text-amber-500 mr-2"></i>矿车坐标列表
+                        </h3>
+                        <div id="caves-points-list" class="space-y-1.5">
+                            <p class="text-center text-gray-400 text-sm py-8">请选择一个洞穴</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 flex flex-wrap gap-3 justify-center">
+                    <button id="caves-reset-view" class="flex items-center px-4 py-2 bg-amber-500 text-white rounded-xl hover:bg-amber-600 transition-all text-sm font-medium">
+                        <i class="fa fa-refresh mr-2"></i> 重置视图
+                    </button>
+                    <button id="caves-show-axes" class="flex items-center px-4 py-2 bg-slate-700 text-white rounded-xl hover:bg-slate-600 transition-all text-sm font-medium">
+                        <i class="fa fa-arrows mr-2"></i> 坐标轴
+                    </button>
+                    <button id="caves-show-labels" class="flex items-center px-4 py-2 bg-slate-700 text-white rounded-xl hover:bg-slate-600 transition-all text-sm font-medium">
+                        <i class="fa fa-tag mr-2"></i> 标签
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page-caves -->
+
     <!-- 页尾组件 -->
     <div id="footer-container"></div>
 
     <!-- 引入外部 JavaScript 文件 -->
     <script src="data/structures.js"></script>
+    <script src="data/caves.js"></script>
     <script src="data/blog-posts.js"></script>
     <script src="js/coordinates.js"></script>
+    <script src="js/caves.js"></script>
     <script src="js/components.js"></script>
     <script src="js/blog.js"></script>
     <script src="js/main.js"></script>

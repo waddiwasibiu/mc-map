@@ -142,6 +142,8 @@ const defaultStructures = [
             { id: 10, x: 45, y: 192, z: -9481, description: "" },
             { id: 11, x: 23, y: 192, z: -14949, description: "" },
             { id: 12, x: -427, y: 192, z: 2417, description: "" },
+            { id: 13, x: -2361, y: 192, z: 15318, description: "LT2" },
+            { id: 14, x: -2325, y: 192, z: 15912, description: "LT2" },
 
 
 
@@ -262,6 +264,7 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
+            { id: 1, x: -2492, y: 192, z: 16663, description: "LT2" },
 
 
         ],
@@ -369,6 +372,7 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
+            { id: 1, x: -2989, y: 192, z: 14329, description: "" },
 
 
 

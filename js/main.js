@@ -416,6 +416,89 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化3D专属筛选器
     if (typeof init3DFilters === 'function') init3DFilters();
 
+    // 填充侧边栏
+    if (typeof populateSidebar === 'function') populateSidebar();
+
+    // 侧边栏切换（移动端）
+    var sidebarToggle = document.getElementById('sidebarToggle');
+    var sidebar = document.getElementById('sidebar');
+    if (sidebarToggle && sidebar) {
+        sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+        });
+        // 点击页面其他区域关闭侧边栏
+        document.addEventListener('click', function(e) {
+            if (!sidebar.contains(e.target) && e.target !== sidebarToggle && !sidebarToggle.contains(e.target)) {
+                sidebar.classList.remove('show');
+            }
+        });
+    }
+
+    // 侧边栏分类点击切换页面
+    document.querySelectorAll('.sidebar-cat-header').forEach(function(header) {
+        header.addEventListener('click', function() {
+            var cat = this.parentElement;
+            var page = cat.getAttribute('data-page');
+            if (page) switchToPage(page);
+        });
+    });
+
+    // 洞穴下拉框
+    var caveSelect = document.getElementById('cave-select');
+    if (caveSelect && typeof caveData !== 'undefined') {
+        caveSelect.innerHTML = '<option value="">-- 选择洞穴 --</option>';
+        caveData.forEach(function(terrain) {
+            var optgroup = document.createElement('optgroup');
+            optgroup.label = terrain.terrain;
+            terrain.caves.forEach(function(cave) {
+                var opt = document.createElement('option');
+                opt.value = cave.id;
+                opt.textContent = cave.name;
+                optgroup.appendChild(opt);
+            });
+            caveSelect.appendChild(optgroup);
+        });
+        caveSelect.addEventListener('change', function() {
+            if (this.value && typeof updateCaves3D === 'function') {
+                updateCaves3D(this.value);
+            }
+        });
+    }
+
+    // 洞穴3D控制按钮
+    var cavesReset = document.getElementById('caves-reset-view');
+    var cavesAxes = document.getElementById('caves-show-axes');
+    var cavesLabels = document.getElementById('caves-show-labels');
+    if (cavesReset) {
+        cavesReset.addEventListener('click', function() {
+            if (caveCamera && caveControls) {
+                if (typeof caveCurrentCenter !== 'undefined' && caveCurrentCenter) {
+                    var c = caveCurrentCenter;
+                    caveCamera.position.set(c.x + c.dist * 0.6, c.y + c.dist * 0.8, c.z + c.dist * 0.6);
+                    caveControls.target.set(c.x, c.y, c.z);
+                } else {
+                    caveCamera.position.set(500, 300, 500);
+                    caveControls.target.set(0, 0, 0);
+                }
+                caveControls.update();
+            }
+        });
+    }
+    if (cavesAxes) {
+        cavesAxes.addEventListener('click', function() {
+            caveShowAxes = !caveShowAxes;
+            if (typeof caveAxesLines !== 'undefined') {
+                caveAxesLines.forEach(function(obj) { obj.visible = caveShowAxes; });
+            }
+        });
+    }
+    if (cavesLabels) {
+        cavesLabels.addEventListener('click', function() {
+            caveShowLabels = !caveShowLabels;
+            caveLabels.forEach(function(l) { l.element.style.opacity = caveShowLabels ? '1' : '0'; });
+        });
+    }
+
     initGitalk();
 
     // 返回顶部按钮
