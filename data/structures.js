@@ -31,34 +31,34 @@ const defaultStructures = [
     icon: "fa-heart",
     coordinates: {
         server1: [
-            { id: 1, x: -22522, y: 192, z: -12320, description: "地狱坐标" },
-            { id: 2, x: -22541, y: 192, z: -12141, description: "地狱坐标" },
-            { id: 3, x: -22645, y: 192, z: -12591, description: "地狱坐标" },
-            { id: 4, x: -22617, y: 192, z: -12595, description: "地狱坐标" },
-            { id: 5, x: -22519, y: 192, z: -12557, description: "地狱坐标" },
-            { id: 6, x: -22683, y: 192, z: -12451, description: "地狱坐标" },
-            { id: 7, x: -22758, y: 192, z: -11988, description: "地狱坐标" },
-            { id: 8, x: -22661, y: 192, z: -11577, description: "地狱坐标" },
-            { id: 9, x: -22769, y: 192, z: -11617, description: "地狱坐标" },
-            { id: 10, x: -22663, y: 192, z: -12015, description: "地狱坐标" },
-            { id: 11, x: -22235, y: 192, z: -11568, description: "地狱坐标" },
-            { id: 12, x: -22143, y: 192, z: -11869, description: "地狱坐标" },
-            { id: 13, x: -22086, y: 192, z: -11591, description: "地狱坐标" },
-            { id: 14, x: -21443, y: 192, z: -9865, description: "地狱坐标" },
-            { id: 15, x: -21353, y: 192, z: -8799, description: "地狱坐标" },
-            { id: 16, x: -21248, y: 192, z: -7933, description: "地狱坐标" },
-            { id: 17, x: -21252, y: 192, z: -8089, description: "地狱坐标" },
-            { id: 18, x: -20293, y: 192, z: -7793, description: "地狱坐标" },
-            { id: 19, x: -19408, y: 192, z: -7268, description: "地狱坐标" },
-            { id: 20, x: -16559, y: 192, z: -5553, description: "地狱坐标" },
-            { id: 21, x: -12411, y: 192, z: -20241, description: "地狱坐标" },
-            { id: 22, x: -12261, y: 192, z: -18321, description: "地狱坐标" },
-            { id: 23, x: -8188, y: 192, z: -17876, description: "地狱坐标" },
-            { id: 24, x: -7595, y: 192, z: -17785, description: "地狱坐标" },
-            { id: 25, x: -7491, y: 192, z: -17677, description: "地狱坐标" },
-            { id: 26, x: -5322, y: 192, z: -16901, description: "地狱坐标" },
-            { id: 27, x: -5309, y: 192, z: -16761, description: "地狱坐标" },
-            { id: 28, x: -4985, y: 192, z: -16375, description: "地狱坐标" },
+            { id: 1, x: -22522, y: 192, z: -12320, description: "LT2" },
+            { id: 2, x: -22541, y: 192, z: -12141, description: "LT2" },
+            { id: 3, x: -22645, y: 192, z: -12591, description: "LT2" },
+            { id: 4, x: -22617, y: 192, z: -12595, description: "LT2" },
+            { id: 5, x: -22519, y: 192, z: -12557, description: "LT2" },
+            { id: 6, x: -22683, y: 192, z: -12451, description: "LT2" },
+            { id: 7, x: -22758, y: 192, z: -11988, description: "LT2" },
+            { id: 8, x: -22661, y: 192, z: -11577, description: "LT2" },
+            { id: 9, x: -22769, y: 192, z: -11617, description: "LT2" },
+            { id: 10, x: -22663, y: 192, z: -12015, description: "LT2" },
+            { id: 11, x: -22235, y: 192, z: -11568, description: "LT2" },
+            { id: 12, x: -22143, y: 192, z: -11869, description: "LT2" },
+            { id: 13, x: -22086, y: 192, z: -11591, description: "LT2" },
+            { id: 14, x: -21443, y: 192, z: -9865, description: "LT2" },
+            { id: 15, x: -21353, y: 192, z: -8799, description: "LT2" },
+            { id: 16, x: -21248, y: 192, z: -7933, description: "LT2" },
+            { id: 17, x: -21252, y: 192, z: -8089, description: "LT2" },
+            { id: 18, x: -20293, y: 192, z: -7793, description: "LT2" },
+            { id: 19, x: -19408, y: 192, z: -7268, description: "LT2" },
+            { id: 20, x: -16559, y: 192, z: -5553, description: "LT2" },
+            { id: 21, x: -12411, y: 192, z: -20241, description: "LT2" },
+            { id: 22, x: -12261, y: 192, z: -18321, description: "LT2" },
+            { id: 23, x: -8188, y: 192, z: -17876, description: "LT2" },
+            { id: 24, x: -7595, y: 192, z: -17785, description: "LT2" },
+            { id: 25, x: -7491, y: 192, z: -17677, description: "LT2" },
+            { id: 26, x: -5322, y: 192, z: -16901, description: "LT2" },
+            { id: 27, x: -5309, y: 192, z: -16761, description: "LT2" },
+            { id: 28, x: -4985, y: 192, z: -16375, description: "LT2" },
         ],
         server2: [
             { id: 1, x: 4200, y: 192, z: 1500, description: "" },
@@ -118,6 +118,9 @@ const defaultStructures = [
         { id: 3, x: 1539, y: 192, z: -7281, description: "" },
         { id: 4, x: 14162, y: 192, z: -1364, description: "" },
         { id: 5, x: 3250, y: 192, z: 722, description: "" },
+        { id: 6, x: -7291, y: 192, z: 1608, description: "LT2" },
+        { id: 7, x: -2870, y: 192, z: 3140, description: "LT2" },
+        { id: 8, x: -21212, y: 192, z: -7788, description: "LT2" },
         
 
         ],
@@ -153,9 +156,12 @@ const defaultStructures = [
         { id: 15, x: -1786, y: 192, z: 5904, description: "" },
         { id: 16, x: 8786, y: 192, z: 8692, description: "" },
         { id: 17, x: 8680, y: 192, z: 2977, description: "" },
-        { id: 18, x: -13338, y: 192, z: -12414, description: "" },
+        { id: 18, x: -13338, y: 192, z: -12414, description: "LT2" },
+        { id: 19, x: -21916, y: 192, z: -11494, description: "LT2" },
+        { id: 20, x: -16310, y: 192, z: -5732, description: "LT2" },
+        { id: 21, x: 18346, y: 192, z: -20943, description: "LT2" },
+        { id: 22, x: 6793, y: 192, z: -10372, description: "LT2" },
 
-        
 
         ],
         server2: [
@@ -306,17 +312,24 @@ const defaultStructures = [
     icon: "fa-fort-awesome",
     coordinates: {
         server1: [
-
+            { id: 1, x: 780, y: 192, z: -4308, description: "LT2" },
+            { id: 2, x: -4191, y: 192, z: -15880, description: "LT2" },
+            { id: 3, x: -11414, y: 192, z: -18308, description: "LT2" },
+            { id: 4, x: -13099, y: 192, z: -18584, description: "LT2" },
+            { id: 5, x: -13522, y: 192, z: -18880, description: "LT2" },
+            { id: 6, x: -16436, y: 192, z: -5597, description: "LT2" },
+            { id: 7, x: -17614, y: 192, z: -6112, description: "LT2" },
+            { id: 8, x: -21976, y: 192, z: -11474, description: "LT2" },
+            { id: 9, x: -23170, y: 192, z: -12550, description: "LT2 有5蓝宝库" },
 
 
         ],
         server2: [
 
-        
+
         ]
     }
 },
-
 {
     id: 11,
     name: "六级试炼",
@@ -328,6 +341,7 @@ const defaultStructures = [
         server1: [
             { id: 1, x: -2492, y: 192, z: 16663, description: "LT2" },
             { id: 2, x: 7199, y: 192, z: -10892, description: "LT2" },
+            { id: 3, x: -13366, y: 192, z: -19282, description: "LT2" },
 
 
         ],
@@ -349,10 +363,10 @@ const defaultStructures = [
     coordinates: {
         server1: [
             { id: 1, x: 8000, y: 192, z: -4240, description: "" },
-            { id: 2, x: -22814, y: 192, z: -11940, description: "地狱坐标" },
-            { id: 3, x: -22678, y: 192, z: -11946, description: "地狱坐标" },
-            { id: 4, x: -21812, y: 192, z: -9570, description: "地狱坐标" },
-            { id: 5, x: -16486, y: 192, z: -5824, description: "地狱坐标" },
+            { id: 2, x: -22814, y: 192, z: -11940, description: "LT2" },
+            { id: 3, x: -22678, y: 192, z: -11946, description: "LT2" },
+            { id: 4, x: -21812, y: 192, z: -9570, description: "LT2" },
+            { id: 5, x: -16486, y: 192, z: -5824, description: "LT2" },
 
 
         ],
@@ -381,6 +395,11 @@ const defaultStructures = [
             { id: 7, x: -1181, y: 192, z: 404, description: "" },
             { id: 8, x: -5183, y: 192, z: 4412, description: "" },
             { id: 9, x: 13213, y: 192, z: -1365, description: "" },
+            { id: 10, x: 818, y: 192, z: -5584, description: "LT2" },
+            { id: 11, x: -10388, y: 192, z: -6386, description: "LT2" },
+            { id: 12, x: -12384, y: 192, z: -18394, description: "LT2" },
+            { id: 13, x: -12788, y: 192, z: -19596, description: "LT2" },
+            { id: 14, x: -21184, y: 192, z: -7985, description: "LT2" },
 
 
         ],
