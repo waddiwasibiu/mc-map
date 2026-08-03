@@ -4,6 +4,25 @@ const expandedStates = {};
 // 默认结构数据
 const defaultStructures = [
 {
+    id: 19,
+    name: "飞艇",
+    type: "自然奇观",
+    description: "悬浮于高空的神秘飞艇，内部藏有稀有宝箱和特殊战利品",
+    image: 101,
+    icon: "fa-rocket",
+    coordinates: {
+        server1: [
+            { id: 1, x: -22287, y: 192, z: -73502, description: "" },
+            { id: 2, x: -16058, y: 192, z: -5327, description: "" },
+            { id: 3, x: -12977, y: 192, z: -20711, description: "" },
+            { id: 4, x: -3799, y: 192, z: -15293, description: "" },
+        ],
+        server2: [
+
+        ]
+    }
+},
+{
     id: 1,
     name: "孤独堡垒",
     type: "遗迹",
@@ -265,6 +284,7 @@ const defaultStructures = [
     coordinates: {
         server1: [
             { id: 1, x: -2492, y: 192, z: 16663, description: "LT2" },
+            { id: 2, x: 7199, y: 192, z: -10892, description: "LT2" },
 
 
         ],

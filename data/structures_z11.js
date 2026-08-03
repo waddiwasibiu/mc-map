@@ -4,6 +4,22 @@ const expandedStates = {};
 // 默认结构数据
 const defaultStructures = [
 {
+    id: 19,
+    name: "飞艇",
+    type: "自然奇观",
+    description: "悬浮于高空的神秘飞艇，内部藏有稀有宝箱和特殊战利品",
+    image: 101,
+    icon: "fa-rocket",
+    coordinates: {
+        server1: [
+
+        ],
+        server2: [
+
+        ]
+    }
+},
+{
     id: 1,
     name: "孤独堡垒",
     type: "遗迹",
